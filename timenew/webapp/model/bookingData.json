@@ -1,0 +1,46 @@
+{
+  "projects": [
+    {
+      "projectId": "PROJ001",
+      "projectName": "Digital Transformation",
+      "allocatedDays": 15,
+      "filledDays": 8,
+      "color": "#0070b1"
+    },
+    {
+      "projectId": "PROJ002",
+      "projectName": "Cloud Migration",
+      "allocatedDays": 10,
+      "filledDays": 6,
+      "color": "#5cbae6"
+    },
+    {
+      "projectId": "PROJ003",
+      "projectName": "DevOps Implementation",
+      "allocatedDays": 8,
+      "filledDays": 2,
+      "color": "#1f78b4"
+    },
+    {
+      "projectId": "PROJ004",
+      "projectName": "Agile Training",
+      "allocatedDays": 5,
+      "filledDays": 5,
+      "color": "#33a02c"
+    },
+    {
+      "projectId": "PROJ005",
+      "projectName": "Internal Admin",
+      "allocatedDays": 2,
+      "filledDays": 1,
+      "color": "#b2df8a"
+    }
+  ],
+  "month": "May 2024",
+  "totalWorkingDays": 22,
+  "totalFilledDays": 22,
+  "employee": {
+    "id": "EMP001",
+    "name": "John Smith"
+  }
+} 

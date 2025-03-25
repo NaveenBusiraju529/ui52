@@ -1,0 +1,43 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    
+    <GenericTile id="approvalsTile" 
+        class="customTileLayout sapUiSmallMarginBottom"
+        frameType="OneByOne" 
+        press=".onApprovalsTilePress">
+        <TileContent class="tileContent">
+            <VBox height="100%">
+                <!-- Top row with icon and title -->
+                <HBox width="100%" alignItems="Center" class="tileHeader">
+                    <core:Icon src="sap-icon://approvals" class="tileIcon"/>
+                    <Title text="Timesheet Approvals" class="tileTitle"/>
+                </HBox>
+                
+                <!-- Approval Status Indicators -->
+                <VBox width="100%" class="tileBody approvalStatusList">
+                    <List
+                        id="timesheetApprovalsList"
+                        showNoData="false"
+                        items="{path: 'approvalModel>/timesheetApprovals', length: 3}">
+                        <items>
+                            <CustomListItem>
+                                <HBox alignItems="Center" justifyContent="SpaceBetween" width="100%">
+                                    <VBox>
+                                        <Text text="{approvalModel>employeeName}" class="sapUiTinyMarginBottom"/>
+                                        <Text text="{approvalModel>week}" class="sapUiTinyMarginBottom sapUiTinyFontSize"/>
+                                    </VBox>
+                                    <ObjectStatus
+                                        icon="{= ${approvalModel>status} === 'approved' ? 'sap-icon://accept' : ${approvalModel>status} === 'rejected' ? 'sap-icon://error' : 'sap-icon://alert'}"
+                                        state="{= ${approvalModel>status} === 'approved' ? 'Success' : ${approvalModel>status} === 'rejected' ? 'Error' : 'Warning'}" />
+                                </HBox>
+                            </CustomListItem>
+                        </items>
+                    </List>
+                    <Link text="View All Approvals" class="sapUiTinyMarginTop" press=".onViewAllApprovalsPress"/>
+                </VBox>
+            </VBox>
+        </TileContent>
+    </GenericTile>
+    
+</core:FragmentDefinition>

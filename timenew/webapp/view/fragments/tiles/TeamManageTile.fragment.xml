@@ -1,0 +1,48 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    
+    <GenericTile id="teamManageTile" 
+        class="customTileLayout sapUiSmallMarginBottom"
+        frameType="OneByOne" 
+        press=".onTeamManageTilePress">
+        <TileContent class="tileContent">
+            <VBox height="100%">
+                <!-- Top row with icon and title -->
+                <HBox width="100%" alignItems="Center" class="tileHeader">
+                    <core:Icon src="sap-icon://group" class="tileIcon"/>
+                    <Title text="Manage Team" class="tileTitle"/>
+                </HBox>
+                
+                <!-- Tabs for PM and LM -->
+                <IconTabBar id="teamTabBar" expanded="true" class="sapUiNoMarginTop sapUiNoMarginBottom teamTabBar" applyContentPadding="false">
+                    <!-- PM Tab -->
+                    <items>
+                        <IconTabFilter id="pmTab" text="PM" key="pm">
+                            <VBox width="100%" class="tileBody">
+                                <Link text="> Approve Time" press=".onPMApproveTimePress" class="tileLink"/>
+                                <Link text="> Time Reports" press=".onPMTimeReportsPress" class="tileLink"/>
+                                <Link text="> Assignment Report (LM)" press=".onPMAssignmentLMPress" class="tileLink"/>
+                                <Link text="> Assignment Report (PM)" press=".onPMAssignmentPMPress" class="tileLink"/>
+                                <Link text="> Home Working Report" press=".onPMHomeWorkingPress" class="tileLink"/>
+                                <Link text="> Timesheet Insights" press=".onPMTimesheetInsightsPress" class="tileLink"/>
+                            </VBox>
+                        </IconTabFilter>
+                        
+                        <!-- LM Tab -->
+                        <IconTabFilter id="lmTab" text="LM" key="lm">
+                            <VBox width="100%" class="tileBody">
+                                <Link text="> Approve Time" press=".onLMApproveTimePress" class="tileLink"/>
+                                <Link text="> Time Reports LM" press=".onLMTimeReportsPress" class="tileLink"/>
+                                <Link text="> Assignment Report (LM) LM" press=".onLMAssignmentLMPress" class="tileLink"/>
+                                <Link text="> Home Working Report LM" press=".onLMHomeWorkingPress" class="tileLink"/>
+                                <Link text="> Timesheet Insights LM" press=".onLMTimesheetInsightsPress" class="tileLink"/>
+                            </VBox>
+                        </IconTabFilter>
+                    </items>
+                </IconTabBar>
+            </VBox>
+        </TileContent>
+    </GenericTile>
+    
+</core:FragmentDefinition> 

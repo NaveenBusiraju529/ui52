@@ -7,20 +7,21 @@
         frameType="OneByOne" 
         press=".onManageProjectTilePress">
         <TileContent class="tileContent">
-            <!-- Top row with title and icon -->
-            <HBox width="100%" justifyContent="SpaceBetween" class="tileHeader">
-                <Title text="Manage Project" class="tileTitle"/>
-                <core:Icon src="sap-icon://project-definition-triangle" class="tileIcon"/>
-            </HBox>
-            
-            <!-- Content immediately below header -->
-            <VBox width="100%" class="tileBody" height="100%">
-                <Text text="Project Management" class="tileSubtitle"/>
-                <Link text="&gt; Project Overview" press=".onProjectOverviewPress" class="tileLink"/>
-                <Link text="&gt; Resource Planning" press=".onResourcePlanningPress" class="tileLink"/>
-                <Link text="&gt; Project Reports" press=".onProjectReportsPress" class="tileLink"/>
-                <FlexBox height="100%" width="100%"></FlexBox>
+            <VBox height="100%">
+                <!-- Top row with icon and title -->
+                <HBox width="100%" alignItems="Center" class="tileHeader">
+                    <core:Icon src="sap-icon://project-definition-triangle" class="tileIcon"/>
+                    <Title text="Manage Project" class="tileTitle"/>
+                </HBox>
+                
+                <!-- Content immediately below header -->
+                <VBox width="100%" class="tileBody">
+                    <Text text="Project Management" class="tileSubtitle"/>
+                    <Link text="> Project Overview" press=".onProjectOverviewPress" class="tileLink"/>
+                    <Link text="> Resource Planning" press=".onResourcePlanningPress" class="tileLink"/>
+                    <Link text="> Project Reports" press=".onProjectReportsPress" class="tileLink"/>
+                </VBox>
             </VBox>
         </TileContent>
     </GenericTile>
-</mvc:View> 
+</mvc:View>

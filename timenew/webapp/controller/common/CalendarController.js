@@ -22,39 +22,45 @@ sap.ui.define([
         Type02: "Type02",
         Type03: "Type03",
         Type04: "Type04",
-        Type05: "Type05"
+        Type05: "Type05",
+        Type06: "Type06",
+        Type07: "Type07",
+        Type08: "Type08"
     };
 
     return BaseObject.extend("timenew.controller.common.CalendarController", {
         /**
          * Constructor
-         * @param {sap.ui.core.mvc.Controller} owner - The owner controller
+         * @param {sap/ui/core.mvc.Controller} owner - The owner controller
          */
         constructor: function(owner) {
             console.log("VALIDATION: Calendar controller constructor called");
             this._owner = owner;
-            this._selectedAppointment = null;
             this._initCalendarModel();
+            console.log("VALIDATION: Calendar model initialized");
         },
-
+        
         /**
          * Initialize the calendar model with sample data
          * @private
          */
         _initCalendarModel: function() {
-            var oModel = new JSONModel();
+            console.log("VALIDATION: Initializing calendar model");
+            
             var oDate = new Date();
-            var oStartDate = new Date(oDate.getFullYear(), oDate.getMonth(), oDate.getDate(), 8, 0);
-
-            // Sample appointment types
+            var oStartDate = new Date(oDate.getFullYear(), oDate.getMonth(), 1);
+            
+            var oModel = new JSONModel();
+            
+            // Define appointment types for legend
             var aAppointmentTypes = [{
                 type: CalendarDayType.Type01,
-                title: "Client Meeting",
-                color: "#FF0000"
+                title: "Client Work",
+                color: "#0070b1"  // Atos blue
             }, {
                 type: CalendarDayType.Type02,
-                title: "Internal Meeting",
-                color: "#0070F2"
+                title: "Internal Meetings",
+                color: "#1d2d3e"  // Atos dark blue
             }, {
                 type: CalendarDayType.Type03,
                 title: "Training",
@@ -67,39 +73,105 @@ sap.ui.define([
                 type: CalendarDayType.Type05,
                 title: "Public Holiday",
                 color: "#6B1C9E"
+            }, {
+                type: CalendarDayType.Type06,
+                title: "Approved Timesheet",
+                color: "#2b7d2b"  // Green for approved
+            }, {
+                type: CalendarDayType.Type07,
+                title: "Rejected Timesheet",
+                color: "#bb0000"  // Red for rejected
+            }, {
+                type: CalendarDayType.Type08,
+                title: "Pending Timesheet",
+                color: "#e78c07"  // Orange for pending
             }];
 
-            // Sample appointments
-            var aAppointments = [{
-                title: "Client Meeting",
-                text: "ACME Inc.",
-                type: CalendarDayType.Type01,
-                startDate: new Date(oDate.getFullYear(), oDate.getMonth(), oDate.getDate(), 9, 0),
-                endDate: new Date(oDate.getFullYear(), oDate.getMonth(), oDate.getDate(), 10, 30)
-            }, {
-                title: "Internal Meeting",
-                text: "Team Sync",
-                type: CalendarDayType.Type02,
-                startDate: new Date(oDate.getFullYear(), oDate.getMonth(), oDate.getDate() + 1, 10, 0),
-                endDate: new Date(oDate.getFullYear(), oDate.getMonth(), oDate.getDate() + 1, 11, 30)
-            }, {
-                title: "Training",
-                text: "SAPUI5 Advanced",
-                type: CalendarDayType.Type03,
-                startDate: new Date(oDate.getFullYear(), oDate.getMonth(), oDate.getDate() + 2, 13, 0),
-                endDate: new Date(oDate.getFullYear(), oDate.getMonth(), oDate.getDate() + 2, 17, 30)
-            }];
-
-            oModel.setData({
-                startDate: oStartDate,
-                appointments: aAppointments,
-                appointmentTypes: aAppointmentTypes,
-                viewKey: "Month"  // Set Month as default view
+            // Initialize with an empty appointments array instead of sample appointments
+            var aAppointments = [];
+            
+            // Load timesheet approvals from the model and create appointments
+            this._loadTimesheetAppointments(function(aTimesheetAppointments) {
+                if (aTimesheetAppointments && aTimesheetAppointments.length > 0) {
+                    aAppointments = aTimesheetAppointments;
+                }
+                
+                oModel.setData({
+                    startDate: oStartDate,
+                    appointments: aAppointments,
+                    appointmentTypes: aAppointmentTypes,
+                    viewKey: "Month"  // Set Month as default view
+                });
+                
+                console.log("VALIDATION: Calendar model initialized with " + aAppointments.length + " appointments");
             });
 
             this._owner.getView().setModel(oModel);
+        },
+        
+        /**
+         * Load timesheet data from approval model and convert to calendar appointments
+         * @private
+         * @param {Function} fnCallback Callback function to handle appointment data
+         */
+        _loadTimesheetAppointments: function(fnCallback) {
+            var that = this;
+            jQuery.ajax({
+                url: sap.ui.require.toUrl("timenew/model/timesheetApprovals.json"),
+                dataType: "json",
+                success: function(oData) {
+                    var aTimesheetApprovals = oData.timesheetApprovals || [];
+                    var aAppointments = that._convertTimesheetsToAppointments(aTimesheetApprovals);
+                    fnCallback(aAppointments);
+                },
+                error: function(err) {
+                    console.log("ERROR: Failed to load timesheet approvals for calendar", err);
+                    fnCallback([]);
+                }
+            });
+        },
+        
+        /**
+         * Convert timesheet data to calendar appointments with status indicators
+         * @private
+         * @param {Array} aTimesheets Timesheet data
+         * @returns {Array} Calendar appointments
+         */
+        _convertTimesheetsToAppointments: function(aTimesheets) {
+            var aAppointments = [];
             
-            console.log("VALIDATION: Calendar model initialized with " + aAppointments.length + " appointments");
+            aTimesheets.forEach(function(oTimesheet) {
+                // Determine type based on status
+                var sType = CalendarDayType.Type08; // Default is Type08 (pending)
+                var sIcon = "sap-icon://alert"; // Default icon for pending
+                
+                if (oTimesheet.status === "approved") {
+                    sType = CalendarDayType.Type06; // Type06 for approved
+                    sIcon = "sap-icon://accept"; // Checkmark for approved
+                } else if (oTimesheet.status === "rejected") {
+                    sType = CalendarDayType.Type07; // Type07 for rejected
+                    sIcon = "sap-icon://error"; // Error icon for rejected
+                }
+                
+                // Parse the date string to create Date objects
+                var oDateParts = oTimesheet.date.split("-");
+                var oStartDate = new Date(parseInt(oDateParts[0]), parseInt(oDateParts[1]) - 1, parseInt(oDateParts[2]), 9, 0); // 9 AM start
+                var oEndDate = new Date(parseInt(oDateParts[0]), parseInt(oDateParts[1]) - 1, parseInt(oDateParts[2]), 17, 0);  // 5 PM end
+                
+                // Create a calendar appointment for this day
+                var oAppointment = {
+                    text: oTimesheet.project + " (" + oTimesheet.hours + " hrs)",
+                    type: sType,
+                    icon: sIcon,
+                    startDate: oStartDate,
+                    endDate: oEndDate,
+                    timesheetId: oTimesheet.id
+                };
+                
+                aAppointments.push(oAppointment);
+            });
+            
+            return aAppointments;
         },
 
         /**
@@ -111,18 +183,131 @@ sap.ui.define([
             
             var oAppointment = oEvent.getParameter("appointment");
             if (oAppointment) {
-                // Store the selected appointment for editing
-                this._selectedAppointment = oAppointment;
-                MessageToast.show("Appointment selected: " + oAppointment.getTitle());
+                // Get the appointment data
+                var oBindingContext = oAppointment.getBindingContext();
+                var oAppointmentData = oBindingContext.getObject();
+                
+                // Find the corresponding timesheet entry
+                this._showTimesheetDetails(oAppointmentData.timesheetId);
             } else {
                 var aAppointments = oEvent.getParameter("appointments");
                 MessageToast.show(aAppointments.length + " appointments selected");
-                
-                // Clear the selected appointment
-                this._selectedAppointment = null;
             }
         },
-
+        
+        /**
+         * Show timesheet details dialog
+         * @param {string} sTimesheetId - Timesheet ID to show details for
+         * @private
+         */
+        _showTimesheetDetails: function(sTimesheetId) {
+            var that = this;
+            
+            // Load timesheet data
+            jQuery.ajax({
+                url: sap.ui.require.toUrl("timenew/model/timesheetApprovals.json"),
+                dataType: "json",
+                success: function(oData) {
+                    // Find the timesheet entry by ID
+                    var aTimesheetApprovals = oData.timesheetApprovals || [];
+                    var oTimesheet = null;
+                    
+                    for (var i = 0; i < aTimesheetApprovals.length; i++) {
+                        if (aTimesheetApprovals[i].id === sTimesheetId) {
+                            oTimesheet = aTimesheetApprovals[i];
+                            break;
+                        }
+                    }
+                    
+                    if (!oTimesheet) {
+                        MessageToast.show("Timesheet details not found");
+                        return;
+                    }
+                    
+                    // Determine status icon and state
+                    var sIcon = "sap-icon://alert";
+                    var sState = "Warning";
+                    
+                    if (oTimesheet.status === "approved") {
+                        sIcon = "sap-icon://accept";
+                        sState = "Success";
+                    } else if (oTimesheet.status === "rejected") {
+                        sIcon = "sap-icon://error";
+                        sState = "Error";
+                    }
+                    
+                    // Create a dialog to show timesheet details
+                    var oDialog = new sap.m.Dialog({
+                        title: "Timesheet Details - " + oTimesheet.date,
+                        contentWidth: "400px",
+                        content: [
+                            new sap.m.VBox({
+                                items: [
+                                    new sap.m.ObjectHeader({
+                                        title: oTimesheet.dayOfWeek,
+                                        number: oTimesheet.hours,
+                                        numberUnit: "hours",
+                                        attributes: [
+                                            new sap.m.ObjectAttribute({
+                                                title: "Project",
+                                                text: oTimesheet.project
+                                            })
+                                        ],
+                                        statuses: [
+                                            new sap.m.ObjectStatus({
+                                                text: oTimesheet.status.charAt(0).toUpperCase() + oTimesheet.status.slice(1),
+                                                state: sState,
+                                                icon: sIcon
+                                            })
+                                        ]
+                                    }),
+                                    new sap.m.Panel({
+                                        headerText: "Approval Information",
+                                        expandable: false,
+                                        expanded: true,
+                                        content: [
+                                            new sap.m.List({
+                                                items: [
+                                                    new sap.m.DisplayListItem({
+                                                        label: "Approver",
+                                                        value: oTimesheet.approver || "Not yet approved"
+                                                    }),
+                                                    new sap.m.DisplayListItem({
+                                                        label: "Approval Date",
+                                                        value: oTimesheet.approvalDate || "Not yet approved"
+                                                    }),
+                                                    new sap.m.DisplayListItem({
+                                                        label: "Comments",
+                                                        value: oTimesheet.comments || "No comments"
+                                                    })
+                                                ]
+                                            })
+                                        ]
+                                    })
+                                ],
+                                class: "sapUiSmallMargin"
+                            })
+                        ],
+                        beginButton: new sap.m.Button({
+                            text: "Close",
+                            press: function() {
+                                oDialog.close();
+                            }
+                        }),
+                        afterClose: function() {
+                            oDialog.destroy();
+                        }
+                    });
+                    
+                    oDialog.open();
+                },
+                error: function(err) {
+                    console.log("ERROR: Failed to load timesheet approvals for details", err);
+                    MessageToast.show("Failed to load timesheet details");
+                }
+            });
+        },
+        
         /**
          * Handle appointment creation dialog
          */

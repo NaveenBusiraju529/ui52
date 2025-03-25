@@ -1,35 +1,59 @@
 <mvc:View
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
-    xmlns:unified="sap.ui.unified">
-    <SinglePlanningCalendar
-        id="SPC1"
-        title="Team Calendar"
-        startDate="{path: '/startDate'}"
-        appointments="{path: '/appointments'}"
-        appointmentSelect=".onAppointmentSelect"
-        fullDay="false"
-        viewKey="Month"
-        class="fullWidthCalendar">
-        <actions>
-            <Button icon="sap-icon://add" press=".handleAppointmentCreateDialog" tooltip="Add Appointment"/>
-            <Button icon="sap-icon://edit" press=".handleAppointmentEdit" tooltip="Edit Appointment"/>
-            <Button icon="sap-icon://delete" press=".handleAppointmentDelete" tooltip="Delete Appointment"/>
-            <Button icon="sap-icon://decline" press=".handleCancel" tooltip="Cancel"/>
-        </actions>
-        <appointments>
-            <unified:CalendarAppointment
-                title="{title}"
-                text="{text}"
-                type="{type}"
-                startDate="{startDate}"
-                endDate="{endDate}">
-            </unified:CalendarAppointment>
-        </appointments>
-        <views>
-            <SinglePlanningCalendarDayView key="Day" title="Day"/>
-            <SinglePlanningCalendarWorkWeekView key="Week" title="Work Week"/>
-            <SinglePlanningCalendarMonthView key="Month" title="Month"/>
-        </views>
-    </SinglePlanningCalendar>
-</mvc:View> 
+    xmlns:unified="sap.ui.unified"
+    xmlns:core="sap.ui.core">
+    <VBox class="sapUiNoContentPadding">
+        <SinglePlanningCalendar
+            id="SPC1"
+            title="My Timesheet Status"
+            startDate="{path: '/startDate'}"
+            appointments="{path: '/appointments'}"
+            appointmentSelect=".onAppointmentSelect"
+            fullDay="false"
+            viewKey="Month"
+            class="fullWidthCalendar">
+            <!-- Removed action buttons as requested -->
+            <appointments>
+                <unified:CalendarAppointment
+                    text="{text}"
+                    type="{type}"
+                    icon="{icon}"
+                    startDate="{startDate}"
+                    endDate="{endDate}">
+                </unified:CalendarAppointment>
+            </appointments>
+            <views>
+                <SinglePlanningCalendarDayView key="Day" title="Day"/>
+                <SinglePlanningCalendarWorkWeekView key="Week" title="Work Week"/>
+                <SinglePlanningCalendarMonthView key="Month" title="Month"/>
+            </views>
+        </SinglePlanningCalendar>
+        
+        <!-- Legend for appointment status indicators -->
+        <Panel expandable="true" expanded="false" headerText="Status Legend" class="sapUiSmallMarginTop sapUiNoContentPadding">
+            <content>
+                <List>
+                    <CustomListItem>
+                        <HBox alignItems="Center" class="sapUiSmallMarginBegin sapUiSmallMarginEnd">
+                            <core:Icon src="sap-icon://accept" color="#2b7d2b" class="sapUiSmallMarginEnd"/>
+                            <Text text="Approved Timesheet"/>
+                        </HBox>
+                    </CustomListItem>
+                    <CustomListItem>
+                        <HBox alignItems="Center" class="sapUiSmallMarginBegin sapUiSmallMarginEnd">
+                            <core:Icon src="sap-icon://error" color="#bb0000" class="sapUiSmallMarginEnd"/>
+                            <Text text="Rejected Timesheet"/>
+                        </HBox>
+                    </CustomListItem>
+                    <CustomListItem>
+                        <HBox alignItems="Center" class="sapUiSmallMarginBegin sapUiSmallMarginEnd">
+                            <core:Icon src="sap-icon://alert" color="#e78c07" class="sapUiSmallMarginEnd"/>
+                            <Text text="Pending Timesheet"/>
+                        </HBox>
+                    </CustomListItem>
+                </List>
+            </content>
+        </Panel>
+    </VBox>
+</mvc:View>

@@ -1,1000 +1,960 @@
-/* Enter your custom styles here */
-
-/* Use flex layout for better space distribution */
-.dashboardLayout {
-    width: 100%;
-    height: calc(100% - 3rem); /* Subtract header height */
-    display: flex;
-    flex-direction: row;
-    padding: 5px !important; /* Changed to 5px for consistency */
-    margin: 0 !important;
-    overflow: hidden; /* Prevent overflow */
-}
-
-/* Tiles container - 40% width */
-.tilesContainer {
-    width: 40%;
-    height: 100%;
-    box-sizing: border-box;
-    padding: 5px !important; /* Set consistent 5px padding */
-    margin: 0;
-    overflow-y: auto; /* Allow scrolling for tiles if needed */
-}
-
-/* Calendar container - 60% width */
-.calendarContainer {
-    width: 60%;
-    height: 100%;
-    box-sizing: border-box;
-    padding: 5px !important; /* Set consistent 5px padding */
-    margin: 0;
-    overflow: hidden; /* Prevent overflow */
-    /* border: 3px solid #0070b1 !important; Added bold blue border */
-    border-radius: 0 !important;
-}
-
-/* Ensure the calendar fits within its container */
-.fullWidthCalendar {
-    width: 100% !important;
-    height: 100% !important;
-    max-height: calc(100vh - 4rem); /* Limit max height to viewport minus header */
-}
-
-.customTile {
-    margin-bottom: 1rem;
-    cursor: pointer;
-}
-
-/* Make tiles more visually appealing */
-.sapMGT {
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    overflow: hidden !important;
-    word-wrap: break-word !important;
-    word-break: break-all !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    border: 3px solid #0070b1 !important;
-    border-radius: 0 !important;
-}
-
-/* Calendar styling improvements */
-.sapMSinglePC {
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    border-radius: 0 !important; /* Changed to sharp corners */
-    width: 100% !important;
-    max-height: 100%; /* Ensure it doesn't exceed container */
-    overflow: hidden; /* Prevent overflow */
-    border: 3px solid #0070b1 !important; /* Added bold blue border */
-    padding: 5px !important; /* Set consistent 5px padding */
-}
-
-/* Control the height of the grid to prevent overflow */
-.sapMSinglePCGrid {
-    width: 100% !important;
-    max-height: calc(100% - 3rem); /* Subtract header height */
-    overflow: hidden; /* Prevent overflow */
-}
-
-/* Adjust row heights to fit available space */
-.sapMSinglePCRow {
-    height: auto !important;
-    max-height: 100%;
-}
-
-/* Specifically target month view to fix overflow */
-.sapMSinglePCMonthView {
-    max-height: calc(100vh - 8rem) !important;
-    overflow: hidden !important;
-}
-
-/* Adjust month grid to fit available space */
-.sapMSinglePCMonthGrid {
-    max-height: calc(100vh - 8rem) !important;
-    overflow: hidden !important;
-}
-
-/* Adjust month days to fit available space */
-.sapMSinglePCMonthDays {
-    max-height: calc(100vh - 10rem) !important;
-    overflow: hidden !important;
-}
-
-/* Adjust month day to fit available space */
-.sapMSinglePCMonthDay {
-    height: auto !important;
-    max-height: calc((100vh - 10rem) / 6) !important; /* Divide available space by typical number of weeks */
-}
-
-/* Remove any default padding from the page */
-.sapMPage > section {
-    padding: 0 !important;
-    overflow: hidden; /* Prevent overflow */
-}
-
-/* Remove any padding from the page content */
-.sapMPageEnableScrolling {
-    padding: 0 !important;
-    overflow: hidden; /* Prevent overflow */
-}
-
-/* Remove padding from FlexBox */
-.sapMFlexBox {
-    padding: 0 !important;
-}
-
-/* Remove padding from Page container */
-.sapMPageBgStandard {
-    padding: 0 !important;
-}
-
-/* Remove padding from content area */
-.sapMPageWithHeader > section {
-    top: 3rem;
-    bottom: 0;
-    padding: 0 !important;
-    overflow: hidden; /* Prevent overflow */
-}
-
-/* Remove padding from FlexBox items */
-.sapMFlexItem {
-    padding: 0 !important;
-}
-
-/* Appointment styling */
-.sapUiCalendarApp {
-    border-radius: 0 !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-
-/* Legend styling */
-.sapUiCalendarLegend {
-    margin-top: 5px !important; /* Changed to 5px for consistency */
-    border: 2px solid #0070b1 !important;
-    border-radius: 0 !important;
-    padding: 5px !important; /* Changed to 5px for consistency */
-    background-color: #ffffff;
-}
-
-/* Make the appointment dialog more appealing */
-.sapMDialog .sapMInputBase {
-    margin-bottom: 5px !important; /* Changed to 5px for consistency */
-}
-
-/* Tile styling */
-.tileTabBar {
-    width: 100%;
-    height: auto;
-    margin-top: 5px !important; /* Changed to 5px for consistency */
-}
-
-.tileTabBar .sapMITBHead {
-    padding: 0;
-    height: 2rem;
-}
-
-.tileTabBar .sapMITBFilter {
-    padding: 0 0.5rem 0 0;
-    height: 2rem;
-}
-
-.tileTabBar .sapMITBFilter .sapMITBText {
-    font-size: 0.8rem;
-    color: #0070b1;
-    padding: 0;
-}
-
-.tileTabBar .sapMITBContent {
-    border: none;
-    background: transparent;
-    padding: 0.25rem 0;
-}
-
-.tileLink {
-    display: block;
-    margin: 5px 0 !important; /* Changed to 5px for consistency */
-    font-size: 0.875rem;
-    color: #0070b1;
-    cursor: pointer;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    white-space: normal !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-}
-
-.tileLink:hover {
-    color: #004578;
-    text-decoration: underline;
-}
-
-/* Adjust GenericTile for content */
-.sapMGT.sapMGTTwoByOne {
-    height: auto !important;
-    min-height: 14rem !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow: hidden !important;
-    margin-bottom: 5px !important; /* Added 5px bottom margin for consistency */
-}
-
-.sapMGT.sapMGTOneByOne {
-    height: auto !important;
-    min-height: 10rem !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow: hidden !important;
-    margin-bottom: 5px !important; /* Added 5px bottom margin for consistency */
-}
-
-/* Make sure the content is visible in the tiles */
-.sapMGTContent {
-    height: auto !important;
-    overflow: hidden !important;
-    padding: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-}
-
-.sapMTileCnt {
-    height: auto !important;
-    min-height: 6rem !important; /* Reduced from 7rem */
-    overflow: hidden !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 0 !important; /* Added to remove padding */
-}
-
-.sapMFeedContent {
-    height: auto !important;
-    white-space: normal !important; /* Changed from pre-line to normal */
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 0.5rem !important;
-    overflow: hidden !important; /* Added to contain content */
-}
-
-.sapMTileContent {
-    height: auto !important;
-    overflow: hidden !important; /* Changed from visible to hidden */
-    width: 100% !important;
-    max-width: 100% !important;
-}
-
-.sapMTileCntContent {
-    height: auto !important;
-    overflow: hidden !important; /* Changed from visible to hidden */
-    width: 100% !important;
-    max-width: 100% !important;
-}
-
-/* Ensure the tile container has proper width */
-.tilesContainer .sapMFlexItem {
-    width: 100% !important;
-}
-
-/* VBox styling for tile content */
-.sapMVBox {
-    /* width: 100% !important; */
-    max-width: 100% !important;
-    overflow: hidden !important;
-}
-
-/* Ensure text doesn't overflow in tab content */
-.sapMITBContent {
-    overflow: hidden !important;
-    width: 100% !important;
-}
-
-/* Specific styling for IconTabFilter content */
-.sapMITBFilter .sapMVBox {
-    max-width: 100% !important;
-    overflow: hidden !important;
-    padding: 0 !important;
-}
-
-.sapMITBFilter .sapMVBox .tileLink {
-    display: block;
-    white-space: normal !important;
-    text-overflow: ellipsis !important;
-    overflow: hidden !important;
-    max-width: 100% !important;
-    line-height: 1.2rem !important;
-}
-
-/* IconTabBar sizing */
-.tileTabBar .sapMITBContent {
-    overflow: hidden !important;
-    padding: 0.5rem 0 !important;
-}
-
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) {
-    .dashboardLayout {
-        flex-direction: column;
-    }
-    
-    .tilesContainer, .calendarContainer {
-        width: 100% !important;
-    }
-    
-    .tilesContainer {
-        padding: 1rem;
-    }
-    
-    .sapMGT {
-        margin: 0 auto 1rem auto;
-    }
-    
-    .fullWidthCalendar {
-        height: 60vh !important;
-    }
-}
-
-@media (max-width: 600px) {
-    .dashboardLayout {
-        flex-direction: column;
-    }
-    
-    .tilesContainer, .calendarContainer {
-        width: 100% !important;
-    }
-    
-    .sapMGT.sapMGTTwoByOne {
-        min-height: 18rem !important;
-    }
-    
-    .sapMGT.sapMGTOneByOne {
-        min-height: 14rem !important;
-    }
-    
-    .sapMFeedContent {
-        font-size: 0.8rem !important;
-    }
-    
-    .tileLink {
-        font-size: 0.8rem !important;
-    }
-}
-
-/* Custom tile layout */
-.customTileLayout {
-    overflow: hidden !important;
-    word-wrap: break-word !important;
-    word-break: normal !important;
-    padding: 5px !important; /* Changed to 5px for consistency */
-    position: relative !important;
-    border-radius: 0 !important;
-    border: 3px solid #0070b1 !important;
-}
-
-/* Update the tile header to be more compact */
-.tileHeader {
-    padding: 5px !important; /* Set consistent 5px padding */
-    width: 100% !important;
-    border-bottom: none !important;
-}
-
-.tileTitle {
-    font-size: 1.15rem !important;
-    font-weight: bold !important;
-    color: #333333 !important;
-    max-width: 75% !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    white-space: nowrap !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-.tileIcon {
-    font-size: 1.25rem !important;
-    color: #0070b1 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-/* Adjust the tile body to start content right after header */
-.tileBody {
-    padding: 5px !important; /* Set consistent 5px padding */
-    width: 100% !important;
-    margin-top: 0 !important;
-}
-
-.tileSubtitle {
-    font-size: 0.8rem !important;
-    color: #666666 !important;
-    margin-bottom: 0.25rem !important;
-    margin-top: 0 !important;
-    font-weight: bold !important;
-}
-
-.tileLink {
-    display: block;
-    margin: 5px 0 !important; /* Changed to 5px for consistency */
-    font-size: 0.875rem;
-    color: #0070b1;
-    cursor: pointer;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    white-space: normal !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-}
-
-/* Override GenericTile styling for custom layout */
-.customTileLayout .sapMGTContent {
-    padding: 5px !important; /* Changed to 5px for consistency */
-    height: auto !important;
-    overflow: hidden !important;
-}
-
-.customTileLayout .sapMTileCnt {
-    padding: 5px !important; /* Changed to 5px for consistency */
-    margin: 0 !important;
-    height: 100% !important;
-    width: 100% !important;
-    overflow: hidden !important;
-}
-
-.customTileLayout .sapMTileContent {
-    height: auto !important;
-    width: 100% !important;
-    padding: 5px !important; /* Changed to 5px for consistency */
-    overflow: hidden !important;
-}
-
-.customTileLayout .sapMTileCntContent {
-    height: auto !important;
-    overflow: hidden !important;
-    width: 100% !important;
-}
-
-/* Fix TabBar styling */
-.sapMITBContent {
-    padding: 5px !important; /* Set consistent 5px padding */
-    border-bottom: none !important;
-}
-
-.tileTabBar {
-    margin-top: 5px !important; /* Changed to 5px for consistency */
-    border: none !important;
-    background: transparent !important;
-    width: 100% !important;
-}
-
-.tileTabBar .sapMITBHead {
-    margin: 0 !important;
-    padding: 5px !important; /* Changed to 5px for consistency */
-}
-
-.tileTabBar .sapMITBFilter {
-    padding: 0 5px 0 0 !important; /* Changed to 5px for consistency */
-}
-
-.tileTabBar .sapMITBFilter .sapMITBText {
-    font-size: 0.875rem !important;
-    color: #0070b1 !important;
-}
-
-.tileTabBar .sapMITBFilter.sapMITBSelected .sapMITBText {
-    font-weight: bold !important;
-}
-
-.tileTabBar .sapMITBContent {
-    border: none !important;
-    background: transparent !important;
-    padding: 0.5rem 0 !important;
-}
-
-/* Responsive layout for custom tiles */
-@media (max-width: 768px) {
-    .tileTitle {
-        font-size: 1.1rem !important;
-    }
-    
-    .tileIcon {
-        font-size: 1.25rem !important;
-    }
-    
-    .tileSubtitle {
-        font-size: 0.8rem !important;
-    }
-    
-    .tileLink {
-        font-size: 0.8rem !important;
-    }
-}
-
-/* Fix for GenericTile to position content at top */
 .sapMGTHdrContent {
-    margin-top: 0 !important;
-    padding-top: 5px !important; /* Changed to 5px for consistency */
-}
-
-/* Ensure TileContent is properly aligned */
-.sapMGT .sapMTileCnt.sapMFrameTypeOneByOne {
-    margin-top: 0 !important;
-    padding-top: 5px !important; /* Changed to 5px for consistency */
-}
-
-/* Half-width tiles for two-per-row layout - larger and taller */
-.tileHalfWidth {
-    width: calc(50% - 5px) !important; /* Updated to match 5px spacing */
-    margin-right: 5px !important; /* Updated to 5px */
-    margin-left: 0 !important; /* Remove left margin */
-    display: inline-block !important;
-    box-sizing: border-box !important;
     height: auto !important;
-    min-height: 16rem !important; /* Increased height */
+    padding-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* Styles for Team Management Tile Tab Bar */
+.teamTabBar {
+    padding: 0;
+    margin-top: 0.5rem;
+}
+
+.teamTabBar .sapMITBHead {
+    padding: 0;
+}
+
+.teamTabBar .sapMITBContent {
+    padding: 0.5rem 0 0 0;
+}
+
+.teamTabBar .sapMITBFilter .sapMITBText {
+    font-size: 0.875rem;
+}
+
+/* Ensure tile body links fit properly */
+.tileBody .tileLink {
+    white-space: normal;
+    padding-top: 0.25rem;
+}
+
+/* Icon spacing in tile headers */
+.tileHeader .tileIcon {
+    margin-right: 0.5rem;
+}
+
+/* Blue square border for tiles */
+.sapMGT {
+    border: 3px solid #0070b1 !important;
+    border-radius: 0 !important;
+    margin: 0.25rem;
+    box-sizing: border-box !important;
+}
+
+/* Adjust tile containers to fill available space within their assigned area */
+.sapUiRespGrid .sapUiRespGridSpan {
+    box-sizing: border-box;
+    padding: 0 !important;
+}
+
+/* Make tiles fit container width without overflowing */
+.sapMFlexBox .sapMFlexItem .sapMGT {
+    width: calc(100% - 0.5rem) !important;
+    max-width: calc(100% - 0.5rem) !important;
+}
+
+/* Time3 specific grid adjustments */
+.sapUiRespGridLayout {
+    padding: 0 !important;
+}
+
+/* Clear margin for grid layout to remove white space */
+.sapUiRespGridMedia-Std-Desktop.sapUiRespGridHSpace0 > div {
+    margin: 0 !important;
+}
+
+/* Force consistent width for all tiles in time3 */
+.sapUiRespGridSpanL4 .sapMGT {
+    width: 100% !important;
+    margin: 0 0 0.5rem 0 !important; /* Only bottom margin for vertical spacing */
+    height: auto !important; /* Allow height to adjust to content */
+    min-height: 10rem !important; /* Ensure minimum height for consistency */
+    display: block !important;
+}
+
+/* Ensure proper spacing between tiles and calendar */
+.sapUiRespGrid .sapUiRespGridSpanL2 .sapMGT,
+.sapUiRespGrid .sapUiRespGridSpanM4 .sapMGT {
+    width: calc(100% - 0.5rem) !important;
+    min-width: initial !important;
+}
+
+/* Specific adjustments for time2 view (20/80 layout) */
+.sapUiRespGrid .sapUiRespGridSpanL2 .sapMGT {
+    width: calc(100% - 0.5rem) !important;
+    margin: 0.25rem !important;
+    min-height: 8rem !important;
+}
+
+/* Fix padding in time3 view specifically */
+.sapUiRespGridSpanL4 {
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+/* Force tiles to be equal width in time3 view regardless of content */
+.sapUiRespGridSpanL4 .sapMFlexItem {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+/* Ensure tile column takes full width in time2 and time3 */
+.sapUiRespGridSpanL2, .sapUiRespGridSpanL4 {
+    padding: 0 !important;
+}
+
+/* Fix for vertical stacking in tile containers */
+.sapUiRespGrid .sapUiRespGridSpanL2 .sapMFlexBox,
+.sapUiRespGrid .sapUiRespGridSpanL4 .sapMFlexBox {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Target specific fixes for time3 */
+.sapUiRespGridMedia-Std-Desktop .sapUiRespGridSpanL4,
+.sapUiRespGridMedia-Std-Tablet .sapUiRespGridSpanM6,
+.sapUiRespGridMedia-Std-Phone .sapUiRespGridSpanS12 {
+    padding: 0 !important;
+    width: 40% !important; /* Fixed width ratio for time3 */
+}
+
+/* Responsive adjustments for different screen sizes in time3 */
+@media screen and (max-width: 1024px) {
+    .sapUiRespGridMedia-Std-Tablet .sapUiRespGridSpanM6 {
+        width: 40% !important;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .sapUiRespGridMedia-Std-Phone .sapUiRespGridSpanS12 {
+        width: 100% !important;
+    }
+}
+
+/* Blue square border for calendar - just one border around the entire calendar */
+.sapMSinglePC {
+    border: 3px solid #0070b1 !important;
+    border-radius: 0 !important;
+}
+
+/* Booking Tile Project List Styles */
+.projectList {
+    margin-top: 0.5rem;
+    width: 100%;
+}
+
+.projectList .sapMListUl {
+    padding: 0;
+}
+
+.projectList .sapMListItems {
+    padding: 0;
+}
+
+.projectList .sapMCLI {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.projectList .sapMCLI:last-child {
+    border-bottom: none;
+}
+
+/* Project container styles - for the new direct project listing approach */
+.projectContainer {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0;
+    overflow-y: visible !important;
+    max-height: none !important; /* Ensure no height restriction */
+}
+
+/* Make progress indicators slightly more compact to fit all projects */
+.projectItem {
+    padding: 0.25rem 0;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 0.25rem !important;
+}
+
+.projectItem .sapUiTinyMarginBottom {
+    margin-bottom: 0.125rem !important; /* Reduce bottom margin to compact the layout */
+}
+
+.projectItem:last-child {
+    border-bottom: none;
+    margin-bottom: 0 !important;
+}
+
+.projectName {
+    font-weight: bold;
+    color: #333333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 65% !important; /* Reduced to prevent overlap */
+    padding-right: 0.5rem !important;
+    font-size: 0.875rem; /* Slightly increase font size for better readability */
+}
+
+.projectDays {
+    font-weight: normal;
+    color: #666666;
+    white-space: nowrap;
+    font-size: 0.875rem; /* Match projectName font size */
+}
+
+/* Interactive Bar Chart Styles */
+.bookingChart {
+    height: 0.75rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.bookingChart .sapSuiteIBCBarValue {
+    height: 0.75rem !important;
+}
+
+.bookingChart .sapSuiteIBCBar {
+    height: 0.75rem !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* Ensure the chart fits in the tile container */
+.sapSuiteUiMicroChartPointer {
+    height: 0.75rem !important;
+}
+
+/* Progress indicators for projects */
+.sapMPI {
+    height: 0.75rem !important;
+    margin: 0.25rem 0 !important;
+}
+
+.sapMPIBar {
+    height: 0.75rem !important;
+}
+
+.sapMPI .sapMPIText {
+    font-size: 0.875rem !important;
+    color: #333333 !important;
+    text-shadow: none !important;
+}
+
+/* Specific styling for project progress indicators */
+.projectProgress {
+    height: 1rem !important; /* Slightly smaller for compactness */
+    margin: 0.125rem 0 0.25rem 0 !important; /* Reduced margins */
+}
+
+.projectProgress .sapMPIBar {
+    height: 1rem !important;
+}
+
+.projectProgress .sapMPIText {
+    line-height: 1rem !important;
+    font-size: 0.75rem !important; /* Slightly smaller text */
+    font-weight: 500 !important;
+}
+
+/* Ensure text is visible on both light and dark backgrounds */
+.projectProgress .sapMPITextLeft {
+    left: 0.5rem !important;
+    color: #333333 !important;
+}
+
+.projectProgress .sapMPITextRight {
+    right: 0.5rem !important;
+    color: #333333 !important;
+}
+
+/* Custom project progress indicator colors - updated for all project items */
+/* Project 1: Digital Transformation */
+.projectItem:nth-child(1) .sapMPIBarNeutral,
+.projectItem:nth-child(1) .sapMPIBarPositive,
+.projectItem:nth-child(1) .sapMPIBarCritical {
+    background-color: #0070b1 !important;
+}
+
+/* Project 2: Cloud Migration */
+.projectItem:nth-child(2) .sapMPIBarNeutral,
+.projectItem:nth-child(2) .sapMPIBarPositive,
+.projectItem:nth-child(2) .sapMPIBarCritical {
+    background-color: #5cbae6 !important;
+}
+
+/* Project 3: DevOps Implementation */
+.projectItem:nth-child(3) .sapMPIBarNeutral,
+.projectItem:nth-child(3) .sapMPIBarPositive,
+.projectItem:nth-child(3) .sapMPIBarCritical {
+    background-color: #1f78b4 !important;
+}
+
+/* Project 4: Agile Training */
+.projectItem:nth-child(4) .sapMPIBarNeutral,
+.projectItem:nth-child(4) .sapMPIBarPositive,
+.projectItem:nth-child(4) .sapMPIBarCritical {
+    background-color: #33a02c !important;
+}
+
+/* Project 5: Internal Admin */
+.projectItem:nth-child(5) .sapMPIBarNeutral,
+.projectItem:nth-child(5) .sapMPIBarPositive,
+.projectItem:nth-child(5) .sapMPIBarCritical {
+    background-color: #b2df8a !important;
+}
+
+/* Fix specific issues with progress bars */
+.sapMPI .sapMPIBarRemaining {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+/* Ensure project list has proper spacing */
+.projectList .sapMListItems {
+    margin-bottom: 0.5rem !important;
+}
+
+/* Make sure tiles in time4 view are properly sized */
+.time4TileColumn {
+    height: auto !important;
+    min-height: 30rem !important; /* Ensure columns have minimum height */
+}
+
+/* Fixed Booking Tile Styles - completely reset */
+#myBookingTile {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
     overflow: visible !important;
 }
 
-/* Adjust FlexBox for tile rows */
-.tilesContainer .sapUiSmallMarginBottom.sapMFlexBox {
-    margin-bottom: 5px !important; /* Changed to 5px for consistency */
+#myBookingTile .sapMTileContent {
+    height: auto !important;
+    overflow: visible !important;
+}
+
+#myBookingTile .sapMTileCnt {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+#myBookingTile .sapMGTContent {
+    height: auto !important;
+    overflow: visible !important;
+}
+
+#bookingVizFrame {
+    height: 10rem !important;
     width: 100% !important;
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: space-between !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
-/* Ensure links inside half-width tiles are properly sized - larger text */
-.tileHalfWidth .tileLink {
-    font-size: 0.9rem !important;
-    padding: 0.35rem 0 !important;
+/* Smaller text for chart labels */
+.sapVizFrame .v-m-title .v-title,
+.sapVizFrame .v-categoryAxisTitle .v-title,
+.sapVizFrame .v-valueAxisTitle .v-title,
+.sapVizFrame .v-dataLabel,
+.sapVizFrame .v-legend-item text {
+    font-size: 0.65rem !important;
+}
+
+/* Adjust time4 tile column to fit booking tile properly */
+.time4TileColumn {
+    height: auto !important;
+    overflow: visible !important;
+}
+
+/* Fix vertical alignment in booking title */
+#myBookingTile .tileHeader {
+    padding-bottom: 0.5rem !important;
+}
+
+/* Fix spacing in booking tile body */
+#myBookingTile .tileBody {
+    padding-top: 0.5rem !important;
+    overflow-y: visible !important;
+    max-height: none !important;
+}
+
+/* Enhanced tile styling to fit content better */
+.time4Tile {
+    min-height: 13rem !important;
+    height: auto !important;
+}
+
+/* Adjustments for booking tile specifically */
+#myBookingTile {
+    min-height: 20rem !important; /* Reduced height */
+    height: auto !important;
+    overflow: visible !important;
+}
+
+/* Ensure tile content fits properly */
+.tileContent {
+    padding: 0.5rem !important;
+}
+
+.tileBody {
+    padding: 0.5rem !important;
+}
+
+.tileHeader {
+    padding-bottom: 0.25rem !important;
+}
+
+.tileSubtitle {
+    margin-bottom: 0.25rem !important;
+}
+
+.bookingTileBody {
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    min-height: 15rem !important; /* Reduced for compact display */
+    padding-bottom: 0.5rem !important;
+}
+
+/* VizFrame Chart specific styling - Optimized size */
+#bookingVizFrame {
+    margin-top: 0.25rem !important;
+    margin-bottom: 0.25rem !important;
+    height: 12rem !important; /* Compact height for full visibility */
+    width: 100% !important;
+    overflow: visible !important;
+}
+
+/* Make chart elements more compact */
+.sapVizFrame .v-m-title .v-title {
+    font-size: 0.75rem !important;
+    font-weight: bold !important;
+}
+
+.sapVizFrame .v-categoryAxisTitle .v-title,
+.sapVizFrame .v-valueAxisTitle .v-title {
+    font-size: 0.7rem !important;
+}
+
+.sapVizFrame .v-dataLabel {
+    font-size: 0.7rem !important;
+}
+
+.sapVizFrame .v-legend-item text {
+    font-size: 0.7rem !important;
+}
+
+/* Project List Styles - Enhanced for dynamic data */
+.simpleProjectList {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+    overflow: visible !important;
+    height: auto !important;
+}
+
+.simpleProjectList .sapMListUl {
     display: block !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
+    visibility: visible !important;
+    overflow: visible !important;
+    height: auto !important;
 }
 
-/* Ensure titles inside half-width tiles are properly sized - larger text */
-.tileHalfWidth .tileTitle {
-    font-size: 1.1rem !important;
+.simpleProjectList .sapMLIB {
+    border-bottom: 1px solid #e5e5e5 !important;
+    height: auto !important;
+    min-height: 2.5rem !important;
+    padding: 0.25rem 0 !important;
+    display: flex !important;
+    visibility: visible !important;
+}
+
+.simpleProjectList .sapMLIB:last-child {
+    border-bottom: none !important;
+}
+
+.simpleProjectList .sapMSLITitle {
+    font-size: 0.875rem !important;
+    font-weight: bold !important;
+    color: #333333 !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
     max-width: 70% !important;
 }
 
-/* Make sure the icons in half-width tiles are sized properly - larger */
-.tileHalfWidth .tileIcon {
-    font-size: 1.5rem !important;
+.simpleProjectList .sapMSLIInfo {
+    font-size: 0.875rem !important;
+    text-align: right !important;
+    margin-right: 0.5rem !important;
+    white-space: nowrap !important;
 }
 
-/* Tile subtitle - larger */
-.tileHalfWidth .tileSubtitle {
-    font-size: 0.9rem !important;
-    margin-bottom: 0.5rem !important;
+/* Automatic color coding based on completion state */
+.sapMSLIInfoSuccess {
+    color: #107e3e !important; /* Green - completed */
 }
 
-/* Mobile responsive adjustments */
-@media (max-width: 768px) {
-    .tilesContainer {
-        width: 100% !important;
-        height: auto !important;
-        overflow: visible !important;
-        padding: 5px !important; /* Ensure consistent padding */
-    }
-    
-    .calendarContainer {
-        width: 100% !important;
-        margin-top: 5px !important; /* Changed to 5px for consistency */
-        padding: 5px !important; /* Ensure consistent padding */
-    }
-    
-    .dashboardLayout {
-        flex-direction: column !important;
-        padding: 5px !important; /* Ensure consistent padding */
-    }
-    
-    .tileHalfWidth {
-        width: calc(50% - 5px) !important;
-        min-height: 10rem !important;
-    }
+.sapMSLIInfoWarning {
+    color: #e9730c !important; /* Orange - behind */
 }
 
-/* Special styling for timesheet3 view */
-.sapMGT.OneByOne,
-.sapMGT.sapMGTOneByOne,
-#timesheetTile,
-#myReportsTile,
-#pmTile,
-#lmTile,
-.time3Tile {
-    width: 20rem !important;
+.sapMSLIInfoInformation {
+    color: #0070b1 !important; /* Blue - on track */
 }
 
-/* Special styling for timesheet4 view */
-.time4Tile {
-    width: 20rem !important;
-    height: auto !important; /* Allow height to be flexible */
-    flex-grow: 1 !important; /* Make tiles grow to fill available space */
-    display: flex !important; /* Use flex display */
-    flex-direction: column !important; /* Stack content vertically */
-}
-
-/* Full width tile for admin in timesheet4 */
-.fullWidthTile {
-    width: calc(100% - 1rem) !important;
-    max-width: 42rem !important;
-    margin: 0 auto !important;
-}
-
-/* Styles for admin tile in time4 */
-#adminTile .tileBody {
-    min-height: 8rem !important;
-}
-
-/* Special styling for timesheet4 view with two columns */
-.tileColumns {
-    width: 100% !important;
+/* Make sure list items are fully visible */
+.projectListItem {
     display: flex !important;
     justify-content: space-between !important;
-    padding: 5px !important; /* Added consistent padding */
-    height: 100% !important; /* Use full height */
+    align-items: center !important;
+    width: 100% !important;
+    visibility: visible !important;
+    height: auto !important;
+    min-height: 2.5rem !important;
 }
 
-.tileColumn {
-    width: 48% !important;
+/* Fix padding inside list items */
+.simpleProjectList .sapMSLI {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+}
+
+/* Project Bar Chart Styles */
+.projectBarChart {
+    margin-top: 0.5rem !important;
+    width: 100% !important;
+}
+
+.barChartList {
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.barChartList .sapMListUl {
+    display: block !important;
+    visibility: visible !important;
+    overflow: visible !important;
+    height: auto !important;
+}
+
+.barChartItem {
+    padding: 0.25rem 0 !important;
+    margin-bottom: 0.5rem !important;
+    border: none !important;
+}
+
+.barItemContent {
+    width: 100% !important;
+}
+
+.projectChartName {
+    font-weight: bold !important;
+    color: #333333 !important;
+    font-size: 0.875rem !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 70% !important;
+}
+
+.projectChartDays {
+    text-align: right !important;
+    color: #666666 !important;
+    font-size: 0.875rem !important;
+    white-space: nowrap !important;
+}
+
+/* Project Bar Styling */
+.projectBar {
+    height: 0.75rem !important;
+    margin: 0 !important;
+}
+
+.projectBar .sapMPIBar {
+    height: 0.75rem !important;
+}
+
+/* Total Row Styling */
+.totalRow {
+    border-top: 1px solid #e5e5e5 !important;
+    padding-top: 0.5rem !important;
+    margin-top: 0.5rem !important;
+}
+
+.totalLabel {
+    font-weight: bold !important;
+    color: #333333 !important;
+    font-size: 0.875rem !important;
+}
+
+.totalValue {
+    color: #0070b1 !important;
+    font-weight: bold !important;
+    font-size: 0.875rem !important;
+}
+
+.totalBar {
+    height: 1rem !important;
+    margin-top: 0.25rem !important;
+}
+
+.totalBar .sapMPIBar {
+    height: 1rem !important;
+}
+
+.totalBar .sapMPIText {
+    font-size: 0.75rem !important;
+    font-weight: bold !important;
+}
+
+/* Set specific colors for each project bar - use project indices */
+.barChartList .sapMListItems:nth-child(1) .projectBar .sapMPIBarNeutral,
+.barChartList .sapMListItems:nth-child(1) .projectBar .sapMPIBarPositive,
+.barChartList .sapMListItems:nth-child(1) .projectBar .sapMPIBarCritical {
+    background-color: #0070b1 !important; /* Digital Transformation - Blue */
+}
+
+.barChartList .sapMListItems:nth-child(2) .projectBar .sapMPIBarNeutral,
+.barChartList .sapMListItems:nth-child(2) .projectBar .sapMPIBarPositive,
+.barChartList .sapMListItems:nth-child(2) .projectBar .sapMPIBarCritical {
+    background-color: #5cbae6 !important; /* Cloud Migration - Light Blue */
+}
+
+.barChartList .sapMListItems:nth-child(3) .projectBar .sapMPIBarNeutral,
+.barChartList .sapMListItems:nth-child(3) .projectBar .sapMPIBarPositive,
+.barChartList .sapMListItems:nth-child(3) .projectBar .sapMPIBarCritical {
+    background-color: #1f78b4 !important; /* DevOps Implementation - Dark Blue */
+}
+
+.barChartList .sapMListItems:nth-child(4) .projectBar .sapMPIBarNeutral,
+.barChartList .sapMListItems:nth-child(4) .projectBar .sapMPIBarPositive,
+.barChartList .sapMListItems:nth-child(4) .projectBar .sapMPIBarCritical {
+    background-color: #33a02c !important; /* Agile Training - Green */
+}
+
+.barChartList .sapMListItems:nth-child(5) .projectBar .sapMPIBarNeutral,
+.barChartList .sapMListItems:nth-child(5) .projectBar .sapMPIBarPositive,
+.barChartList .sapMListItems:nth-child(5) .projectBar .sapMPIBarCritical {
+    background-color: #b2df8a !important; /* Internal Admin - Light Green */
+}
+
+/* Horizontal Bar Chart Styles */
+.horizontalBarChart {
+    margin-top: 0.5rem !important;
+    padding: 0 0.5rem !important;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: auto !important;
+    display: block !important; /* Changed from flex to block for UI5 rendering */
+}
+
+.chartRow {
+    margin-bottom: 0.5rem !important;
+    height: auto !important;
+    min-height: 1.5rem !important;
     display: flex !important;
-    flex-direction: column !important;
-    padding: 5px !important; /* Added consistent padding */
-    height: 100% !important; /* Use full height */
+    align-items: center !important;
+    visibility: visible !important;
+    position: relative !important; /* Added to ensure proper stacking */
+    z-index: auto !important; /* Ensure no z-index issues */
 }
 
-/* Full width tile for single-column layout */
-.tileFullWidth {
-    width: 20rem !important;
-    margin: 5px auto !important; /* Changed to 5px for consistency */
+/* Further ensure each chart row is independently visible */
+.chartRow:nth-child(1),
+.chartRow:nth-child(2),
+.chartRow:nth-child(3),
+.chartRow:nth-child(4),
+.chartRow:nth-child(5) {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.projectLabel {
+    padding-right: 0.5rem !important;
+    overflow: visible !important;
+}
+
+.projectLabelText {
+    font-size: 0.8rem !important;
+    font-weight: bold !important;
+    color: #333333 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    visibility: visible !important;
+}
+
+.barContainer {
+    height: auto !important;
+    min-height: 1rem !important;
+    overflow: visible !important;
+    visibility: visible !important;
+}
+
+.projectBar {
+    height: 1rem !important;
+    margin: 0 !important;
+}
+
+.projectBar .sapMPIBar {
+    height: 1rem !important;
+}
+
+/* Custom colors for each project bar */
+.projectBar1 .sapMPIBarNeutral {
+    background-color: #0070b1 !important; /* Blue */
+}
+
+.projectBar2 .sapMPIBarNeutral {
+    background-color: #5cbae6 !important; /* Light Blue */
+}
+
+.projectBar3 .sapMPIBarNeutral {
+    background-color: #1f78b4 !important; /* Dark Blue */
+}
+
+.projectBar4 .sapMPIBarNeutral {
+    background-color: #33a02c !important; /* Green */
+}
+
+.projectBar5 .sapMPIBarNeutral {
+    background-color: #b2df8a !important; /* Light Green */
+}
+
+/* Ensure remaining part of the bar is subtle */
+.projectBar .sapMPIBarRemaining {
+    background-color: #f2f2f2 !important;
+}
+
+/* Chart Legend Styles */
+.chartLegend {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+.legendItem {
+    display: flex !important;
+    align-items: center !important;
+}
+
+.legendColor {
+    width: 0.75rem !important;
+    height: 0.75rem !important;
+    margin-right: 0.25rem !important;
+    border: 1px solid #e5e5e5 !important;
+}
+
+.legendText {
+    font-size: 0.7rem !important;
+    color: #666666 !important;
+}
+
+.legendColor1 {
+    background-color: #0070b1 !important;
+}
+
+.legendColorEmpty {
+    background-color: #f2f2f2 !important;
+}
+
+/* Approvals Tile Styling */
+.approvalStatusList .sapMListUl {
+    margin-top: 0.5rem;
+}
+
+.approvalStatusList .sapMListUl .sapMLIB {
+    border-bottom: 1px solid #eaeaea;
+    padding: 0.5rem 0;
+}
+
+.approvalStatusList .sapMListUl .sapMLIB:last-child {
+    border-bottom: none;
+}
+
+.approvalStatusList .sapUiTinyFontSize {
+    font-size: 0.75rem;
+    color: #6a6d70;
+}
+
+.approvalStatusList .sapMObjStatusIcon {
+    font-size: 1.25rem;
+}
+
+/* Status colors */
+.sapMObjStatusSuccess .sapMObjStatusIcon {
+    color: #2b7d2b !important; /* Green for approved */
+}
+
+.sapMObjStatusError .sapMObjStatusIcon {
+    color: #bb0000 !important; /* Red for rejected */
+}
+
+.sapMObjStatusWarning .sapMObjStatusIcon {
+    color: #e78c07 !important; /* Orange for pending */
+}
+
+/* Booking Tile Viz Chart Styles - Optimized for no scrolling */
+#myBookingTile {
+    min-height: 24rem !important; /* Increased to match larger chart */
+    height: auto !important;
+    overflow: visible !important;
+}
+
+.bookingTileBody {
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    min-height: 18rem !important; /* Increased for compact display */
+    padding-bottom: 0.5rem !important;
+}
+
+/* VizFrame Chart specific styling - Optimized size */
+#bookingVizFrame {
+    margin-top: 0.25rem !important;
+    margin-bottom: 0.25rem !important;
+    height: 18rem !important; /* Match the new height in the XML */
+    width: 100% !important;
+    overflow: visible !important;
+}
+
+/* Make chart elements more compact */
+.sapVizFrame .v-m-title .v-title {
+    font-size: 0.75rem !important;
+    font-weight: bold !important;
+}
+
+.sapVizFrame .v-categoryAxisTitle .v-title,
+.sapVizFrame .v-valueAxisTitle .v-title {
+    font-size: 0.7rem !important;
+}
+
+.sapVizFrame .v-dataLabel {
+    font-size: 0.7rem !important;
+}
+
+.sapVizFrame .v-legend-item text {
+    font-size: 0.7rem !important;
+}
+
+/* Reduce margins in tile content */
+.tileContent {
+    padding: 0.5rem !important;
+}
+
+.tileBody {
+    padding: 0.5rem !important;
+}
+
+.tileHeader {
+    padding-bottom: 0.25rem !important;
+}
+
+.tileSubtitle {
+    margin-bottom: 0.25rem !important;
+}
+
+/* Booking Tile Ultra-Compact Styling */
+.bookingTileCustom {
+    height: auto !important;
+    width: 100% !important;
+    min-height: 24rem !important; /* Increased for TwoByOne format */
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+#bookingTileContainer {
+    height: auto !important;
+    min-height: 24rem !important;
+    width: 100% !important;
+    overflow: visible !important;
+}
+
+#myBookingTile .sapMTileContent {
+    height: auto !important;
+    min-height: 20rem !important;
+    overflow: visible !important;
+    padding: 0.5rem !important;
+}
+
+#myBookingTile .sapMGTContent {
+    height: auto !important;
+    overflow: visible !important;
+}
+
+#bookingVizFrame {
+    height: 18rem !important;
+    width: 100% !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Add some padding back for better appearance */
+#myBookingTile .sapMTileCnt {
+    padding: 0.5rem !important;
+    height: auto !important;
+    min-height: 22rem !important;
+}
+
+/* Restore normal font sizes for better readability */
+.sapVizFrame .v-m-title,
+.sapVizFrame .v-subtitle,
+.sapVizFrame .v-title {
+    font-size: 0.75rem !important;
+}
+
+.sapVizFrame .v-categoryAxis .v-axisline,
+.sapVizFrame .v-valueAxis .v-axisline,
+.sapVizFrame .v-legend,
+.sapVizFrame .v-axis-label,
+.sapVizFrame .v-label {
+    font-size: 0.75rem !important;
+}
+
+/* Show axis lines for better readability */
+.sapVizFrame .v-valueaxisline,
+.sapVizFrame .v-categoryaxisline {
     display: block !important;
 }
 
-/* Ensure consistent spacing between elements */
-.sapUiSmallMarginBottom {
-    margin-bottom: 5px !important; /* Changed to 5px for consistency */
-}
-
-.sapUiSmallMarginTop {
-    margin-top: 5px !important; /* Changed to 5px for consistency */
-}
-
-.sapUiSmallMarginEnd {
-    margin-right: 5px !important; /* Changed to 5px for consistency */
-}
-
-/* Tile styling specific for time2, time3, and time4 views */
-.time3Tile, .time4Tile, .customTileLayout {
-    /* border-radius: 0 !important; */
-    /* border: 3px solid #0070b1 !important; */
-}
-
-/* Ensure all tile frame types have sharp corners and blue borders */
-.sapMGT.sapMGTFrameType, .sapMGT.sapMGTFrameTypeOneByOne, .sapMGT.sapMGTFrameTypeTwoByOne, .sapMFrameTypeAuto, .sapMFrameTypeOneByOne, .sapMFrameTypeOneByHalf, .sapMFrameTypeTwoByOne {
-    border-radius: 0 !important;
-    /* border: 3px solid #0070b1 !important; */
-}
-
-/* Inner content of tiles should also have sharp corners */
-.sapMTileCnt, .sapMTileCntContent, .sapMTileContent, .sapMGTContent {
-    border-radius: 0 !important;
-}
-
-/* Override any SAP UI5 specific tile styling that might add rounded corners */
-.sapMGT::before, .sapMGT::after,
-.sapMGTContent::before, .sapMGTContent::after,
-.sapMTileCnt::before, .sapMTileCnt::after,
-.sapMTileCntContent::before, .sapMTileCntContent::after,
-.sapMTileContent::before, .sapMTileContent::after {
-    border-radius: 0 !important;
-}
-
-/* Apply consistent blue border to all timesheet variants */
-#timesheetTile, #myReportsTile, #myBookingTile, #adminTile, 
-.time2Tile, .time3Tile, .time4Tile {
-    /* border: 3px solid #0070b1 !important; */
-    border-radius: 0 !important;
-}
-
-/* Make tile hover effect maintain sharp corners */
-.sapMGT:hover, .sapMGT:focus, .sapMGT:active {
-    border-radius: 0 !important;
-}
-
-/* Additional calendar component styles to match tiles */
-.sapUiCalendarApp, .sapUiCalendarAppCont, .sapUiCalItem, .sapUiCalHead, 
-.sapUiCalMonthView, .sapUiCalContent, .sapMPCHeadNavToolbar, .sapUiCalMonthPicker, 
-.sapUiCalYearPicker, .sapUiCalRow {
-    border-radius: 0 !important;
-}
-
-.sapMSinglePCGrid, .sapMSinglePCRow, .sapMSinglePCMonthView, 
-.sapMSinglePCMonthGrid, .sapMSinglePCMonthDays, .sapMSinglePCMonthDay,
-.sapUiCalMonthView, .sapUiCalContent, .sapUiCalRow {
-    border-radius: 0 !important;
-}
-
-/* Ensure calendar header has same styling */
-.sapMSinglePCHead, .sapMPCHeadNavToolbar {
-    border-radius: 0 !important;
-    border-bottom: 1px solid #0070b1 !important;
-}
-
-/* Override rounded corners in calendar app appointments */
-.sapUiCalendarApp {
-    border-radius: 0 !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-
-/* Legend styling with matching border */
-.sapUiCalendarLegend {
-    margin-top: 5px !important; /* Changed to 5px for consistency */
-    border: 2px solid #0070b1 !important;
-    border-radius: 0 !important;
-    padding: 5px !important; /* Changed to 5px for consistency */
-    background-color: #ffffff;
-}
-
-/* Ensure all calendar elements have sharp corners */
-.sapUiCalendarApp, .sapMSinglePC, .sapMSinglePCHead, .sapMSinglePCAppointment,
-.sapUiCalItem, .sapUiCalRow, .sapUiCalHead, .sapUiCalMonthView, .sapUiCalContent,
-.sapMPCHeadNavToolbar, .sapMSinglePCGrid, .sapMSinglePCRow, .sapMSinglePCMonthView, 
-.sapMSinglePCMonthGrid, .sapMSinglePCMonthDays, .sapMSinglePCMonthDay,
-.fullWidthCalendar, .sapUiCalendarAppContainer {
-    border-radius: 0 !important;
-}
-
-/* Calendar component hover and focus states */
-.sapUiCalendarApp:hover, .sapUiCalendarApp:focus, .sapUiCalendarApp:active,
-.sapUiCalItem:hover, .sapUiCalItem:focus, .sapUiCalItem:active,
-.sapMSinglePCAppointment:hover, .sapMSinglePCAppointment:focus, .sapMSinglePCAppointment:active {
-    border-radius: 0 !important;
-}
-
-/* Make sure calendar date selection uses sharp corners */
-.sapUiCalDayToday, .sapUiCalDayToday > .sapUiCalDayNum,
-.sapUiCalItem.sapUiCalItemSel, .sapUiCalItem:active,
-.sapUiCalItem.sapUiCalItemNow,
-.sapUiCalItem.sapUiCalItemSelBetween,
-.sapUiCalItem.sapUiCalItemSelStart,
-.sapUiCalItem.sapUiCalItemSelEnd {
-    border-radius: 0 !important;
-}
-
-/* Match the calendar and tiles borders in responsive mode */
-@media (max-width: 768px) {
-    .calendarContainer {
-        border: 3px solid #0070b1 !important;
-        border-radius: 0 !important;
-    }
-    
-    .sapMSinglePC {
-        border: 3px solid #0070b1 !important;
-        border-radius: 0 !important;
-    }
-}
-
-/* Apply consistent padding to all tile components */
-.sapMTileCnt, 
-.sapMGTContent, 
-.sapMTileContent, 
-.sapMTileCntContent,
-.customTileLayout .sapMGTContent,
-.customTileLayout .sapMTileCnt,
-.customTileLayout .sapMTileContent,
-.customTileLayout .sapMTileCntContent {
-    padding: 5px !important; /* Set consistent 5px padding */
-}
-
-/* Apply consistent padding to calendar components */
-.sapMSinglePC,
-.sapMSinglePCHead,
-.sapMSinglePCAppointment,
-.sapMSinglePCGrid,
-.sapUiCalendarApp {
-    padding: 5px !important; /* Set consistent 5px padding */
-}
-
-/* Ensure tab content has consistent padding */
-.sapMITBContent {
-    padding: 5px !important; /* Set consistent 5px padding */
-}
-
-/* Ensure half-width tiles have consistent spacing */
-.tileHalfWidth {
-    width: calc(50% - 5px) !important; /* Updated to match 5px spacing */
-    margin-right: 5px !important; /* Updated to 5px */
-    margin-left: 0 !important; /* Remove left margin */
-}
-
-/* Apply consistent margin to tiles and elements */
-.customTile,
-.sapUiSmallMarginBottom,
-.sapUiSmallMarginTop,
-.sapUiSmallMarginEnd {
-    margin: 5px !important; /* Set consistent 5px margin */
-}
-
-/* Links inside tiles should have consistent padding */
-.tileLink {
-    padding: 5px 0 !important; /* Horizontal 5px padding */
-}
-
-/* Fix for time3 and time4 specific tile layouts */
-.time3Tile, .time4Tile {
-    margin: 5px auto !important;
-    height: auto !important; /* Allow flexible height */
-}
-
-/* Special handling for time4 tile content to use full height */
-.time4Tile .sapMTileCnt,
-.time4Tile .sapMGTContent {
-    height: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
-
-.time4Tile .tileContent {
-    flex-grow: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
-
-.time4Tile .tileBody {
-    flex-grow: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: space-between !important;
-}
-
-/* Make the entire tilesContainer flex in time4 */
-#time4 .tilesContainer {
-    display: flex !important;
-    flex-direction: column !important;
-    height: 100% !important;
-}
-
-#time4 .tileColumns {
-    flex-grow: 1 !important;
-    flex-shrink: 1 !important;
-    overflow: hidden !important;
-}
-
-#time4 .sapMGT.sapMGTFrameTypeOneByOne {
-    height: auto !important;
-    min-height: 0 !important;
-    flex-grow: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
-
-#time4 .sapMGT .sapMTileCnt {
-    height: 100% !important;
-    min-height: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
-
-#time4 .tileColumn .GenericTile {
-    height: auto !important;
-    flex-grow: 1 !important;
-    margin-bottom: 2px !important;
-}
-
-#time4 .tilesContainer .sapMFlexItem {
-    height: 100% !important;
-}
-
-/* Ensure tile content height is distributed properly in time4 */
-#time4 .tileContent {
-    height: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
-
-/* Make the tile columns stretch to fill available space evenly */
-#time4 .tileColumns {
-    height: 100% !important;
-    display: flex !important;
-    align-items: stretch !important;
-}
-
-/* Ensure the tiles in each column distribute height evenly */
-#time4 .tileColumn {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: space-between !important;
-    height: 100% !important;
-}
-
-/* Make all the tiles in time4 view fill equal height */
-#time4 .time4Tile {
-    flex: 1 1 0 !important;
-    margin-bottom: 2px !important;
-    min-height: 0 !important;
-}
-
-/* Special classes for time4 tile columns to ensure full screen filling */
-.time4TileColumnsContainer {
-    height: calc(100% - 4px) !important; /* Account for top/bottom margin */
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: space-between !important;
-    align-items: stretch !important;
-    flex: 1 1 auto !important;
-    box-sizing: border-box !important;
-    overflow: hidden !important;
-}
-
+/* Make sure column heights adapt */
 .time4TileColumn {
-    height: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    /* justify-content: space-between !important; */
-    flex: 1 0 48% !important;
-    box-sizing: border-box !important;
+    height: auto !important;
+    overflow: visible !important;
 }
 
-.time4TileColumn .time4Tile {
-    margin-bottom: 2px !important;
-    display: flex !important;
-    flex-direction: column !important;
+/* Force compact chart appearance */
+.sapVizFrame .v-datapoint,
+.sapVizFrame .v-categoryaxisline,
+.sapVizFrame .v-valueaxisline {
+    stroke-width: 0.5px !important;
 }
 
-/* Ensure the last tile in each column has no bottom margin */
-.time4TileColumn .time4Tile:last-child {
-    margin-bottom: 0 !important;
+.sapVizFrame .v-m-title,
+.sapVizFrame .v-subtitle,
+.sapVizFrame .v-title {
+    font-size: 0.65rem !important;
 }
 
-/* Specific height calculations for time4 view only */
-#time4 .time4TileColumn:first-child .time4Tile {
-    /* Each tile in left column gets 1/3 of available height minus margins */
-    height: calc((100% - 4px) / 3) !important; /* Subtract two 2px margins */
-    min-height: 0 !important;
-    flex: 0 0 auto !important;
+.sapVizFrame .v-categoryAxis .v-axisline,
+.sapVizFrame .v-valueAxis .v-axisline,
+.sapVizFrame .v-legend,
+.sapVizFrame .v-axis-label,
+.sapVizFrame .v-label {
+    font-size: 0.65rem !important;
 }
 
-#time4 .time4TileColumn:last-child .time4Tile {
-    /* Each tile in right column gets 1/2 of available height minus margin */
-    height: calc((100% - 2px) / 2) !important; /* Subtract one 2px margin */
-    min-height: 0 !important;
-    flex: 0 0 auto !important;
-}
-
-/* Ensure even spacing when there are three tiles */
-.time4TileColumn > .time4Tile:nth-child(3) {
-    margin-bottom: 0 !important;
-}
-
-/* Ensure that tiles stretch to fill the space */
-#time4 .tilesContainer {
-    display: flex !important;
-    flex-direction: column !important;
-    overflow-y: hidden !important; /* Prevent scrolling initially */
-}
-
-#time4 .sapMFlexItem {
-    flex-grow: 1 !important;
-}
-
-/* Apply padding only to right column */
-.time4TileColumn:last-child {
-    padding-top: 5em !important;
-    box-sizing: border-box !important;
-}
-
-/* Remove individual padding for the tiles as it's redundant and might cause conflicts */
-#manageTeamTile {
-    padding-top: 0 !important;
-}
-
-#manageProjectTile {
-    padding-top: 0 !important;
+/* Hide axis lines and gridlines to save space */
+.sapVizFrame .v-valueaxisline,
+.sapVizFrame .v-gridline {
+    display: none !important;
 }

@@ -25,6 +25,11 @@
                         <core:Fragment fragmentName="timenew.view.fragments.tiles.ReportsTile" type="XML" />
                     </FlexBox>
                     
+                    <!-- Team Management Tile -->
+                    <FlexBox width="100%" class="tileWrapper time2Tile sapUiTinyMarginTop">
+                        <core:Fragment fragmentName="timenew.view.fragments.tiles.TeamManageTile" type="XML" />
+                    </FlexBox>
+                    
                     <!-- Calendar Legend -->
                     <Panel headerText="{i18n>legendTitle}" expandable="true" expanded="true" class="sapUiTinyMarginTop">
                         <unified:CalendarLegend id="legend1" items="{/appointmentTypes}">

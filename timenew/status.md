@@ -27,6 +27,7 @@ timenew/
 │   │   │   └── tiles/              # Tile fragments
 │   │   │       ├── TimesheetTile.fragment.xml
 │   │   │       ├── ReportsTile.fragment.xml
+│   │   │       ├── TeamManageTile.fragment.xml   # New combined Team Management tile
 │   │   │       ├── TeamTile.fragment.xml
 │   │   │       ├── LMTile.fragment.xml
 │   │   │       ├── BookingTile.fragment.xml
@@ -54,9 +55,10 @@ timenew/
 - **Tile Components**:
   - `fragments/tiles/TimesheetTile.fragment.xml`: Timesheet entry options
   - `fragments/tiles/ReportsTile.fragment.xml`: Report viewing options
+  - `fragments/tiles/TeamManageTile.fragment.xml`: **New** combined Team Management tile with PM/LM tabs
   - `fragments/tiles/TeamTile.fragment.xml`: Team management for PMs
   - `fragments/tiles/LMTile.fragment.xml`: Line manager functions
-  - `fragments/tiles/BookingTile.fragment.xml`: Booking management
+  - `fragments/tiles/BookingTile.fragment.xml`: Booking management with dynamic horizontal bar chart
   - `fragments/tiles/ProjectTile.fragment.xml`: Project management
 
 #### Controller Modularization
@@ -90,6 +92,7 @@ timenew/
 
 ### 1. Timesheet View 2 (time2.view.xml)
 - Dashboard layout with a 20/80 split between navigation tiles and calendar
+- Three tiles: Timesheet, Reports, and Team Management (with PM/LM tabs)
 - Fully modularized with reusable fragments for tiles and calendar
 - Responsive design that adapts to different screen sizes
 
@@ -116,16 +119,18 @@ timenew/
 - **Tile Fragments**:
   - TimesheetTile: Timesheet entry options
   - ReportsTile: Report viewing options
+  - TeamManageTile: **New** combined tile with PM/LM tabs for team management
   - TeamTile: Team management for Project Managers
   - LMTile: Line manager functions
-  - BookingTile: Booking management
+  - BookingTile: Booking management with dynamic horizontal bar chart
   - ProjectTile: Project management
   
 - **Tile Styling**:
-  - Consistent design with title at top and icon in top-right corner
+  - Consistent design with icon on the left followed by title in the header
   - Contains specific options as links with proper formatting
   - Sharp rectangular corners with bold blue borders
   - Compact layout with optimized spacing
+  - Fixed header height issues to allow dynamic content
 
 ### 3. SinglePlanningCalendar Fragment
 - **Implementation**: Extracted as reusable TeamCalendar fragment
@@ -147,7 +152,7 @@ timenew/
 - **TileActionsController**: Reusable module for common tile actions
   - Timesheet functions
   - Report functions
-  - Team management functions
+  - Team management functions (PM and LM)
   - Booking functions
   - Project functions
 
@@ -156,6 +161,7 @@ timenew/
 ### 1. Fragment-Based Components
 - **Calendar Fragment**: Extracted the SinglePlanningCalendar into a reusable fragment
 - **Tile Fragments**: Created separate fragments for each tile type
+- **Team Management Tile**: **New** combined fragment with IconTabBar for PM and LM functions
 - **Legend Fragment**: Calendar legend implemented consistently across views
 
 ### 2. Modular Controllers
@@ -185,7 +191,9 @@ timenew/
 - **Uniform Padding**: Applied consistent padding to calendar components
 
 ### 3. Tile Styling
-- **Content Display**: Enhanced tiles with title at top, icon at top-right, and content below
+- **Content Display**: Enhanced tiles with icon on the left followed by title in the header
+- **Dynamic Header Height**: Removed fixed height constraints for tile headers to allow for varying content
+- **Tab Support**: Added specialized styling for IconTabBar within tiles
 - **Compact Sizing**: Reduced padding and margins for more efficient space usage
 - **Visual Hierarchy**: Used proper spacing and typography for clear information hierarchy
 - **Text Containment**: Fixed issues with text overflow in tiles
@@ -193,6 +201,75 @@ timenew/
 - **Sharp Rectangles**: Changed all tile borders from rounded to sharp rectangular corners
 - **Bold Blue Borders**: Applied 3px solid #0070b1 borders to all tiles
 - **Consistent Spacing**: Implemented uniform padding and margins throughout all tile components
+- **Consistent Icon Placement**: All tiles now use the same layout with icon on the left of the title
+
+### 4. Booking Tile Enhancements
+- **Dynamic Height**: Removed fixed height constraints to allow automatic content sizing
+- **Horizontal Bar Chart**: Implemented a clean, simple horizontal bar chart for project bookings
+- **Project Visualization**: Each project displayed with a progress bar showing filled vs. allocated days
+- **Color Coding**: Unique colors for each project bar for easy visual differentiation
+- **Simple Legend**: Added a minimal legend showing filled and allocated areas
+- **Responsive Layout**: Chart adjusts automatically to show all projects without cutting off
+- **Auto Frame Type**: Changed to frameType="Auto" for better content fitting
+- **Visibility Improvements**: Enhanced visibility settings for all chart elements
+- **Column Balancing**: Maintained proper column heights while allowing dynamic content
+
+## Recent Updates
+
+### 1. Tile Layout Optimization
+- **Horizontal Space Utilization**: Enhanced tiles to fill available horizontal space completely
+- **Removed White Space**: Eliminated excess white space between and around tiles
+- **Responsive Width**: Implemented 100% width for tiles to use all available container space
+- **Consistent Sizing**: Ensured tiles maintain full width across different views and layouts
+- **Grid Layout Improvements**: Applied width fixes for desktop, tablet, and mobile grid layouts
+- **View-Specific Optimizations**: Added targeted CSS for time2 (20/80) and time3 (40/60) layouts
+- **Clean Boundaries**: Maintained proper spacing between tiles and calendar in all views
+- **Vertical Consistency**: Added minimum height for tiles in smaller column layouts (time2)
+- **Padding Elimination**: Removed excessive padding in time3 view's flex containers and grid items
+- **Margin Optimization**: Adjusted margins in time3 view to eliminate empty space between tiles
+- **Container Spacing**: Fixed spacing issues in nested flex containers for consistent layout
+
+### 2. Visual Border Enhancements
+- **Blue Square Borders**: Added 3px solid #0070b1 border to both tiles and calendar
+- **Consistent Border Style**: Applied the same border style to all interactive components
+- **Square Corners**: Removed rounded corners from tiles and calendar for a modern, precise look
+- **Improved Visual Containment**: Enhanced visual distinction between different UI elements
+- **Uniform Styling**: Maintained consistent border thickness and color across the application
+
+### 3. Team Management Tile Enhancement
+- **Combined PM and LM Functions**: Created a single tile with tabs for PM and LM functions
+- **Tab-Based Navigation**: Used IconTabBar to provide clear separation between PM and LM roles
+- **Consistent Styling**: Applied the same styling to tabs as to other tile elements
+- **Role-Specific Actions**: Each tab contains only the actions relevant to that role
+- **Space Efficiency**: Maximized available space within the 20/80 layout
+
+### 4. Tile Header Improvements
+- **Dynamic Height**: Removed fixed height constraint from tile headers
+- **Custom Padding**: Applied consistent padding (1rem) to all header content
+- **Improved Alignment**: Better vertical alignment of title and icon
+- **Icon Repositioning**: Moved icons to the left of the title for better visual hierarchy
+- **Consistent Spacing**: Added margin between icon and title for improved readability
+
+### 5. Unified Tile Layout
+- **Consistent Header Structure**: Updated all tile fragments to use the same header layout
+- **Standardized Icon Placement**: Repositioned all icons to appear on the left side of titles
+- **Uniform Vertical Alignment**: Used alignItems="Center" for proper vertical centering
+- **Complete Implementation**: Applied the consistent layout across all 7 tile fragments
+- **Improved Readability**: Natural left-to-right reading flow in all tiles
+
+### 6. CSS Optimizations
+- **Optimized Selectors**: Used specific class selectors for targeted styling
+- **Overrode Default Values**: Used !important selectively to override SAP default values
+- **Tab Bar Styling**: Created specialized styles for the IconTabBar within the Team Management tile
+- **Improved Link Display**: Enhanced link styling for better readability and spacing
+- **Icon Spacing**: Added specific margin to icons for consistent spacing between icon and title
+
+### 7. Booking Chart Improvements
+- **Dynamic Sizing**: Removed fixed height constraints to allow automatic content sizing
+- **Visibility Fixes**: Enhanced visibility settings for all chart elements
+- **Responsive Layout**: Chart adjusts automatically to show all projects
+- **Column Balancing**: Maintained proper column heights while allowing dynamic content
+- **Auto Frame Type**: Changed to frameType="Auto" for better content fitting
 
 ## Next Steps
 
@@ -200,6 +277,7 @@ timenew/
 1. **Data Integration**: Connect to backend services for real appointment data
 2. **User Settings**: Add personalization options for calendar views and preferences
 3. **Offline Support**: Implement local storage for offline functionality
+4. **Role-Based Personalization**: Adjust UI based on user role (PM/LM/Regular)
 
 ### Known Issues
 - All previously reported issues have been fixed
@@ -209,10 +287,12 @@ timenew/
 ### CSS Approach
 - Used SAPUI5 responsive classes where possible
 - Added custom CSS for specific component styling
+- Overrode default SAP UI5 styling strategically with !important declarations
 - Used word-wrap and overflow properties to contain text
 - Created custom tile layout with HBox for header and VBox for content
 - Established uniform padding and margin system for visual consistency
-- Used !important declarations strategically to override default SAPUI5 styling
+- Added specialized styling for tab bars within tiles
+- Created consistent icon-title spacing with dedicated margin rule
 
 ### Component Structure
 - Implemented modular architecture with reusable fragments and controller modules
@@ -220,6 +300,7 @@ timenew/
 - Used consistent component patterns across all views
 - Leveraged SAPUI5 standard controls with custom enhancements
 - Optimized sizing and spacing for better visual appearance
+- Added role-based tab navigation for the Team Management tile
 
 ### Routing and Navigation
 - Implemented routing for all views (time2, time3, and time4)
@@ -229,4 +310,4 @@ timenew/
 
 ---
 
-*Last Updated: March 25, 2025 04:25 AM*
+*Last Updated: May 28, 2024 11:15 AM*

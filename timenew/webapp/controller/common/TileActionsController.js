@@ -70,7 +70,94 @@ sap.ui.define([
         
         onViewBookingsPress: function() {
             console.log("VALIDATION: View bookings link pressed in TileActionsController");
-            MessageToast.show("View Bookings Selected");
+            
+            // Get the booking model data
+            var oView = this._owner.getView();
+            var oModel = oView.getModel("bookingModel");
+            
+            if (oModel) {
+                var oData = oModel.getData();
+                var totalAllocated = 0;
+                var totalFilled = 0;
+                var projectSummary = "";
+                
+                // Calculate totals and build project summary
+                oData.projects.forEach(function(project, index) {
+                    totalAllocated += project.allocatedDays;
+                    totalFilled += project.filledDays;
+                    
+                    // Calculate completion percentage
+                    var completion = Math.round((project.filledDays / project.allocatedDays) * 100);
+                    
+                    // Add to summary string
+                    projectSummary += project.projectName + ": " + 
+                                     project.filledDays + "/" + project.allocatedDays + 
+                                     " days (" + completion + "%)\n";
+                });
+                
+                // Calculate total completion percentage
+                var totalCompletion = Math.round((totalFilled / totalAllocated) * 100);
+                
+                // Show a dialog with the detailed information
+                if (!this._oBookingDialog) {
+                    this._oBookingDialog = new sap.m.Dialog({
+                        title: "Booking Details for " + oData.month,
+                        contentWidth: "400px",
+                        content: [
+                            new sap.m.VBox({
+                                items: [
+                                    new sap.m.Text({
+                                        text: "Project Allocations:"
+                                    }).addStyleClass("sapUiSmallMarginBottom sapUiSmallMarginTop dialogTitle"),
+                                    new sap.m.TextArea({
+                                        value: projectSummary,
+                                        rows: 6,
+                                        width: "100%",
+                                        editable: false
+                                    }),
+                                    new sap.m.Text({
+                                        text: "Summary:"
+                                    }).addStyleClass("sapUiSmallMarginBottom sapUiSmallMarginTop dialogTitle"),
+                                    new sap.m.Text({
+                                        text: "Total Projects: " + oData.projects.length
+                                    }),
+                                    new sap.m.Text({
+                                        text: "Total Days Allocated: " + totalAllocated
+                                    }),
+                                    new sap.m.Text({
+                                        text: "Total Days Filled: " + totalFilled
+                                    }),
+                                    new sap.m.Text({
+                                        text: "Total Completion: " + totalCompletion + "%"
+                                    }).addStyleClass("sapUiSmallMarginBottom")
+                                ]
+                            }).addStyleClass("sapUiContentPadding")
+                        ],
+                        beginButton: new sap.m.Button({
+                            text: "Close",
+                            press: function () {
+                                this._oBookingDialog.close();
+                            }.bind(this)
+                        }),
+                        afterClose: function() {
+                            // Update dialog content on close for next time
+                            var textArea = this._oBookingDialog.getContent()[0].getItems()[1];
+                            textArea.setValue(projectSummary);
+                            
+                            // Update title
+                            this._oBookingDialog.setTitle("Booking Details for " + oData.month);
+                        }.bind(this)
+                    });
+                    
+                    // Add dialog to owner view for lifecycle management
+                    oView.addDependent(this._oBookingDialog);
+                }
+                
+                // Open the dialog
+                this._oBookingDialog.open();
+            } else {
+                MessageToast.show("Booking data not available");
+            }
         },
         
         // Manage Team tile actions

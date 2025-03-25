@@ -35,7 +35,8 @@ sap.ui.define([
                     oControl.fireAppointmentSelect({
                         appointment: oEvent.getParameter("appointment")
                     });
-                }
+                },
+                actions: [] // Explicitly set empty actions to remove default buttons
             });
 
             // Add appointments from the aggregation

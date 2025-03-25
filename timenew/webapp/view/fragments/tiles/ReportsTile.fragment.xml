@@ -7,20 +7,21 @@
         frameType="OneByOne" 
         press=".onMyReportsTilePress">
         <TileContent class="tileContent">
-            <!-- Top row with title and icon -->
-            <HBox width="100%" justifyContent="SpaceBetween" class="tileHeader">
-                <Title text="My Reports" class="tileTitle"/>
-                <core:Icon src="sap-icon://bar-chart" class="tileIcon"/>
-            </HBox>
-            
-            <!-- Content immediately below header -->
-            <VBox width="100%" class="tileBody" height="100%">
-                <Text text="3 Available Reports" class="tileSubtitle"/>
-                <Link text="&gt; Activity Report" press=".onActivityReportPress" class="tileLink"/>
-                <Link text="&gt; Customer Timesheet" press=".onCustomerTimesheetPress" class="tileLink"/>
-                <Link text="&gt; Home Working Report" press=".onHomeWorkingReportPress" class="tileLink"/>
-                <FlexBox height="100%" width="100%"></FlexBox>
+            <VBox height="100%">
+                <!-- Top row with icon and title -->
+                <HBox width="100%" alignItems="Center" class="tileHeader">
+                    <core:Icon src="sap-icon://bar-chart" class="tileIcon"/>
+                    <Title text="My Reports" class="tileTitle"/>
+                </HBox>
+                
+                <!-- Content immediately below header -->
+                <VBox width="100%" class="tileBody">
+                    <Text text="3 Available Reports" class="tileSubtitle"/>
+                    <Link text="> Activity Report" press=".onActivityReportPress" class="tileLink"/>
+                    <Link text="> Customer Timesheet" press=".onCustomerTimesheetPress" class="tileLink"/>
+                    <Link text="> Home Working Report" press=".onHomeWorkingReportPress" class="tileLink"/>
+                </VBox>
             </VBox>
         </TileContent>
     </GenericTile>
-</mvc:View> 
+</mvc:View>

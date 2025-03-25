@@ -1,25 +1,37 @@
 <mvc:View
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:viz.data="sap.viz.ui5.data"
     xmlns:core="sap.ui.core">
-    <GenericTile id="myBookingTile" 
-        class="customTileLayout tileFullWidth timeTile time4Tile sapUiSmallMarginTop"
-        frameType="OneByOne" 
-        press=".onMyBookingTilePress">
-        <TileContent class="tileContent">
-            <!-- Top row with title and icon -->
-            <HBox width="100%" justifyContent="SpaceBetween" class="tileHeader">
-                <Title text="My Booking" class="tileTitle"/>
-                <core:Icon src="sap-icon://calendar" class="tileIcon"/>
-            </HBox>
-            
-            <!-- Content immediately below header -->
-            <VBox width="100%" class="tileBody" height="100%">
-                <Text text="Booking Options" class="tileSubtitle"/>
-                <Link text="&gt; Add Booking" press=".onAddBookingPress" class="tileLink"/>
-                <Link text="&gt; View Bookings" press=".onViewBookingsPress" class="tileLink"/>
-                <FlexBox height="100%" width="100%"></FlexBox>
-            </VBox>
-        </TileContent>
-    </GenericTile>
-</mvc:View> 
+<GenericTile id="myBookingTile" 
+    class="bookingTileCustom sapUiTinyMargin"
+    header="My Booking"
+    subheader="{bookingModel>/month}"
+    frameType="TwoByOne" 
+    press=".onMyBookingTilePress">
+    <TileContent footer="Project Allocation">
+        <viz:VizFrame id="bookingVizFrame" 
+                   height="18rem"
+                   width="100%"
+                   vizType="bar">
+            <viz:dataset>
+                <viz.data:FlattenedDataset data="{bookingModel>/projects}">
+                    <viz.data:dimensions>
+                        <viz.data:DimensionDefinition name="Project" value="{projectName}" />
+                    </viz.data:dimensions>
+                    <viz.data:measures>
+                        <viz.data:MeasureDefinition name="Filled Days" value="{filledDays}" />
+                        <viz.data:MeasureDefinition name="Allocated Days" value="{allocatedDays}" />
+                    </viz.data:measures>
+                </viz.data:FlattenedDataset>
+            </viz:dataset>
+            <viz:feeds>
+                <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Filled Days,Allocated Days" />
+                <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Project" />
+            </viz:feeds>
+        </viz:VizFrame>
+    </TileContent>
+</GenericTile>
+</mvc:View>
