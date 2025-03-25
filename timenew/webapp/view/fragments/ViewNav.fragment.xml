@@ -1,0 +1,17 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Bar>
+        <contentLeft>
+            <Title text="SAPUI5 Timesheet Application" class="sapUiSmallMarginBegin"/>
+        </contentLeft>
+        <contentRight>
+            <SegmentedButton selectedKey="{/selectedView}" select="onViewSelect" class="sapUiSmallMarginEnd">
+                <items>
+                    <SegmentedButtonItem key="time2" text="Combined Tile View"/>
+                    <SegmentedButtonItem key="time3" text="Separate Tiles View"/>
+                </items>
+            </SegmentedButton>
+        </contentRight>
+    </Bar>
+</core:FragmentDefinition> 

@@ -1,0 +1,35 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:unified="sap.ui.unified">
+    <SinglePlanningCalendar
+        id="SPC1"
+        title="Team Calendar"
+        startDate="{path: '/startDate'}"
+        appointments="{path: '/appointments'}"
+        appointmentSelect=".onAppointmentSelect"
+        fullDay="false"
+        viewKey="Month"
+        class="fullWidthCalendar">
+        <actions>
+            <Button icon="sap-icon://add" press=".handleAppointmentCreateDialog" tooltip="Add Appointment"/>
+            <Button icon="sap-icon://edit" press=".handleAppointmentEdit" tooltip="Edit Appointment"/>
+            <Button icon="sap-icon://delete" press=".handleAppointmentDelete" tooltip="Delete Appointment"/>
+            <Button icon="sap-icon://decline" press=".handleCancel" tooltip="Cancel"/>
+        </actions>
+        <appointments>
+            <unified:CalendarAppointment
+                title="{title}"
+                text="{text}"
+                type="{type}"
+                startDate="{startDate}"
+                endDate="{endDate}">
+            </unified:CalendarAppointment>
+        </appointments>
+        <views>
+            <SinglePlanningCalendarDayView key="Day" title="Day"/>
+            <SinglePlanningCalendarWorkWeekView key="Week" title="Work Week"/>
+            <SinglePlanningCalendarMonthView key="Month" title="Month"/>
+        </views>
+    </SinglePlanningCalendar>
+</mvc:View> 

@@ -1,0 +1,46 @@
+<mvc:View controllerName="timenew.controller.time2"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:unified="sap.ui.unified"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    displayBlock="true"
+    height="100%">
+    <Page id="page" title="{i18n>title}" enableScrolling="false" class="sapUiNoContentPadding">
+        <headerContent>
+            <Button text="Switch to Time3 View" icon="sap-icon://arrow-right" press=".onNavToTime3" class="sapUiSmallMarginEnd"/>
+        </headerContent>
+        <content>
+            <!-- Use FlexBox with no padding or margins -->
+            <FlexBox id="dashboardLayout" class="dashboardLayout" width="100%" height="100%" renderType="Bare">
+                <!-- Left side with tiles - 20% width -->
+                <FlexBox id="tilesContainer" class="tilesContainer" width="20%" height="100%" direction="Column" renderType="Bare">
+                    <!-- Timesheet Tile -->
+                    <FlexBox width="100%" class="tileWrapper time2Tile">
+                        <core:Fragment fragmentName="timenew.view.fragments.tiles.TimesheetTile" type="XML" />
+                    </FlexBox>
+                    
+                    <!-- My Reports Tile -->
+                    <FlexBox width="100%" class="tileWrapper time2Tile sapUiTinyMarginTop">
+                        <core:Fragment fragmentName="timenew.view.fragments.tiles.ReportsTile" type="XML" />
+                    </FlexBox>
+                    
+                    <!-- Calendar Legend -->
+                    <Panel headerText="{i18n>legendTitle}" expandable="true" expanded="true" class="sapUiTinyMarginTop">
+                        <unified:CalendarLegend id="legend1" items="{/appointmentTypes}">
+                            <unified:items>
+                                <unified:CalendarLegendItem text="{title}" type="{type}" color="{color}"/>
+                            </unified:items>
+                        </unified:CalendarLegend>
+                    </Panel>
+                </FlexBox>
+                
+                <!-- Right side with calendar - 80% width -->
+                <FlexBox id="calendarContainer" class="calendarContainer" width="80%" height="100%" direction="Column" renderType="Bare">
+                    <!-- Calendar Fragment -->
+                    <core:Fragment fragmentName="timenew.view.fragments.calendar.TeamCalendar" type="XML" />
+                </FlexBox>
+            </FlexBox>
+        </content>
+    </Page>
+</mvc:View>

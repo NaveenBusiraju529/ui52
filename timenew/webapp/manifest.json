@@ -1,0 +1,151 @@
+{
+    "_version": "1.60.0",
+    "sap.app": {
+        "id": "timenew",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.16.5",
+            "toolsId": "4301f996-8dc8-4701-b2d0-08d63d9d439c"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/ZDEMO_EMP1_SRV/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/mainService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.120.24",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ui.unified": {},
+                "sap.ui.layout": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "timenew.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {}
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "transition": "slide",
+                "type": "View",
+                "viewType": "XML",
+                "path": "timenew.view",
+                "async": true,
+                "viewPath": "timenew.view"
+            },
+            "routes": [
+                {
+                    "name": "Routetime2",
+                    "pattern": "time2",
+                    "target": [
+                        "Targettime2"
+                    ]
+                },
+                {
+                    "name": "Routetime3",
+                    "pattern": "time3",
+                    "target": [
+                        "Targettime3"
+                    ]
+                },
+                {
+                    "name": "Routetime4",
+                    "pattern": "time4",
+                    "target": [
+                        "Targettime4"
+                    ]
+                },
+                {
+                    "name": "RouteDefault",
+                    "pattern": "",
+                    "target": [
+                        "Targettime2"
+                    ]
+                },
+                {
+                    "name": "RouteWithQuery",
+                    "pattern": ":?query:",
+                    "target": [
+                        "Targettime2"
+                    ]
+                }
+            ],
+            "targets": {
+                "Targettime2": {
+                    "id": "time2",
+                    "name": "time2"
+                },
+                "Targettime3": {
+                    "id": "time3",
+                    "name": "time3"
+                },
+                "Targettime4": {
+                    "id": "time4",
+                    "name": "time4"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "timenew.view.App",
+            "type": "XML",
+            "id": "App"
+        }
+    }
+}

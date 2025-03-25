@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZDEMO_EMP1_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="employeeCreate" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="employeeNumber"/>
+                </Key>
+                <Property Name="employeeNumber" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Personnel No." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="dasId" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="User Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="firstName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="First Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="lastName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Last Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="employeeSet" Relationship="ZDEMO_EMP1_SRV.employeeCreateToemployee" FromRole="FromRole_employeeCreateToemployee" ToRole="ToRole_employeeCreateToemployee"/>
+            </EntityType>
+            <EntityType Name="me" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="employeeNumber"/>
+                </Key>
+                <Property Name="employeeNumber" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Personnel No." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="dasId" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="System ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="companyCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Company Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="firstName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="First Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="lastName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Last Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="manager" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Manager Personnel No." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="employee" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="employeeNumber"/>
+                </Key>
+                <Property Name="employeeNumber" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Personnel No." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="flagCommType" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Communication Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="usridLong" Type="Edm.String" Nullable="false" MaxLength="241" sap:unicode="false" sap:label="Long ID/Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="employeeCreateToemployee" sap:content-version="1">
+                <End Type="ZDEMO_EMP1_SRV.employeeCreate" Multiplicity="1" Role="FromRole_employeeCreateToemployee"/>
+                <End Type="ZDEMO_EMP1_SRV.employee" Multiplicity="*" Role="ToRole_employeeCreateToemployee"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_employeeCreateToemployee">
+                        <PropertyRef Name="employeeNumber"/>
+                    </Principal>
+                    <Dependent Role="ToRole_employeeCreateToemployee">
+                        <PropertyRef Name="employeeNumber"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZDEMO_EMP1_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="employeeCreateSet" EntityType="ZDEMO_EMP1_SRV.employeeCreate" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="meSet" EntityType="ZDEMO_EMP1_SRV.me" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="employeeSet" EntityType="ZDEMO_EMP1_SRV.employee" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <AssociationSet Name="employeeCreateToemployeeSet" Association="ZDEMO_EMP1_SRV.employeeCreateToemployee" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="employeeCreateSet" Role="FromRole_employeeCreateToemployee"/>
+                    <End EntitySet="employeeSet" Role="ToRole_employeeCreateToemployee"/>
+                </AssociationSet>
+            </EntityContainer>
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <atom:link rel="self" href="https://perfdev.myatos.net/sap/opu/odata/sap/ZDEMO_EMP1_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://perfdev.myatos.net/sap/opu/odata/sap/ZDEMO_EMP1_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

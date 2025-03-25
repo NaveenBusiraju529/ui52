@@ -1,0 +1,24 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <GenericTile id="timesheetTile" 
+        class="customTileLayout tileFullWidth timeTile time4Tile"
+        frameType="OneByOne" 
+        press=".onTimesheetTilePress">
+        <TileContent class="tileContent">
+            <!-- Top row with title and icon -->
+            <HBox width="100%" justifyContent="SpaceBetween" class="tileHeader">
+                <Title text="Timesheet" class="tileTitle"/>
+                <core:Icon src="sap-icon://time-entry-request" class="tileIcon"/>
+            </HBox>
+            
+            <!-- Content immediately below header -->
+            <VBox width="100%" class="tileBody" height="100%">
+                <Text text="Time Entry Options" class="tileSubtitle"/>
+                <Link text="&gt; Entry" press=".onTimesheetEntryPress" class="tileLink"/>
+                <FlexBox height="100%" width="100%"></FlexBox>
+            </VBox>
+        </TileContent>
+    </GenericTile>
+</mvc:View> 

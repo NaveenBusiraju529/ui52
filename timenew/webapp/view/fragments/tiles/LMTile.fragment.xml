@@ -1,0 +1,29 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    
+    <GenericTile id="lmTile" 
+        class="customTileLayout sapUiSmallMarginBottom"
+        frameType="OneByOne" 
+        press=".onLMTilePress">
+        <TileContent>
+            <!-- Top row with title and icon -->
+            <HBox width="100%" justifyContent="SpaceBetween" class="tileHeader">
+                <Title text="Line Manager" class="tileTitle"/>
+                <core:Icon src="sap-icon://employee" class="tileIcon"/>
+            </HBox>
+            
+            <!-- Content immediately below header -->
+            <VBox width="100%" class="tileBody">
+                <Text text="LM Functions" class="tileSubtitle"/>
+                <Link text="&gt; Approve Time LM" press=".onLMApproveTimePress" class="tileLink"/>
+                <Link text="&gt; Time Reports LM" press=".onLMTimeReportsPress" class="tileLink"/>
+                <Link text="&gt; Assignment Report (LM) LM" press=".onLMAssignmentLMPress" class="tileLink"/>
+                <Link text="&gt; Assignment Report (PM) LM" press=".onLMAssignmentPMPress" class="tileLink"/>
+                <Link text="&gt; Home Working Report LM" press=".onLMHomeWorkingPress" class="tileLink"/>
+                <Link text="&gt; Timesheet Insights LM" press=".onLMTimesheetInsightsPress" class="tileLink"/>
+            </VBox>
+        </TileContent>
+    </GenericTile>
+    
+</core:FragmentDefinition> 

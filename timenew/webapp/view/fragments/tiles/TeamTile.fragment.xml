@@ -1,0 +1,26 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <GenericTile id="manageTeamTile" 
+        class="customTileLayout tileFullWidth timeTile time4Tile"
+        frameType="OneByOne" 
+        press=".onManageTeamTilePress">
+        <TileContent class="tileContent">
+            <!-- Top row with title and icon -->
+            <HBox width="100%" justifyContent="SpaceBetween" class="tileHeader">
+                <Title text="Manage Team" class="tileTitle"/>
+                <core:Icon src="sap-icon://group" class="tileIcon"/>
+            </HBox>
+            
+            <!-- Content immediately below header -->
+            <VBox width="100%" class="tileBody" height="100%">
+                <Text text="Team Management" class="tileSubtitle"/>
+                <Link text="&gt; Team Overview" press=".onTeamOverviewPress" class="tileLink"/>
+                <Link text="&gt; Team Calendar" press=".onTeamCalendarPress" class="tileLink"/>
+                <Link text="&gt; Approvals" press=".onApprovalsPress" class="tileLink"/>
+                <FlexBox height="100%" width="100%"></FlexBox>
+            </VBox>
+        </TileContent>
+    </GenericTile>
+</mvc:View> 

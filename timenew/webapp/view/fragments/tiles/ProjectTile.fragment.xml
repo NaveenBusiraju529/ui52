@@ -1,0 +1,26 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <GenericTile id="manageProjectTile" 
+        class="customTileLayout tileFullWidth timeTile time4Tile sapUiSmallMarginTop"
+        frameType="OneByOne" 
+        press=".onManageProjectTilePress">
+        <TileContent class="tileContent">
+            <!-- Top row with title and icon -->
+            <HBox width="100%" justifyContent="SpaceBetween" class="tileHeader">
+                <Title text="Manage Project" class="tileTitle"/>
+                <core:Icon src="sap-icon://project-definition-triangle" class="tileIcon"/>
+            </HBox>
+            
+            <!-- Content immediately below header -->
+            <VBox width="100%" class="tileBody" height="100%">
+                <Text text="Project Management" class="tileSubtitle"/>
+                <Link text="&gt; Project Overview" press=".onProjectOverviewPress" class="tileLink"/>
+                <Link text="&gt; Resource Planning" press=".onResourcePlanningPress" class="tileLink"/>
+                <Link text="&gt; Project Reports" press=".onProjectReportsPress" class="tileLink"/>
+                <FlexBox height="100%" width="100%"></FlexBox>
+            </VBox>
+        </TileContent>
+    </GenericTile>
+</mvc:View> 
