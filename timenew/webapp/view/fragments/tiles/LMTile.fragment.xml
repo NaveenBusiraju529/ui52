@@ -10,7 +10,7 @@
             <VBox height="100%">
                 <!-- Top row with icon and title -->
                 <HBox width="100%" alignItems="Center" class="tileHeader">
-                    <core:Icon src="sap-icon://employee" class="tileIcon"/>
+                    <core:Icon src="sap-icon://account" class="tileIcon"/>
                     <Title text="Line Manager" class="tileTitle"/>
                 </HBox>
                 
