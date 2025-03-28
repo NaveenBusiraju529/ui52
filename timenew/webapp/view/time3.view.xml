@@ -6,45 +6,45 @@
     xmlns:layout="sap.ui.layout"
     displayBlock="true"
     height="100%">
-    <Page id="page" title="{i18n>title}" enableScrolling="false" class="sapUiNoContentPadding">
+    <Page id="page" title="{i18n>title}" enableScrolling="false">
         <headerContent>
-            <Button text="Switch to Time2 View" icon="sap-icon://arrow-left" press=".onNavToTime2" class="sapUiSmallMarginEnd"/>
-            <Button text="Switch to Time4 View" icon="sap-icon://arrow-right" press=".onNavToTime4" class="sapUiSmallMarginEnd"/>
+            <Button text="Switch to Time2 View" icon="sap-icon://arrow-left" press=".onNavToTime2"/>
+            <Button text="Switch to Time4 View" icon="sap-icon://arrow-right" press=".onNavToTime4"/>
         </headerContent>
         <content>
             <!-- Use FlexBox with no padding or margins -->
-            <FlexBox id="dashboardLayout" class="dashboardLayout" width="100%" height="100%" renderType="Bare">
+            <FlexBox id="dashboardLayout" width="100%" height="100%" renderType="Bare">
                 <!-- Left side with tiles - 40% width -->
-                <FlexBox id="tilesContainer" class="tilesContainer" width="40%" height="100%" direction="Column" renderType="Bare">
+                <FlexBox id="tilesContainer" width="40%" height="100%" direction="Column" renderType="Bare">
                     
                     <!-- First row: Timesheet and My Reports tiles -->
-                    <FlexBox width="100%" justifyContent="SpaceBetween" class="sapUiSmallMarginBottom">
+                    <FlexBox width="100%" justifyContent="SpaceBetween">
                         <!-- Timesheet Tile -->
-                        <FlexBox width="48%" class="tileWrapper time3Tile">
+                        <FlexBox width="48%">
                             <core:Fragment fragmentName="timenew.view.fragments.tiles.TimesheetTile" type="XML" />
                         </FlexBox>
                         
                         <!-- My Reports Tile -->
-                        <FlexBox width="48%" class="tileWrapper time3Tile">
+                        <FlexBox width="48%">
                             <core:Fragment fragmentName="timenew.view.fragments.tiles.ReportsTile" type="XML" />
                         </FlexBox>
                     </FlexBox>
                     
                     <!-- Second row: PM and LM tiles -->
-                    <FlexBox width="100%" justifyContent="SpaceBetween" class="sapUiSmallMarginBottom">
+                    <FlexBox width="100%" justifyContent="SpaceBetween">
                         <!-- Project Manager Tile -->
-                        <FlexBox width="48%" class="tileWrapper time3Tile">
+                        <FlexBox width="48%">
                             <core:Fragment fragmentName="timenew.view.fragments.tiles.TeamTile" type="XML" />
                         </FlexBox>
                         
                         <!-- Line Manager Tile -->
-                        <FlexBox width="48%" class="tileWrapper time3Tile">
+                        <FlexBox width="48%">
                             <core:Fragment fragmentName="timenew.view.fragments.tiles.LMTile" type="XML" />
                         </FlexBox>
                     </FlexBox>
                     
                     <!-- Calendar Legend -->
-                    <Panel headerText="{i18n>legendTitle}" expandable="true" expanded="true" class="sapUiNoContentPadding">
+                    <Panel headerText="{i18n>legendTitle}" expandable="true" expanded="true">
                         <unified:CalendarLegend id="legend1" items="{/appointmentTypes}">
                             <unified:items>
                                 <unified:CalendarLegendItem text="{title}" type="{type}" color="{color}"/>
@@ -54,7 +54,7 @@
                 </FlexBox>
                 
                 <!-- Right side with calendar - 60% width -->
-                <FlexBox id="calendarContainer" class="calendarContainer" width="60%" height="100%" direction="Column" renderType="Bare">
+                <FlexBox id="calendarContainer" width="60%" height="100%" direction="Column" renderType="Bare">
                     <!-- Calendar Fragment -->
                     <core:Fragment fragmentName="timenew.view.fragments.calendar.TeamCalendar" type="XML" />
                 </FlexBox>

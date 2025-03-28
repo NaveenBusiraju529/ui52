@@ -3,23 +3,22 @@
     xmlns="sap.m"
     xmlns:core="sap.ui.core">
     <GenericTile id="myReportsTile" 
-        class="customTileLayout tileFullWidth timeTile time4Tile sapUiSmallMarginTop"
         frameType="OneByOne" 
         press=".onMyReportsTilePress">
-        <TileContent class="tileContent">
+        <TileContent>
             <VBox height="100%">
                 <!-- Top row with icon and title -->
-                <HBox width="100%" alignItems="Center" class="tileHeader">
-                    <core:Icon src="sap-icon://bar-chart" class="tileIcon"/>
-                    <Title text="My Reports" class="tileTitle"/>
+                <HBox width="100%" alignItems="Center">
+                    <core:Icon src="sap-icon://bar-chart"/>
+                    <Title text="My Reports"/>
                 </HBox>
                 
                 <!-- Content immediately below header -->
-                <VBox width="100%" class="tileBody">
-                    <Text text="3 Available Reports" class="tileSubtitle"/>
-                    <Link text="> Activity Report" press=".onActivityReportPress" class="tileLink"/>
-                    <Link text="> Customer Timesheet" press=".onCustomerTimesheetPress" class="tileLink"/>
-                    <Link text="> Home Working Report" press=".onHomeWorkingReportPress" class="tileLink"/>
+                <VBox width="100%">
+                    <Text text="3 Available Reports"/>
+                    <Link text="> Activity Report" press=".onActivityReportPress"/>
+                    <Link text="> Customer Timesheet" press=".onCustomerTimesheetPress"/>
+                    <Link text="> Home Working Report" press=".onHomeWorkingReportPress"/>
                 </VBox>
             </VBox>
         </TileContent>

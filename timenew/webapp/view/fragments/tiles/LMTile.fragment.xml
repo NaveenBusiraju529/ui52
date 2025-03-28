@@ -3,26 +3,25 @@
     xmlns:core="sap.ui.core">
     
     <GenericTile id="lmTile" 
-        class="customTileLayout sapUiSmallMarginBottom"
         frameType="OneByOne" 
         press=".onLMTilePress">
-        <TileContent class="tileContent">
+        <TileContent>
             <VBox height="100%">
                 <!-- Top row with icon and title -->
-                <HBox width="100%" alignItems="Center" class="tileHeader">
-                    <core:Icon src="sap-icon://account" class="tileIcon"/>
-                    <Title text="Line Manager" class="tileTitle"/>
+                <HBox width="100%" alignItems="Center">
+                    <core:Icon src="sap-icon://account"/>
+                    <Title text="Line Manager"/>
                 </HBox>
                 
                 <!-- Content immediately below header -->
-                <VBox width="100%" class="tileBody">
-                    <Text text="LM Functions" class="tileSubtitle"/>
-                    <Link text="> Approve Time LM" press=".onLMApproveTimePress" class="tileLink"/>
-                    <Link text="> Time Reports LM" press=".onLMTimeReportsPress" class="tileLink"/>
-                    <Link text="> Assignment Report (LM) LM" press=".onLMAssignmentLMPress" class="tileLink"/>
-                    <Link text="> Assignment Report (PM) LM" press=".onLMAssignmentPMPress" class="tileLink"/>
-                    <Link text="> Home Working Report LM" press=".onLMHomeWorkingPress" class="tileLink"/>
-                    <Link text="> Timesheet Insights LM" press=".onLMTimesheetInsightsPress" class="tileLink"/>
+                <VBox width="100%">
+                    <Text text="LM Functions"/>
+                    <Link text="> Approve Time LM" press=".onLMApproveTimePress"/>
+                    <Link text="> Time Reports LM" press=".onLMTimeReportsPress"/>
+                    <Link text="> Assignment Report (LM) LM" press=".onLMAssignmentLMPress"/>
+                    <Link text="> Assignment Report (PM) LM" press=".onLMAssignmentPMPress"/>
+                    <Link text="> Home Working Report LM" press=".onLMHomeWorkingPress"/>
+                    <Link text="> Timesheet Insights LM" press=".onLMTimesheetInsightsPress"/>
                 </VBox>
             </VBox>
         </TileContent>

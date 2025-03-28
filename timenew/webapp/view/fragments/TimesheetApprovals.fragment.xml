@@ -2,7 +2,7 @@
     xmlns="sap.m"
     xmlns:core="sap.ui.core">
     <VBox>
-        <Title text="Timesheet Approvals" class="sapUiSmallMarginBottom"/>
+        <Title text="Timesheet Approvals"/>
         <List
             id="timesheetApprovalsList"
             items="{approvalModel>/timesheetApprovals}"

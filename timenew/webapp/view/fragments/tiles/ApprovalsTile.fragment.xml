@@ -1,43 +1,56 @@
+<!-- Timesheet Approvals Tile (example) -->
 <core:FragmentDefinition
     xmlns="sap.m"
     xmlns:core="sap.ui.core">
     
-    <GenericTile id="approvalsTile" 
-        class="customTileLayout sapUiSmallMarginBottom"
+    <GenericTile
+        id="approvalsTile"
         frameType="OneByOne" 
-        press=".onApprovalsTilePress">
-        <TileContent class="tileContent">
+        press=".onApprovalsTilePress"
+    >
+        <TileContent>
             <VBox height="100%">
-                <!-- Top row with icon and title -->
-                <HBox width="100%" alignItems="Center" class="tileHeader">
-                    <core:Icon src="sap-icon://approvals" class="tileIcon"/>
-                    <Title text="Timesheet Approvals" class="tileTitle"/>
+                <HBox width="100%" alignItems="Center">
+                    <core:Icon src="sap-icon://approvals"/>
+                    <Title text="Timesheet Approvals"/>
                 </HBox>
-                
-                <!-- Approval Status Indicators -->
-                <VBox width="100%" class="tileBody approvalStatusList">
+
+                <VBox width="100%">
                     <List
                         id="timesheetApprovalsList"
                         showNoData="false"
-                        items="{path: 'approvalModel>/timesheetApprovals', length: 3}">
+                        items="{path: 'approvalModel>/timesheetApprovals', length: 3}"
+                    >
                         <items>
                             <CustomListItem>
                                 <HBox alignItems="Center" justifyContent="SpaceBetween" width="100%">
                                     <VBox>
-                                        <Text text="{approvalModel>employeeName}" class="sapUiTinyMarginBottom"/>
-                                        <Text text="{approvalModel>week}" class="sapUiTinyMarginBottom sapUiTinyFontSize"/>
+                                        <Text text="{approvalModel>employeeName}"/>
+                                        <Text text="{approvalModel>week}"/>
                                     </VBox>
                                     <ObjectStatus
-                                        icon="{= ${approvalModel>status} === 'approved' ? 'sap-icon://accept' : ${approvalModel>status} === 'rejected' ? 'sap-icon://error' : 'sap-icon://alert'}"
-                                        state="{= ${approvalModel>status} === 'approved' ? 'Success' : ${approvalModel>status} === 'rejected' ? 'Error' : 'Warning'}" />
+                                        icon="{
+                                         = ${approvalModel>status} === 'approved' ? 'sap-icon://accept' :
+                                            ${approvalModel>status} === 'rejected' ? 'sap-icon://error' :
+                                            'sap-icon://alert'
+                                        }"
+                                        state="{
+                                         = ${approvalModel>status} === 'approved' ? 'Success' :
+                                            ${approvalModel>status} === 'rejected' ? 'Error' :
+                                            'Warning'
+                                        }"
+                                    />
                                 </HBox>
                             </CustomListItem>
                         </items>
                     </List>
-                    <Link text="View All Approvals" class="sapUiTinyMarginTop" press=".onViewAllApprovalsPress"/>
+
+                    <Link
+                        text="View All Approvals"
+                        press=".onViewAllApprovalsPress"
+                    />
                 </VBox>
             </VBox>
         </TileContent>
     </GenericTile>
-    
 </core:FragmentDefinition>

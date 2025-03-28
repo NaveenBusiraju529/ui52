@@ -3,7 +3,7 @@
     xmlns="sap.m"
     xmlns:unified="sap.ui.unified"
     xmlns:core="sap.ui.core">
-    <VBox class="sapUiNoContentPadding">
+    <VBox>
         <SinglePlanningCalendar
             id="SPC1"
             title="My Timesheet Status"
@@ -11,8 +11,7 @@
             appointments="{path: '/appointments'}"
             appointmentSelect=".onAppointmentSelect"
             fullDay="false"
-            viewKey="Month"
-            class="fullWidthCalendar">
+            viewKey="Month">
             <!-- Removed action buttons as requested -->
             <appointments>
                 <unified:CalendarAppointment
@@ -31,24 +30,24 @@
         </SinglePlanningCalendar>
         
         <!-- Legend for appointment status indicators -->
-        <Panel expandable="true" expanded="false" headerText="Status Legend" class="sapUiSmallMarginTop sapUiNoContentPadding">
+        <Panel expandable="true" expanded="false" headerText="Status Legend">
             <content>
                 <List>
                     <CustomListItem>
-                        <HBox alignItems="Center" class="sapUiSmallMarginBegin sapUiSmallMarginEnd">
-                            <core:Icon src="sap-icon://accept" color="#2b7d2b" class="sapUiSmallMarginEnd"/>
+                        <HBox alignItems="Center">
+                            <core:Icon src="sap-icon://accept" color="#2b7d2b"/>
                             <Text text="Approved Timesheet"/>
                         </HBox>
                     </CustomListItem>
                     <CustomListItem>
-                        <HBox alignItems="Center" class="sapUiSmallMarginBegin sapUiSmallMarginEnd">
-                            <core:Icon src="sap-icon://error" color="#bb0000" class="sapUiSmallMarginEnd"/>
+                        <HBox alignItems="Center">
+                            <core:Icon src="sap-icon://error" color="#bb0000"/>
                             <Text text="Rejected Timesheet"/>
                         </HBox>
                     </CustomListItem>
                     <CustomListItem>
-                        <HBox alignItems="Center" class="sapUiSmallMarginBegin sapUiSmallMarginEnd">
-                            <core:Icon src="sap-icon://alert" color="#e78c07" class="sapUiSmallMarginEnd"/>
+                        <HBox alignItems="Center">
+                            <core:Icon src="sap-icon://alert" color="#e78c07"/>
                             <Text text="Pending Timesheet"/>
                         </HBox>
                     </CustomListItem>

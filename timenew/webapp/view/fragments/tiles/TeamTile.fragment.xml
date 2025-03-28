@@ -3,23 +3,22 @@
     xmlns="sap.m"
     xmlns:core="sap.ui.core">
     <GenericTile id="manageTeamTile" 
-        class="customTileLayout tileFullWidth timeTile time4Tile"
         frameType="OneByOne" 
         press=".onManageTeamTilePress">
-        <TileContent class="tileContent">
+        <TileContent>
             <VBox height="100%">
                 <!-- Top row with icon and title -->
-                <HBox width="100%" alignItems="Center" class="tileHeader">
-                    <core:Icon src="sap-icon://group" class="tileIcon"/>
-                    <Title text="Manage Team" class="tileTitle"/>
+                <HBox width="100%" alignItems="Center">
+                    <core:Icon src="sap-icon://group"/>
+                    <Title text="Manage Team"/>
                 </HBox>
                 
                 <!-- Content immediately below header -->
-                <VBox width="100%" class="tileBody">
-                    <Text text="Team Management" class="tileSubtitle"/>
-                    <Link text="> Team Overview" press=".onTeamOverviewPress" class="tileLink"/>
-                    <Link text="> Team Calendar" press=".onTeamCalendarPress" class="tileLink"/>
-                    <Link text="> Approvals" press=".onApprovalsPress" class="tileLink"/>
+                <VBox width="100%">
+                    <Text text="Team Management"/>
+                    <Link text="> Team Overview" press=".onTeamOverviewPress"/>
+                    <Link text="> Team Calendar" press=".onTeamCalendarPress"/>
+                    <Link text="> Approvals" press=".onApprovalsPress"/>
                 </VBox>
             </VBox>
         </TileContent>

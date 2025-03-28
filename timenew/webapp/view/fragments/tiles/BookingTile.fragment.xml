@@ -6,7 +6,6 @@
     xmlns:viz.data="sap.viz.ui5.data"
     xmlns:core="sap.ui.core">
 <GenericTile id="myBookingTile" 
-    class="bookingTileCustom sapUiTinyMargin"
     header="My Booking"
     subheader="{bookingModel>/month}"
     frameType="TwoByOne" 

@@ -6,21 +6,21 @@
     xmlns:layout="sap.ui.layout"
     displayBlock="true"
     height="100%">
-    <Page id="time4" title="{i18n>title}" enableScrolling="false" class="sapUiNoContentPadding">
+    <Page id="time4" title="{i18n>title}" enableScrolling="false">
         <headerContent>
-            <Button text="Switch to Time3 View" icon="sap-icon://arrow-left" press=".onNavToTime3" class="sapUiSmallMarginEnd"/>
+            <Button text="Switch to Time3 View" icon="sap-icon://arrow-left" press=".onNavToTime3"/>
         </headerContent>
         <content>
             <!-- Use FlexBox with no padding or margins -->
-            <FlexBox id="dashboardLayout" class="dashboardLayout" width="100%" height="100%" renderType="Bare">
+            <FlexBox id="dashboardLayout" width="100%" height="100%" renderType="Bare">
                 <!-- Left side with tiles - 40% width -->
-                <FlexBox id="tilesContainer" class="tilesContainer" width="40%" height="100%" direction="Column" renderType="Bare">
+                <FlexBox id="tilesContainer" width="40%" height="100%" direction="Column" renderType="Bare">
                     
                     <!-- Two-column layout for tiles -->
-                    <FlexBox width="100%" justifyContent="SpaceBetween" class="tileColumns sapUiSmallMarginBottom time4TileColumnsContainer">
+                    <FlexBox width="100%" justifyContent="SpaceBetween">
                         
                         <!-- Left column: Timesheet, My Reports, and My Booking -->
-                        <FlexBox width="48%" direction="Column" class="tileColumn time4TileColumn" fitContainer="true">
+                        <FlexBox width="48%" direction="Column" fitContainer="true">
                             <!-- Timesheet Tile Fragment -->
                             <core:Fragment fragmentName="timenew.view.fragments.tiles.TimesheetTile" type="XML" />
                             
@@ -28,13 +28,13 @@
                             <core:Fragment fragmentName="timenew.view.fragments.tiles.ReportsTile" type="XML" />
                             
                             <!-- My Booking Tile Fragment with fixed height -->
-                            <VBox height="auto" class="sapUiSmallMarginTop" id="bookingTileContainer">
+                            <VBox height="auto" id="bookingTileContainer">
                                 <core:Fragment fragmentName="timenew.view.fragments.tiles.BookingTile" type="XML" />
                             </VBox>
                         </FlexBox>
                         
                         <!-- Right column: Manage Team and Manage Project -->
-                        <FlexBox width="48%" direction="Column" class="tileColumn time4TileColumn">
+                        <FlexBox width="48%" direction="Column">
                             <!-- Manage Team Tile Fragment -->
                             <core:Fragment fragmentName="timenew.view.fragments.tiles.TeamTile" type="XML" />
                             
@@ -45,7 +45,7 @@
                 </FlexBox>
                 
                 <!-- Right side with calendar - 60% width -->
-                <FlexBox id="calendarContainer" class="calendarContainer" width="60%" height="100%" direction="Column" renderType="Bare">
+                <FlexBox id="calendarContainer" width="60%" height="100%" direction="Column" renderType="Bare">
                     <!-- Calendar Fragment -->
                     <core:Fragment fragmentName="timenew.view.fragments.calendar.TeamCalendar" type="XML" />
                 </FlexBox>

@@ -3,21 +3,20 @@
     xmlns="sap.m"
     xmlns:core="sap.ui.core">
     <GenericTile id="timesheetTile" 
-        class="customTileLayout tileFullWidth timeTile time4Tile"
         frameType="OneByOne" 
         press=".onTimesheetTilePress">
-        <TileContent class="tileContent">
+        <TileContent>
             <VBox height="100%">
                 <!-- Top row with icon and title -->
-                <HBox width="100%" alignItems="Center" class="tileHeader">
-                    <core:Icon src="sap-icon://time-entry-request" class="tileIcon"/>
-                    <Title text="Timesheet" class="tileTitle"/>
+                <HBox width="100%" alignItems="Center">
+                    <core:Icon src="sap-icon://time-entry-request"/>
+                    <Title text="Timesheet"/>
                 </HBox>
                 
                 <!-- Content immediately below header -->
-                <VBox width="100%" class="tileBody">
-                    <Text text="Time Entry Options" class="tileSubtitle"/>
-                    <Link text="> Entry" press=".onTimesheetEntryPress" class="tileLink"/>
+                <VBox width="100%">
+                    <Text text="Time Entry Options"/>
+                    <Link text="> Entry" press=".onTimesheetEntryPress"/>
                 </VBox>
             </VBox>
         </TileContent>

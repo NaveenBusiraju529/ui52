@@ -3,23 +3,22 @@
     xmlns="sap.m"
     xmlns:core="sap.ui.core">
     <GenericTile id="manageProjectTile" 
-        class="customTileLayout tileFullWidth timeTile time4Tile sapUiSmallMarginTop"
         frameType="OneByOne" 
         press=".onManageProjectTilePress">
-        <TileContent class="tileContent">
+        <TileContent>
             <VBox height="100%">
                 <!-- Top row with icon and title -->
-                <HBox width="100%" alignItems="Center" class="tileHeader">
-                    <core:Icon src="sap-icon://project-definition-triangle" class="tileIcon"/>
-                    <Title text="Manage Project" class="tileTitle"/>
+                <HBox width="100%" alignItems="Center">
+                    <core:Icon src="sap-icon://project-definition-triangle"/>
+                    <Title text="Manage Project"/>
                 </HBox>
                 
                 <!-- Content immediately below header -->
-                <VBox width="100%" class="tileBody">
-                    <Text text="Project Management" class="tileSubtitle"/>
-                    <Link text="> Project Overview" press=".onProjectOverviewPress" class="tileLink"/>
-                    <Link text="> Resource Planning" press=".onResourcePlanningPress" class="tileLink"/>
-                    <Link text="> Project Reports" press=".onProjectReportsPress" class="tileLink"/>
+                <VBox width="100%">
+                    <Text text="Project Management"/>
+                    <Link text="> Project Overview" press=".onProjectOverviewPress"/>
+                    <Link text="> Resource Planning" press=".onResourcePlanningPress"/>
+                    <Link text="> Project Reports" press=".onProjectReportsPress"/>
                 </VBox>
             </VBox>
         </TileContent>
