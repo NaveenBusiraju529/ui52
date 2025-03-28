@@ -3,9 +3,7 @@ SAPUI5 Best Practices
 
 A collection of SAPUI5 best practices learned from actual projects and implementations.
 
-You can also check tutorials and guides on my blog, [genuineprogrammer](https://www.genuineprogrammer.com) for more!
 
-[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/G2G317AEZ)
 
 ## Table of Contents
 
