@@ -1,26 +1,90 @@
 <mvc:View
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
-    xmlns:core="sap.ui.core">
-    <GenericTile id="manageProjectTile" 
-        frameType="OneByOne" 
-        press=".onManageProjectTilePress">
-        <TileContent>
-            <VBox height="100%">
-                <!-- Top row with icon and title -->
-                <HBox width="100%" alignItems="Center">
-                    <core:Icon src="sap-icon://project-definition-triangle"/>
-                    <Title text="Manage Project"/>
-                </HBox>
-                
-                <!-- Content immediately below header -->
-                <VBox width="100%">
-                    <Text text="Project Management"/>
-                    <Link text="> Project Overview" press=".onProjectOverviewPress"/>
-                    <Link text="> Resource Planning" press=".onResourcePlanningPress"/>
-                    <Link text="> Project Reports" press=".onProjectReportsPress"/>
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+    <f:Card width="100%" class="sapUiTinyMarginBottom equalHeightTile">
+        <f:content>
+            <FlexBox class="sapUiTinyMargin" width="100%">
+                <VBox>
+                    <HBox>
+                        <core:Icon src="sap-icon://project-definition-triangle" size="30px"/>
+                        <VBox class="sapUiSmallMarginBegin">
+                            <Text class="boldFont" text="{i18n>manageProject}"/>
+                        </VBox>
+                    </HBox>
+                    <VBox class="sapUiTinyMargin">
+                        <Button
+                            icon="sap-icon://slim-arrow-right"
+                            text="Approve Time"
+                            type="Transparent"
+                            press=".onApproveTimePress"
+                            app:semObject="Project"
+                            app:action="ApproveTime">
+                            <customData>
+                                <BadgeCustomData key="badge" value="" visible="true"/>
+                            </customData>
+                        </Button>
+                        <Button
+                            icon="sap-icon://slim-arrow-right"
+                            text="Time Reports"
+                            type="Transparent"
+                            press=".onTimeReportsPress"
+                            app:semObject="Project"
+                            app:action="TimeReports">
+                            <customData>
+                                <BadgeCustomData key="badge" value="" visible="true"/>
+                            </customData>
+                        </Button>
+                        <Button
+                            icon="sap-icon://slim-arrow-right"
+                            text="Assignment Report (LM)"
+                            type="Transparent"
+                            press=".onAssignmentReportLMPress"
+                            app:semObject="Project"
+                            app:action="AssignmentReportLM">
+                            <customData>
+                                <BadgeCustomData key="badge" value="" visible="true"/>
+                            </customData>
+                        </Button>
+                        <Button
+                            icon="sap-icon://slim-arrow-right"
+                            text="Assignment Report (PM)"
+                            type="Transparent"
+                            press=".onAssignmentReportPMPress"
+                            app:semObject="Project"
+                            app:action="AssignmentReportPM">
+                            <customData>
+                                <BadgeCustomData key="badge" value="" visible="true"/>
+                            </customData>
+                        </Button>
+                        <Button
+                            icon="sap-icon://slim-arrow-right"
+                            text="Home Working Report"
+                            type="Transparent"
+                            press=".onHomeWorkingReportPress"
+                            app:semObject="Project"
+                            app:action="HomeWorkingReport">
+                            <customData>
+                                <BadgeCustomData key="badge" value="" visible="true"/>
+                            </customData>
+                        </Button>
+                        <Button
+                            icon="sap-icon://slim-arrow-right"
+                            text="Timesheet Insights"
+                            type="Transparent"
+                            press=".onTimesheetInsightsPress"
+                            app:semObject="Project"
+                            app:action="TimesheetInsights">
+                            <customData>
+                                <BadgeCustomData key="badge" value="" visible="true"/>
+                            </customData>
+                        </Button>
+                    </VBox>
                 </VBox>
-            </VBox>
-        </TileContent>
-    </GenericTile>
+            </FlexBox>
+        </f:content>
+    </f:Card>
 </mvc:View>

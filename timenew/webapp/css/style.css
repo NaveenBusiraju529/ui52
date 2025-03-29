@@ -1,39 +1,192 @@
-.sapMGT.OneByOne {
-    width: -webkit-fill-available !important;
-    height: 11rem;
-    margin: 0 !important;
+/* Card Styling */
+.sapFCard {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border: 1px solid #e5e5e5 !important;
+}
+
+/* Button Styling */
+.sapMBtn {
+    border-radius: 0 !important;
+}
+
+.sapMBtnInner {
+    border-radius: 0 !important;
+}
+
+/* Icon Tab Bar Styling */
+.sapMITBSelected .sapMITBFilterDefault {
+    border-radius: 0 !important;
+}
+
+.sapMITBFilter .sapMITBText {
+    border-radius: 0 !important;
+}
+
+/* Badge Styling */
+.sapMBadge .sapMBadgeIndicator {
+    border-radius: 0 !important;
+}
+
+/* Text Styling */
+.boldFont {
+    font-weight: bold !important;
+}
+
+/* Focus Outline */
+.sapMBtn:focus > .sapMFocusable {
+    outline: none !important;
+    border-radius: 0 !important;
+}
+
+/* Button States */
+.sapMBtnInner:not(.sapMBtnDisabled) {
+    border-radius: 0 !important;
+}
+
+.sapMBtnInner:hover {
+    border-radius: 0 !important;
+}
+
+/* Custom Button Colors */
+.btnApproved .sapMBtnInner {
+    background-color: #80FFEF !important;
+    color: #000000 !important;
+    border-radius: 0 !important;
+}
+
+.btnWaitingForApproval .sapMBtnInner {
+    background-color: #fcfbe9 !important;
+    color: #000000 !important;
+    border-radius: 0 !important;
+}
+
+.btnSaved .sapMBtnInner {
+    background-color: #FFD2E4 !important;
+    color: #000000 !important;
+    border-radius: 0 !important;
+}
+
+.btnRejected .sapMBtnInner {
+    background-color: #FFD9CF !important;
+    color: #000000 !important;
+    border-radius: 0 !important;
+}
+
+.btnBankHolidays .sapMBtnInner {
+    background-color: #C3D5F2 !important;
+    color: #000000 !important;
+    border-radius: 0 !important;
+}
+
+/* Layout Spacing */
+.sapUiTinyMargin {
+    margin: 0.5rem !important;
+}
+
+.sapUiSmallMarginBegin {
+    margin-left: 1rem !important;
+}
+
+/* Icon Styling */
+.sapUiIcon {
+    color: #0854a0 !important;
+}
+
+/* Remove Default Card Padding */
+.sapFCardContent {
     padding: 0 !important;
 }
 
-.sapMGT.OneByOne .sapMGTContent {
-    height: 100% !important;
-    padding: 0.5rem !important;
+/* Custom Badge Colors */
+.sapMBadge .sapMBadgeIndicator::after {
+    background-color: #0854a0 !important;
+    border-color: #0854a0 !important;
 }
 
-.sapMGT.OneByOne .sapMGTContentInner {
+.sapMBadge .sapMBadgeIndicator::before {
+    background-color: #0854a0 !important;
+    border-color: #0854a0 !important;
+}
+
+/* Hover Effects */
+.sapFCard:hover {
+    box-shadow: 0 0 0 1px #0854a0 !important;
+}
+
+.sapMBtnInner:hover {
+    background-color: #f5f5f5 !important;
+}
+
+/* Focus States */
+.sapFCard:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 2px #0854a0 !important;
+}
+
+/* Grid Layout */
+.sapUiLayoutCSSGrid {
+    display: grid !important;
+    align-items: stretch !important;
+}
+
+/* Improved Grid Settings */
+#dashboardLayout {
+    height: 100% !important;
+}
+
+/* Grid Settings for Tiles */
+#tilesGrid {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+#leftColumnGrid, #rightColumnGrid {
+    height: 100% !important;
+}
+
+/* Equal Height Tiles */
+.equalHeightTile {
     height: 100% !important;
     display: flex !important;
     flex-direction: column !important;
 }
 
-.sapMGT.OneByOne .sapMGTContentInner > * {
-    flex: 1 1 auto !important;
-}
-
-/* Ensure VBox containers fill available space */
-.sapMGT.OneByOne .sapMVBox {
+.equalHeightTile .sapFCardContent {
     height: 100% !important;
-    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
 }
 
-/* Ensure lists within tiles fill available space */
-.sapMGT.OneByOne .sapMList {
+.equalHeightTile .sapMFlexBox {
     height: 100% !important;
-    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
 }
 
-/* Ensure proper spacing in tile content */
-.sapMGT.OneByOne .sapMText,
-.sapMGT.OneByOne .sapMLabel {
-    margin: 0.25rem 0 !important;
+/* Calendar Styling */
+#calendarCard {
+    height: 100% !important;
+}
+
+#calendarCard .sapFCardContent {
+    height: 100% !important;
+}
+
+/* Responsive Behavior */
+@media (max-width: 599px) {
+    .sapFCard {
+        margin-bottom: 0.5rem !important;
+    }
+    
+    #dashboardLayout {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto auto !important;
+    }
+}
+
+/* Remove Rounded Corners from All Elements */
+* {
+    border-radius: 0 !important;
 }

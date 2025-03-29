@@ -1,36 +1,46 @@
 <mvc:View
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
     xmlns:viz="sap.viz.ui5.controls"
-    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
     xmlns:viz.data="sap.viz.ui5.data"
-    xmlns:core="sap.ui.core">
-<GenericTile id="myBookingTile" 
-    header="My Booking"
-    subheader="{bookingModel>/month}"
-    frameType="TwoByOne" 
-    press=".onMyBookingTilePress">
-    <TileContent footer="Project Allocation">
-        <viz:VizFrame id="bookingVizFrame" 
-                   height="18rem"
-                   width="100%"
-                   vizType="bar">
-            <viz:dataset>
-                <viz.data:FlattenedDataset data="{bookingModel>/projects}">
-                    <viz.data:dimensions>
-                        <viz.data:DimensionDefinition name="Project" value="{projectName}" />
-                    </viz.data:dimensions>
-                    <viz.data:measures>
-                        <viz.data:MeasureDefinition name="Filled Days" value="{filledDays}" />
-                        <viz.data:MeasureDefinition name="Allocated Days" value="{allocatedDays}" />
-                    </viz.data:measures>
-                </viz.data:FlattenedDataset>
-            </viz:dataset>
-            <viz:feeds>
-                <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Filled Days,Allocated Days" />
-                <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Project" />
-            </viz:feeds>
-        </viz:VizFrame>
-    </TileContent>
-</GenericTile>
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+    <f:Card width="100%" class="sapUiTinyMarginBottom equalHeightTile">
+        <f:content>
+            <FlexBox class="sapUiTinyMargin" direction="Column" width="100%">
+                <HBox>
+                    <core:Icon src="sap-icon://calendar" size="30px"/>
+                    <VBox class="sapUiSmallMarginBegin">
+                        <Text class="boldFont" text="{i18n>bookings}"/>
+                    </VBox>
+                </HBox>
+                
+                <VBox class="sapUiTinyMarginTop" width="100%">
+                    <Text text="Chart displaying bookings with values:" class="sapUiTinyMarginBottom" />
+                    <List noDataText="No booking data available">
+                        <StandardListItem title="Choices Franchise 1" info="3.33M" infoState="Success" />
+                        <StandardListItem title="Donald's Market" info="3.31M" infoState="Success" />
+                        <StandardListItem title="Choices Franchise 3" info="2.09M" infoState="Information" />
+                        <StandardListItem title="Choices Franchise 6" info="1.93M" infoState="Information" />
+                    </List>
+                </VBox>
+                
+                <Button
+                    icon="sap-icon://slim-arrow-right"
+                    text="Manage Bookings"
+                    type="Transparent"
+                    press=".onManageBookingsPress"
+                    app:semObject="Booking"
+                    app:action="Manage"
+                    class="sapUiTinyMarginTop">
+                    <customData>
+                        <BadgeCustomData key="badge" value="" visible="true"/>
+                    </customData>
+                </Button>
+            </FlexBox>
+        </f:content>
+    </f:Card>
 </mvc:View>

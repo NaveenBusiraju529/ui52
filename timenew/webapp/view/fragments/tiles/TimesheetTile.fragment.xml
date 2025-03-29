@@ -1,24 +1,35 @@
 <mvc:View
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
-    xmlns:core="sap.ui.core">
-    <GenericTile id="timesheetTile" 
-        frameType="OneByOne" 
-        press=".onTimesheetTilePress">
-        <TileContent>
-            <VBox height="100%">
-                <!-- Top row with icon and title -->
-                <HBox width="100%" alignItems="Center">
-                    <core:Icon src="sap-icon://time-entry-request"/>
-                    <Title text="Timesheet"/>
-                </HBox>
-                
-                <!-- Content immediately below header -->
-                <VBox width="100%">
-                    <Text text="Time Entry Options"/>
-                    <Link text="> Entry" press=".onTimesheetEntryPress"/>
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+    <f:Card width="100%" class="sapUiTinyMarginBottom equalHeightTile">
+        <f:content>
+            <FlexBox class="sapUiTinyMargin" width="100%">
+                <VBox>
+                    <HBox>
+                        <core:Icon src="sap-icon://time-entry-request" size="30px"/>
+                        <VBox class="sapUiSmallMarginBegin">
+                            <Text class="boldFont" text="{i18n>timesheet}"/>
+                        </VBox>
+                    </HBox>
+                    <VBox class="sapUiTinyMargin">
+                        <Button
+                            icon="sap-icon://slim-arrow-right"
+                            text="Entry"
+                            type="Transparent"
+                            press=".onTimesheetEntryPress"
+                            app:semObject="Timesheet"
+                            app:action="Entry">
+                            <customData>
+                                <BadgeCustomData key="badge" value="" visible="true"/>
+                            </customData>
+                        </Button>
+                    </VBox>
                 </VBox>
-            </VBox>
-        </TileContent>
-    </GenericTile>
+            </FlexBox>
+        </f:content>
+    </f:Card>
 </mvc:View>

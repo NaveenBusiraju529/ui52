@@ -23,18 +23,19 @@ timenew/
 │   ├── view/
 │   │   ├── fragments/              # Reusable UI fragments
 │   │   │   ├── calendar/
-│   │   │   │   └── TeamCalendar.fragment.xml  # Calendar fragment
-│   │   │   └── tiles/              # Tile fragments
-│   │   │       ├── TimesheetTile.fragment.xml
-│   │   │       ├── ReportsTile.fragment.xml
-│   │   │       ├── TeamManageTile.fragment.xml   # New combined Team Management tile
-│   │   │       ├── TeamTile.fragment.xml
-│   │   │       ├── LMTile.fragment.xml
-│   │   │       ├── BookingTile.fragment.xml
-│   │   │       └── ProjectTile.fragment.xml
-│   │   ├── time2.view.xml          # Time2 view - 20/80 layout
-│   │   ├── time3.view.xml          # Time3 view - 40/60 layout
-│   │   └── time4.view.xml          # Time4 view - 40/60 layout with columns
+│   │   │   │   └── TeamCalendar.fragment.xml  # Calendar fragment (Legend removed)
+│   │   │   └── tiles/              # Reusable Card-based tile fragments
+│   │   │       ├── TimesheetTile.fragment.xml    # Entry functionality
+│   │   │       ├── ReportsTile.fragment.xml      # Activity, Customer and Home reports
+│   │   │       ├── TeamManageTile.fragment.xml   # Combined PM/LM tabs for approvals and reports
+│   │   │       ├── TeamTile.fragment.xml         # Time approvals and various reports
+│   │   │       ├── LMTile.fragment.xml           # Duplicate of Team tile for time3 view
+│   │   │       ├── BookingTile.fragment.xml      # Chart with franchise booking data
+│   │   │       ├── ProjectTile.fragment.xml      # Project management with approvals and reports
+│   │   │       └── ApprovalsTile.fragment.xml    # Simplified approval actions
+│   │   ├── time2.view.xml          # Time2 view - 40/60 layout with grid
+│   │   ├── time3.view.xml          # Time3 view - 40/60 layout with grid tiles
+│   │   └── time4.view.xml          # Time4 view - 40/60 layout with grid columns
 │   ├── Component.js                # Application component
 │   └── manifest.json               # Application configuration
 └── status.md                       # This status document
@@ -43,271 +44,199 @@ timenew/
 ### Modular Approach
 
 #### View Modularization
-- **time2.view.xml**: Uses fragments for tiles and calendar with 20/80 layout
-- **time3.view.xml**: Uses fragments for tiles and calendar with 40/60 layout
-- **time4.view.xml**: Uses fragments for tiles and calendar with 40/60 layout and two-column tiles
+- **time2.view.xml**: Uses f:Card-wrapped fragments for tiles and calendar with 40/60 grid layout.
+- **time3.view.xml**: Uses f:Card-wrapped fragments for tiles and calendar with 40/60 grid layout and consistent grid-like tile structure.
+- **time4.view.xml**: Uses f:Card-wrapped fragments for tiles and calendar with 40/60 grid layout and two-column grid layout for tiles.
 
 #### Fragment-Based Components
 - **Calendar Component**: `fragments/calendar/TeamCalendar.fragment.xml`
-  - Encapsulates the entire SinglePlanningCalendar with consistent styling
-  - Used identically across all three views
-  
-- **Tile Components**:
-  - `fragments/tiles/TimesheetTile.fragment.xml`: Timesheet entry options
-  - `fragments/tiles/ReportsTile.fragment.xml`: Report viewing options
-  - `fragments/tiles/TeamManageTile.fragment.xml`: **New** combined Team Management tile with PM/LM tabs
-  - `fragments/tiles/TeamTile.fragment.xml`: Team management for PMs
-  - `fragments/tiles/LMTile.fragment.xml`: Line manager functions
-  - `fragments/tiles/BookingTile.fragment.xml`: Booking management with dynamic horizontal bar chart
-  - `fragments/tiles/ProjectTile.fragment.xml`: Project management
+  - Encapsulates the SinglePlanningCalendar.
+  - Status legend has been removed from the fragment.
+  - Used identically across all three views, wrapped in f:Card for consistent styling.
+
+- **Tile Components (using `sap.f.Card`)**: Located in `fragments/tiles/`
+  - Each tile is implemented as a reusable fragment based on `sap.f.Card`.
+  - Standardized internal structure (Icon + Title header, action Buttons).
+  - Detailed content customized per tile:
+    - Timesheet: Single "Entry" action button
+    - Reports: Three action buttons for "Activity Report", "Customer Timesheet", and "Home Working Report"
+    - Team Management: Tabbed interface (PM/LM) with six actions each for approvals and reports
+    - Team & LM: Six action buttons for approvals and various reports
+    - Booking: Chart display showing franchise booking values with visualization
+    - Project: Six action buttons for approvals and various reports
 
 #### Controller Modularization
-- **Base Controllers**:
-  - `time2.controller.js`: Base controller for time2 view
-  - `time3.controller.js`: Base controller for time3 view
-  - `time4.controller.js`: Base controller for time4 view
-  
-- **Reusable Modules**:
-  - `common/CalendarController.js`: Handles all calendar functionality
-  - `common/TileActionsController.js`: Handles common tile actions
+- **Base Controllers**: `time2.controller.js`, `time3.controller.js`, `time4.controller.js`.
+- **Reusable Modules**: `common/CalendarController.js`, `common/TileActionsController.js`. (No changes in this update).
 
-#### How Components Interact
-1. **View Loading**:
-   - Each view loads with its corresponding controller
-   - Views include fragments for tiles and calendar
-   
-2. **Controller Initialization**:
-   - Base controllers instantiate reusable modules in `onInit()`
-   - Example: `this._calendarController = new CalendarController(this);`
-   
-3. **Event Delegation**:
-   - Base controllers delegate events to appropriate modules
-   - Example: `onAppointmentSelect: function(oEvent) { this._calendarController.onAppointmentSelect(oEvent); }`
-   
-4. **Data Sharing**:
-   - Models are shared between controllers and fragments
-   - Consistent model structure for appointments and calendar data
+#### How Components Interact (No changes in this update)
+1. View Loading -> Fragments Included
+2. Controller Init -> Modules Instantiated
+3. Event Delegation -> Base controller delegates to modules
+4. Data Sharing -> Models shared
 
 ## Implemented Views
 
 ### 1. Timesheet View 2 (time2.view.xml)
-- Dashboard layout with a 20/80 split between navigation tiles and calendar
-- Three tiles: Timesheet, Reports, and Team Management (with PM/LM tabs)
-- Fully modularized with reusable fragments for tiles and calendar
-- Responsive design that adapts to different screen sizes
+- Dashboard layout with a 40/60 split implemented using sap.ui.layout.cssgrid.GridResponsiveLayout.
+- Uses f:Card-wrapped fragments for tiles arranged in a single column grid.
+- Uses calendar fragment wrapped in f:Card for consistent styling (no legend panel).
+- Tiles Include:
+  - Timesheet (Entry button)
+  - My Reports (Activity, Customer, Home Working)
+  - Team Management (Combined PM/LM tabs with all management options)
 
 ### 2. Timesheet View 3 (time3.view.xml)
-- Dashboard layout with a 40/60 split 
-- Separate tiles for Timesheet, Reports, Team, and LM functions
-- Fully modularized with reusable fragments for tiles and calendar
-- Same responsive behavior for different screen sizes
+- Dashboard layout with a 40/60 split implemented using sap.ui.layout.cssgrid.GridResponsiveLayout.
+- Uses f:Card-wrapped fragments for tiles arranged in a two-column grid.
+- Equal height behavior for tiles in the same row controlled via CSS.
+- Uses calendar fragment wrapped in f:Card for consistent styling (no legend panel).
+- Tiles Include:
+  - Timesheet (Entry button)
+  - My Reports (Activity, Customer, Home Working)
+  - Team Management (Various approval and reporting options)
+  - LM Management (Various approval and reporting options)
 
 ### 3. Timesheet View 4 (time4.view.xml)
-- Dashboard layout with a 40/60 split
-- Two-column layout for tiles with 5 different tile types
-- Fully modularized with reusable fragments for tiles and calendar
-- Same responsive behavior for different screen sizes
+- Dashboard layout with a 40/60 split implemented using sap.ui.layout.cssgrid.GridResponsiveLayout.
+- Two-column grid layout for tiles with nested grids for each column.
+- Uses calendar fragment wrapped in f:Card for consistent styling (no legend panel).
+- Left Column Tiles:
+  - Timesheet (Entry button)
+  - My Reports (Activity, Customer, Home Working)
+  - Booking (Chart with franchise data visualization)
+- Right Column Tiles:
+  - Team Management (Various approval and reporting options)
+  - Project Management (Various approval and reporting options)
 
 ## Components Implemented
 
 ### 1. Dashboard Layout
-- **Structure**: Implemented a responsive dashboard layout with a appropriate split between navigation tiles and the calendar
-- **Technology**: Used FlexBox containers for better responsive behavior
-- **Responsiveness**: Automatically adjusts to different screen sizes with mobile-specific styling
+- Responsive grid layout using sap.ui.layout.cssgrid.GridResponsiveLayout.
+- Consistent 40/60 split layout across all views.
+- Responsive behavior for small, medium, and large screens.
 
-### 2. Navigation Tiles
-- **Tile Fragments**:
-  - TimesheetTile: Timesheet entry options
-  - ReportsTile: Report viewing options
-  - TeamManageTile: **New** combined tile with PM/LM tabs for team management
-  - TeamTile: Team management for Project Managers
-  - LMTile: Line manager functions
-  - BookingTile: Booking management with dynamic horizontal bar chart
-  - ProjectTile: Project management
-  
-- **Tile Styling**:
-  - Consistent design with icon on the left followed by title in the header
-  - Contains specific options as links with proper formatting
-  - Sharp rectangular corners with bold blue borders
-  - Compact layout with optimized spacing
-  - Fixed header height issues to allow dynamic content
+### 2. Navigation Tiles (Refactored to Cards)
+- **Technology**: Switched from `sap.m.GenericTile` to `sap.f.Card` for all tiles.
+- **Structure**: Standardized card layout:
+  - Header: `HBox` with `core:Icon` (30px) and bold `Text` title.
+  - Content: `VBox` with action `Button`s (transparent, slim-arrow-right icon).
+- **Content Specificity**:
+  - Custom action buttons relevant to each tile's purpose
+  - BookingTile with chart visualization showing franchise data
+  - Team and Project tiles with comprehensive management options
+- **Styling**:
+    - Sharp rectangular corners enforced via CSS (`border-radius: 0`).
+    - Equal height for tiles within the same row via CSS (`equalHeightTile` class and grid `align-items: stretch`).
+    - Consistent spacing using standard margin classes.
+- **Fragments**: All fragments in `fragments/tiles/` updated with specific content requirements.
 
 ### 3. SinglePlanningCalendar Fragment
-- **Implementation**: Extracted as reusable TeamCalendar fragment
-- **Views**: Implemented Day, Work Week, and Month views
-- **Features**:
-  - Appointment creation and editing
-  - Appointment selection
-  - View switching
-  - Calendar legend for appointment types
-- **Actions**: Added buttons for adding, editing, and canceling appointments
+- **Implementation**: Reusable `TeamCalendar.fragment.xml`.
+- **Legend Removed**: The status legend panel has been removed from the fragment and all views.
+- **Views**: Day, Work Week, Month views remain.
+- **Features**: Appointment selection remains.
+- **Styling**: Wrapped in f:Card for consistent appearance with tiles.
 
 ### 4. Controller Modules
-- **CalendarController**: Reusable module for calendar functionality
-  - Appointment creation
-  - Appointment editing
-  - Appointment deletion
-  - View handling
-  
-- **TileActionsController**: Reusable module for common tile actions
-  - Timesheet functions
-  - Report functions
-  - Team management functions (PM and LM)
-  - Booking functions
-  - Project functions
+- `CalendarController.js` and `TileActionsController.js` remain.
 
 ## Modular Architecture
 
 ### 1. Fragment-Based Components
-- **Calendar Fragment**: Extracted the SinglePlanningCalendar into a reusable fragment
-- **Tile Fragments**: Created separate fragments for each tile type
-- **Team Management Tile**: **New** combined fragment with IconTabBar for PM and LM functions
-- **Legend Fragment**: Calendar legend implemented consistently across views
+- **Calendar Fragment**: `TeamCalendar.fragment.xml` (legend removed).
+- **Tile Fragments**: Replaced `GenericTile` fragments with `f:Card` based fragments in `fragments/tiles/`.
 
 ### 2. Modular Controllers
-- **Base Controllers**: Each view has its own base controller
-- **Shared Modules**: Common functionality extracted into shared modules
-- **Dependency Injection**: Controllers pass themselves to modules for context
+- Base controllers + Shared modules pattern remains.
 
 ### 3. Consistent Patterns
-- **Fragment Loading**: Consistent approach to loading fragments
-- **Event Delegation**: Consistent pattern for delegating events to modules
-- **Styling Classes**: Consistent application of styling classes for visual uniformity
+- Fragment loading, event delegation patterns remain.
+- Styling classes updated (`equalHeightTile`, `boldFont`).
 
 ## Styling Enhancements
 
 ### 1. Layout Improvements
-- **Adjusted Proportions**: Different layout proportions for different views
-- **Fixed Sizing Issues**: Ensured the calendar takes up appropriate space
-- **Overflow Handling**: Prevented content overflow in all calendar views
-- **Responsive Design**: Implemented media queries for different screen sizes
-- **Consistent Padding**: Applied uniform padding throughout the application for visual consistency
+- **Grid-Based Layout**: Replaced FlexBox layout with sap.ui.layout.cssgrid.CSSGrid and GridResponsiveLayout for more robust, responsive layouts.
+- **Equal Tile Heights**: Implemented CSS using grid `align-items: stretch` and a custom `equalHeightTile` class to ensure tiles in the same row automatically adjust to the same height.
+- **Consistent Tile Widths**: Updated time3.view.xml to use consistent width for tiles with proper spacing using grid layout.
+- **Responsive Grid Settings**: Added specific layout configurations for small screens that stack content vertically and medium/large screens that maintain the 40/60 split.
+- **Legend Removal**: Removed all legend panels for a cleaner, more focused interface.
 
 ### 2. Calendar Styling
-- **Month View Fixes**: Added specific styling for month view to prevent overflow
-- **Visual Enhancements**: Replaced rounded corners with sharp rectangular corners
-- **Bold Blue Borders**: Added 3px solid #0070b1 borders to all calendar components
-- **Consistent Corner Style**: Ensured all calendar elements maintain sharp corners in all states
-- **Uniform Padding**: Applied consistent padding to calendar components
+- **Card-Based Encapsulation**: Calendar is now wrapped in f:Card for consistent styling with tiles.
+- **Legend Removed**: Status legend panel removed from all views for consistent, clean appearance.
+- **Sharp Corners**: CSS ensures sharp rectangular corners for the calendar and its internal elements (`border-radius: 0`).
+- **Full Height Utilization**: Calendar card takes full available height for better space utilization.
 
-### 3. Tile Styling
-- **Content Display**: Enhanced tiles with icon on the left followed by title in the header
-- **Dynamic Header Height**: Removed fixed height constraints for tile headers to allow for varying content
-- **Tab Support**: Added specialized styling for IconTabBar within tiles
-- **Compact Sizing**: Reduced padding and margins for more efficient space usage
-- **Visual Hierarchy**: Used proper spacing and typography for clear information hierarchy
-- **Text Containment**: Fixed issues with text overflow in tiles
-- **Responsive Tiles**: Made tiles adjust their size to fit content properly
-- **Sharp Rectangles**: Changed all tile borders from rounded to sharp rectangular corners
-- **Bold Blue Borders**: Applied 3px solid #0070b1 borders to all tiles
-- **Consistent Spacing**: Implemented uniform padding and margins throughout all tile components
-- **Consistent Icon Placement**: All tiles now use the same layout with icon on the left of the title
+### 3. Tile Styling (Now Card Styling)
+- **Sharp Rectangular Design**: Applied global CSS (`border-radius: 0 !important;`) to enforce sharp corners on cards, buttons, and other elements, aligning with the target design.
+- **Card Structure**: Uses `sap.f.Card` with internal `FlexBox`, `HBox`, `VBox` structure.
+- **Consistent Header**: Icon (30px) left of bold title text.
+- **Action Buttons**: Standardized `sap.m.Button` usage (transparent, slim-arrow-right icon).
+- **Equal Heights**: Ensured via CSS (`equalHeightTile` class) and grid layout properties.
+- **Grid-Based Arrangement**: Tiles now arranged using CSSGrid instead of FlexBox for more consistent behavior.
+- **Customized Content**: Specific content and action buttons for each tile type based on its purpose.
 
-### 4. Booking Tile Enhancements
-- **Dynamic Height**: Removed fixed height constraints to allow automatic content sizing
-- **Horizontal Bar Chart**: Implemented a clean, simple horizontal bar chart for project bookings
-- **Project Visualization**: Each project displayed with a progress bar showing filled vs. allocated days
-- **Color Coding**: Unique colors for each project bar for easy visual differentiation
-- **Simple Legend**: Added a minimal legend showing filled and allocated areas
-- **Responsive Layout**: Chart adjusts automatically to show all projects without cutting off
-- **Auto Frame Type**: Changed to frameType="Auto" for better content fitting
-- **Visibility Improvements**: Enhanced visibility settings for all chart elements
-- **Column Balancing**: Maintained proper column heights while allowing dynamic content
+### 4. Grid-Based UI Improvements
+- **Native Grid Support**: Used SAP's grid:CSSGrid component with GridResponsiveLayout for better responsiveness.
+- **Consistent Spacing**: Maintained consistent gap (0.5rem) between grid items for clean appearance.
+- **Nested Grids**: Implemented nested grids in time4.view to achieve the two-column layout with individual columns.
+- **Equal Height Rows**: Grid layout ensures equal heights for elements in the same row.
+- **Improved Responsive Behavior**: Added media queries for smaller screens to adjust the grid layout appropriately.
 
-## Recent Updates
+## Recent Updates (June 4, 2024)
 
-### 1. Tile Layout Optimization
-- **Horizontal Space Utilization**: Enhanced tiles to fill available horizontal space completely
-- **Removed White Space**: Eliminated excess white space between and around tiles
-- **Responsive Width**: Implemented 100% width for tiles to use all available container space
-- **Consistent Sizing**: Ensured tiles maintain full width across different views and layouts
-- **Grid Layout Improvements**: Applied width fixes for desktop, tablet, and mobile grid layouts
-- **View-Specific Optimizations**: Added targeted CSS for time2 (20/80) and time3 (40/60) layouts
-- **Clean Boundaries**: Maintained proper spacing between tiles and calendar in all views
-- **Vertical Consistency**: Added minimum height for tiles in smaller column layouts (time2)
-- **Padding Elimination**: Removed excessive padding in time3 view's flex containers and grid items
-- **Margin Optimization**: Adjusted margins in time3 view to eliminate empty space between tiles
-- **Container Spacing**: Fixed spacing issues in nested flex containers for consistent layout
+### 1. Tile Content Customization
+- **Detailed Action Buttons**: Updated all tile fragments with specific action buttons relevant to their purpose.
+- **TeamManageTile Enhancement**: Expanded PM/LM tabs with six management actions each.
+- **BookingTile Visualization**: Added franchise data visualization with list display.
+- **Consistent Management Options**: Aligned Team, LM, and Project tiles with similar management options.
+- **Specific Navigation Actions**: Each button has custom press handlers and semantic object mappings.
 
-### 2. Visual Border Enhancements
-- **Blue Square Borders**: Added 3px solid #0070b1 border to both tiles and calendar
-- **Consistent Border Style**: Applied the same border style to all interactive components
-- **Square Corners**: Removed rounded corners from tiles and calendar for a modern, precise look
-- **Improved Visual Containment**: Enhanced visual distinction between different UI elements
-- **Uniform Styling**: Maintained consistent border thickness and color across the application
+### 2. Previous Updates (June 3, 2024)
+- **Replaced FlexBox with CSSGrid**: Updated all three views to use sap.ui.layout.cssgrid.CSSGrid instead of FlexBox.
+- **Added Responsive Grid Layout**: Implemented GridResponsiveLayout with specific settings for different screen sizes.
+- **Maintained 40/60 Split**: Preserved the 40/60 split between tiles and calendar sections across all views.
+- **Card-Based Content**: Wrapped all fragments in sap.f.Card for consistent styling and behavior.
 
-### 3. Team Management Tile Enhancement
-- **Combined PM and LM Functions**: Created a single tile with tabs for PM and LM functions
-- **Tab-Based Navigation**: Used IconTabBar to provide clear separation between PM and LM roles
-- **Consistent Styling**: Applied the same styling to tabs as to other tile elements
-- **Role-Specific Actions**: Each tab contains only the actions relevant to that role
-- **Space Efficiency**: Maximized available space within the 20/80 layout
-
-### 4. Tile Header Improvements
-- **Dynamic Height**: Removed fixed height constraint from tile headers
-- **Custom Padding**: Applied consistent padding (1rem) to all header content
-- **Improved Alignment**: Better vertical alignment of title and icon
-- **Icon Repositioning**: Moved icons to the left of the title for better visual hierarchy
-- **Consistent Spacing**: Added margin between icon and title for improved readability
-
-### 5. Unified Tile Layout
-- **Consistent Header Structure**: Updated all tile fragments to use the same header layout
-- **Standardized Icon Placement**: Repositioned all icons to appear on the left side of titles
-- **Uniform Vertical Alignment**: Used alignItems="Center" for proper vertical centering
-- **Complete Implementation**: Applied the consistent layout across all 7 tile fragments
-- **Improved Readability**: Natural left-to-right reading flow in all tiles
-
-### 6. CSS Optimizations
-- **Optimized Selectors**: Used specific class selectors for targeted styling
-- **Overrode Default Values**: Used !important selectively to override SAP default values
-- **Tab Bar Styling**: Created specialized styles for the IconTabBar within the Team Management tile
-- **Improved Link Display**: Enhanced link styling for better readability and spacing
-- **Icon Spacing**: Added specific margin to icons for consistent spacing between icon and title
-
-### 7. Booking Chart Improvements
-- **Dynamic Sizing**: Removed fixed height constraints to allow automatic content sizing
-- **Visibility Fixes**: Enhanced visibility settings for all chart elements
-- **Responsive Layout**: Chart adjusts automatically to show all projects
-- **Column Balancing**: Maintained proper column heights while allowing dynamic content
-- **Auto Frame Type**: Changed to frameType="Auto" for better content fitting
+### 3. Earlier Updates
+- **Legend Panel Removal**: Removed all legend panels from all views for a cleaner interface.
+- **Consistent Tile Widths**: Updated time3.view.xml layout to ensure all tiles have the same width with proper spacing.
+- **Standardized Layout**: Updated all views to use the same 40/60 split layout.
+- **Switched to `sap.f.Card`**: Replaced `sap.m.GenericTile` with `sap.f.Card` across all tile fragments.
+- **Standardized Structure**: Implemented a consistent internal structure for all cards.
+- **Sharp Rectangular Design**: Applied global CSS for consistent styling.
 
 ## Next Steps
 
 ### Planned Enhancements
-1. **Data Integration**: Connect to backend services for real appointment data
+1. **Data Integration**: Connect to backend services for real appointment data and booking information
 2. **User Settings**: Add personalization options for calendar views and preferences
 3. **Offline Support**: Implement local storage for offline functionality
 4. **Role-Based Personalization**: Adjust UI based on user role (PM/LM/Regular)
+5. **Event Handling Implementation**: Complete the controller methods for the new action buttons
 
 ### Known Issues
-- All previously reported issues have been fixed
+- None currently identified.
 
 ## Technical Implementation Details
 
 ### CSS Approach
-- Used SAPUI5 responsive classes where possible
-- Added custom CSS for specific component styling
-- Overrode default SAP UI5 styling strategically with !important declarations
-- Used word-wrap and overflow properties to contain text
-- Created custom tile layout with HBox for header and VBox for content
-- Established uniform padding and margin system for visual consistency
-- Added specialized styling for tab bars within tiles
-- Created consistent icon-title spacing with dedicated margin rule
+- Custom CSS (`style.css`) used for specific component styling and overrides.
+- **Global Sharp Corners**: `* { border-radius: 0 !important; }` applied.
+- **Equal Tile Heights**: Combination of Grid `align-items: stretch` and `.equalHeightTile` class.
+- **Card Layout**: Uses `sap.f.Card` with internal `FlexBox`, `HBox`, `VBox`. Standard margin classes used.
+- **Grid-Specific Styling**: Added targeted selectors for grid layout elements to ensure proper sizing and alignment.
 
 ### Component Structure
-- Implemented modular architecture with reusable fragments and controller modules
-- Maintained separation of concerns between view, controller, and styling
-- Used consistent component patterns across all views
-- Leveraged SAPUI5 standard controls with custom enhancements
-- Optimized sizing and spacing for better visual appearance
-- Added role-based tab navigation for the Team Management tile
+- Modular architecture with reusable fragments (`f:Card` for tiles, `SinglePlanningCalendar` for calendar) and controller modules.
+- Grid-based layout structure using sap.ui.layout.cssgrid components.
+- Specific content customization for each tile type while maintaining consistent styling.
 
 ### Routing and Navigation
-- Implemented routing for all views (time2, time3, and time4)
-- Set time2 as the default view
-- Created separate controllers for each view with appropriate event handlers
-- Used consistent naming conventions across controllers
+- Routing for time2, time3, time4 views remains.
 
 ---
 
-*Last Updated: May 28, 2024 11:15 AM*
+*Last Updated: June 4, 2024*

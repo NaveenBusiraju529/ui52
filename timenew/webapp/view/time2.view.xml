@@ -4,6 +4,8 @@
     xmlns:unified="sap.ui.unified"
     xmlns:core="sap.ui.core"
     xmlns:l="sap.ui.layout"
+    xmlns:f="sap.f"
+    xmlns:grid="sap.ui.layout.cssgrid"
     displayBlock="true"
     height="100%">
     <Page id="page" title="{i18n>title}" enableScrolling="false">
@@ -11,41 +13,81 @@
             <Button text="Switch to Time3 View" icon="sap-icon://arrow-right" press=".onNavToTime3"/>
         </headerContent>
         <content>
-            <!-- Use FlexBox with no padding or margins -->
-            <FlexBox id="dashboardLayout" width="100%" height="100%" renderType="Bare">
-                <!-- Left side with tiles - 20% width -->
-                <FlexBox id="tilesContainer" width="20%" height="100%" direction="Column" renderType="Bare">
-                    <!-- Timesheet Tile -->
-                    <FlexBox width="100%">
-                        <core:Fragment fragmentName="timenew.view.fragments.tiles.TimesheetTile" type="XML" />
-                    </FlexBox>
-                    
-                    <!-- My Reports Tile -->
-                    <FlexBox width="100%">
-                        <core:Fragment fragmentName="timenew.view.fragments.tiles.ReportsTile" type="XML" />
-                    </FlexBox>
-                    
-                    <!-- Team Management Tile -->
-                    <FlexBox width="100%">
-                        <core:Fragment fragmentName="timenew.view.fragments.tiles.TeamManageTile" type="XML" />
-                    </FlexBox>
-                    
-                    <!-- Calendar Legend -->
-                    <Panel headerText="{i18n>legendTitle}" expandable="true" expanded="true">
-                        <unified:CalendarLegend id="legend1" items="{/appointmentTypes}">
-                            <unified:items>
-                                <unified:CalendarLegendItem text="{title}" type="{type}" color="{color}"/>
-                            </unified:items>
-                        </unified:CalendarLegend>
-                    </Panel>
-                </FlexBox>
+            <!-- Main Grid Layout with 40/60 split -->
+            <grid:CSSGrid id="dashboardLayout" width="100%" class="sapUiSizeCompact">
+                <grid:customLayout>
+                    <grid:GridResponsiveLayout
+                        id="_IDGenGridResponsiveLayoutMain"
+                        layoutChange="onLayoutChange">
+                        <grid:layoutS>
+                            <grid:GridSettings
+                                id="_IDGenGridSettingsMainS"
+                                gridTemplateColumns="1fr"
+                                gridTemplateRows="auto auto"
+                                gridRowGap="0rem"
+                                gridColumnGap="0rem"
+                            />
+                        </grid:layoutS>
+                        <grid:layout>
+                            <grid:GridSettings
+                                id="_IDGenGridSettingsMain"
+                                gridTemplateColumns="40% 60%"
+                                gridTemplateRows="1fr"
+                                gridRowGap="0rem"
+                                gridColumnGap="0rem"
+                            />
+                        </grid:layout>
+                        <grid:layoutXL>
+                            <grid:GridSettings
+                                id="_IDGenGridSettingsMainXL"
+                                gridTemplateColumns="40% 60%"
+                                gridTemplateRows="1fr"
+                                gridRowGap="0rem"
+                                gridColumnGap="0rem"
+                            />
+                        </grid:layoutXL>
+                    </grid:GridResponsiveLayout>
+                </grid:customLayout>
+
+                <!-- Left side with tiles - 40% width -->
+                <VBox id="tilesContainer" class="sapUiTinyMarginEnd">
+                    <grid:CSSGrid
+                        id="tilesGrid"
+                        gridTemplateColumns="1fr"
+                        gridGap="0.5rem"
+                    >
+                        <!-- Timesheet Tile -->
+                        <f:Card width="100%" class="sapUiTinyMarginBottom equalHeightTile">
+                            <f:content>
+                                <core:Fragment fragmentName="timenew.view.fragments.tiles.TimesheetTile" type="XML" />
+                            </f:content>
+                        </f:Card>
+                        
+                        <!-- My Reports Tile -->
+                        <f:Card width="100%" class="sapUiTinyMarginBottom equalHeightTile">
+                            <f:content>
+                                <core:Fragment fragmentName="timenew.view.fragments.tiles.ReportsTile" type="XML" />
+                            </f:content>
+                        </f:Card>
+                        
+                        <!-- Team Management Tile -->
+                        <f:Card width="100%" class="sapUiTinyMarginBottom equalHeightTile">
+                            <f:content>
+                                <core:Fragment fragmentName="timenew.view.fragments.tiles.TeamManageTile" type="XML" />
+                            </f:content>
+                        </f:Card>
+                    </grid:CSSGrid>
+                </VBox>
                 
-                <!-- Right side with calendar - 80% width -->
-                <FlexBox id="calendarContainer" width="80%" height="100%" direction="Column" renderType="Bare">
-                    <!-- Calendar Fragment -->
-                    <core:Fragment fragmentName="timenew.view.fragments.calendar.TeamCalendar" type="XML" />
-                </FlexBox>
-            </FlexBox>
+                <!-- Right side with calendar - 60% width -->
+                <f:Card id="calendarCard" width="100%" height="100%">
+                    <f:content>
+                        <FlexBox fitContainer="true" direction="Column" alignContent="Center">
+                            <core:Fragment fragmentName="timenew.view.fragments.calendar.TeamCalendar" type="XML" />
+                        </FlexBox>
+                    </f:content>
+                </f:Card>
+            </grid:CSSGrid>
         </content>
     </Page>
 </mvc:View>

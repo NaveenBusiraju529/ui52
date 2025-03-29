@@ -28,31 +28,5 @@
                 <SinglePlanningCalendarMonthView key="Month" title="Month"/>
             </views>
         </SinglePlanningCalendar>
-        
-        <!-- Legend for appointment status indicators -->
-        <Panel expandable="true" expanded="false" headerText="Status Legend">
-            <content>
-                <List>
-                    <CustomListItem>
-                        <HBox alignItems="Center">
-                            <core:Icon src="sap-icon://accept" color="#2b7d2b"/>
-                            <Text text="Approved Timesheet"/>
-                        </HBox>
-                    </CustomListItem>
-                    <CustomListItem>
-                        <HBox alignItems="Center">
-                            <core:Icon src="sap-icon://error" color="#bb0000"/>
-                            <Text text="Rejected Timesheet"/>
-                        </HBox>
-                    </CustomListItem>
-                    <CustomListItem>
-                        <HBox alignItems="Center">
-                            <core:Icon src="sap-icon://alert" color="#e78c07"/>
-                            <Text text="Pending Timesheet"/>
-                        </HBox>
-                    </CustomListItem>
-                </List>
-            </content>
-        </Panel>
     </VBox>
 </mvc:View>

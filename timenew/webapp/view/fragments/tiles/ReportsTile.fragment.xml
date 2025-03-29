@@ -1,26 +1,57 @@
 <mvc:View
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
-    xmlns:core="sap.ui.core">
-    <GenericTile id="myReportsTile" 
-        frameType="OneByOne" 
-        press=".onMyReportsTilePress">
-        <TileContent>
-            <VBox height="100%">
-                <!-- Top row with icon and title -->
-                <HBox width="100%" alignItems="Center">
-                    <core:Icon src="sap-icon://bar-chart"/>
-                    <Title text="My Reports"/>
-                </HBox>
-                
-                <!-- Content immediately below header -->
-                <VBox width="100%">
-                    <Text text="3 Available Reports"/>
-                    <Link text="> Activity Report" press=".onActivityReportPress"/>
-                    <Link text="> Customer Timesheet" press=".onCustomerTimesheetPress"/>
-                    <Link text="> Home Working Report" press=".onHomeWorkingReportPress"/>
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+    <f:Card width="100%" class="sapUiTinyMarginBottom equalHeightTile">
+        <f:content>
+            <FlexBox class="sapUiTinyMargin" width="100%">
+                <VBox>
+                    <HBox>
+                        <core:Icon src="sap-icon://business-objects-experience" size="30px"/>
+                        <VBox class="sapUiSmallMarginBegin">
+                            <Text class="boldFont" text="{i18n>reports}"/>
+                        </VBox>
+                    </HBox>
+                    <VBox class="sapUiTinyMargin">
+                        <Button
+                            icon="sap-icon://slim-arrow-right"
+                            text="Activity Report"
+                            type="Transparent"
+                            press=".onActivityReportPress"
+                            app:semObject="Reports"
+                            app:action="Activity">
+                            <customData>
+                                <BadgeCustomData key="badge" value="" visible="true"/>
+                            </customData>
+                        </Button>
+                        <Button
+                            icon="sap-icon://slim-arrow-right"
+                            text="Customer Timesheet"
+                            type="Transparent"
+                            press=".onCustomerTimesheetPress"
+                            app:semObject="Reports"
+                            app:action="Customer">
+                            <customData>
+                                <BadgeCustomData key="badge" value="" visible="true"/>
+                            </customData>
+                        </Button>
+                        <Button
+                            icon="sap-icon://slim-arrow-right"
+                            text="Home Working Report"
+                            type="Transparent"
+                            press=".onHomeWorkingReportPress"
+                            app:semObject="Reports"
+                            app:action="HomeWorking">
+                            <customData>
+                                <BadgeCustomData key="badge" value="" visible="true"/>
+                            </customData>
+                        </Button>
+                    </VBox>
                 </VBox>
-            </VBox>
-        </TileContent>
-    </GenericTile>
+            </FlexBox>
+        </f:content>
+    </f:Card>
 </mvc:View>

@@ -1,56 +1,47 @@
 <!-- Timesheet Approvals Tile (example) -->
-<core:FragmentDefinition
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
-    xmlns:core="sap.ui.core">
-    
-    <GenericTile
-        id="approvalsTile"
-        frameType="OneByOne" 
-        press=".onApprovalsTilePress"
-    >
-        <TileContent>
-            <VBox height="100%">
-                <HBox width="100%" alignItems="Center">
-                    <core:Icon src="sap-icon://approvals"/>
-                    <Title text="Timesheet Approvals"/>
-                </HBox>
-
-                <VBox width="100%">
-                    <List
-                        id="timesheetApprovalsList"
-                        showNoData="false"
-                        items="{path: 'approvalModel>/timesheetApprovals', length: 3}"
-                    >
-                        <items>
-                            <CustomListItem>
-                                <HBox alignItems="Center" justifyContent="SpaceBetween" width="100%">
-                                    <VBox>
-                                        <Text text="{approvalModel>employeeName}"/>
-                                        <Text text="{approvalModel>week}"/>
-                                    </VBox>
-                                    <ObjectStatus
-                                        icon="{
-                                         = ${approvalModel>status} === 'approved' ? 'sap-icon://accept' :
-                                            ${approvalModel>status} === 'rejected' ? 'sap-icon://error' :
-                                            'sap-icon://alert'
-                                        }"
-                                        state="{
-                                         = ${approvalModel>status} === 'approved' ? 'Success' :
-                                            ${approvalModel>status} === 'rejected' ? 'Error' :
-                                            'Warning'
-                                        }"
-                                    />
-                                </HBox>
-                            </CustomListItem>
-                        </items>
-                    </List>
-
-                    <Link
-                        text="View All Approvals"
-                        press=".onViewAllApprovalsPress"
-                    />
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+    <f:Card width="100%" class="sapUiTinyMarginBottom equalHeightTile">
+        <f:content>
+            <FlexBox class="sapUiTinyMargin" width="100%">
+                <VBox>
+                    <HBox>
+                        <core:Icon src="sap-icon://approvals" size="30px"/>
+                        <VBox class="sapUiSmallMarginBegin">
+                            <Text class="boldFont" text="{i18n>approvals}"/>
+                        </VBox>
+                    </HBox>
+                    <VBox class="sapUiTinyMargin">
+                        <Button
+                            icon="sap-icon://slim-arrow-right"
+                            text="{i18n>pendingApprovals}"
+                            type="Transparent"
+                            press=".onPendingApprovalsPress"
+                            app:semObject="Leave"
+                            app:action="Approve">
+                            <customData>
+                                <BadgeCustomData key="badge" value="{myConfigSet>/pendingApprovalCount}" visible="true"/>
+                            </customData>
+                        </Button>
+                        <Button
+                            icon="sap-icon://slim-arrow-right"
+                            text="{i18n>approvalHistory}"
+                            type="Transparent"
+                            press=".onApprovalHistoryPress"
+                            app:semObject="Leave"
+                            app:action="History">
+                            <customData>
+                                <BadgeCustomData key="badge" value="" visible="true"/>
+                            </customData>
+                        </Button>
+                    </VBox>
                 </VBox>
-            </VBox>
-        </TileContent>
-    </GenericTile>
-</core:FragmentDefinition>
+            </FlexBox>
+        </f:content>
+    </f:Card>
+</mvc:View>
