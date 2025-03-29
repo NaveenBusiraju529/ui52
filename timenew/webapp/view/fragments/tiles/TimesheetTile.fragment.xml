@@ -7,27 +7,25 @@
     xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
     <f:Card width="100%" class="sapUiTinyMarginBottom equalHeightTile">
         <f:content>
-            <FlexBox class="sapUiTinyMargin" width="100%">
-                <VBox>
-                    <HBox>
-                        <core:Icon src="sap-icon://time-entry-request" size="30px"/>
-                        <VBox class="sapUiSmallMarginBegin">
-                            <Text class="boldFont" text="{i18n>timesheet}"/>
-                        </VBox>
-                    </HBox>
-                    <VBox class="sapUiTinyMargin">
-                        <Button
-                            icon="sap-icon://slim-arrow-right"
-                            text="Entry"
-                            type="Transparent"
-                            press=".onTimesheetEntryPress"
-                            app:semObject="Timesheet"
-                            app:action="Entry">
-                            <customData>
-                                <BadgeCustomData key="badge" value="" visible="true"/>
-                            </customData>
-                        </Button>
-                    </VBox>
+            <FlexBox class="sapUiTinyMargin" direction="Column" width="100%">
+                <!-- Header with icon and text in one line -->
+                <FlexBox direction="Row" alignItems="Center" justifyContent="Start">
+                    <core:Icon src="sap-icon://time-entry-request" size="30px"/>
+                    <Text class="sapUiSmallMarginBegin boldFont" text="{i18n>timesheet}" wrapping="false"/>
+                </FlexBox>
+                <!-- Content -->
+                <VBox class="sapUiTinyMargin">
+                    <Button
+                        icon="sap-icon://slim-arrow-right"
+                        text="Entry"
+                        type="Transparent"
+                        press=".onTimesheetEntryPress"
+                        app:semObject="Timesheet"
+                        app:action="Entry">
+                        <customData>
+                            <core:CustomData key="badge" value="" visible="true"/>
+                        </customData>
+                    </Button>
                 </VBox>
             </FlexBox>
         </f:content>

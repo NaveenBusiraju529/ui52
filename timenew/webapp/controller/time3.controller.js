@@ -1,8 +1,10 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "timenew/controller/common/CalendarController",
-    "timenew/controller/common/TileActionsController"
-], function (Controller, CalendarController, TileActionsController) {
+    "timenew/controller/common/TileActionsController",
+    "sap/ui/model/json/JSONModel",
+    "sap/m/MessageToast"
+], function (Controller, CalendarController, TileActionsController, JSONModel, MessageToast) {
     "use strict";
 
     return Controller.extend("timenew.controller.time3", {
@@ -16,6 +18,25 @@ sap.ui.define([
             // Initialize the tile actions controller
             this._tileActionsController = new TileActionsController(this);
             console.log("VALIDATION: time3 - Tile actions controller initialized");
+            
+            // Load timesheet approval model
+            this._loadTimeSheetApprovalModel();
+        },
+        
+        _loadTimeSheetApprovalModel: function() {
+            var oApprovalModel = new JSONModel();
+            jQuery.ajax({
+                url: sap.ui.require.toUrl("timenew/model/timesheetApprovals.json"),
+                dataType: "json",
+                success: function(oData) {
+                    oApprovalModel.setData(oData);
+                    this.getView().setModel(oApprovalModel, "approvalModel");
+                    console.log("VALIDATION: Timesheet approval model loaded");
+                }.bind(this),
+                error: function(error) {
+                    console.log("ERROR: Failed to load timesheet approval model", error);
+                }
+            });
         },
 
         // Navigation functions
@@ -27,6 +48,54 @@ sap.ui.define([
         onNavToTime4: function() {
             var oRouter = this.getOwnerComponent().getRouter();
             oRouter.navTo("Routetime4");
+        },
+
+        // General tile press events - delegated to tile actions controller
+        onTimesheetTilePress: function (oEvent) {
+            this._tileActionsController.onTimesheetTilePress();
+        },
+
+        onMyReportsTilePress: function (oEvent) {
+            this._tileActionsController.onMyReportsTilePress();
+        },
+        
+        onManageTeamTilePress: function (oEvent) {
+            this._tileActionsController.onManageTeamTilePress();
+        },
+        
+        onLMTilePress: function (oEvent) {
+            this._tileActionsController.onManageTeamTilePress();
+        },
+
+        // Timesheet tile actions
+        onTimesheetEntryPress: function (oEvent) {
+            this._tileActionsController.onTimesheetEntryPress();
+        },
+
+        // My Reports tile actions
+        onActivityReportPress: function (oEvent) {
+            this._tileActionsController.onActivityReportPress();
+        },
+
+        onCustomerTimesheetPress: function (oEvent) {
+            this._tileActionsController.onCustomerTimesheetPress();
+        },
+
+        onHomeWorkingReportPress: function (oEvent) {
+            this._tileActionsController.onHomeWorkingReportPress();
+        },
+        
+        // Team Management tile actions
+        onTeamOverviewPress: function (oEvent) {
+            this._tileActionsController.onTeamOverviewPress();
+        },
+        
+        onTeamCalendarPress: function (oEvent) {
+            this._tileActionsController.onTeamCalendarPress();
+        },
+        
+        onApprovalsPress: function (oEvent) {
+            this._tileActionsController.onApprovalsPress();
         },
 
         // Calendar event handlers - delegated to calendar controller
@@ -51,38 +120,8 @@ sap.ui.define([
         },
 
         // Tile press events - delegated to tile actions controller
-        onTimesheetTilePress: function() {
-            this._tileActionsController.onTimesheetTilePress();
-        },
-        
-        onMyReportsTilePress: function() {
-            this._tileActionsController.onMyReportsTilePress();
-        },
-        
         onPMTilePress: function() {
             sap.m.MessageToast.show("Project Manager Tile Pressed");
-        },
-        
-        onLMTilePress: function() {
-            sap.m.MessageToast.show("Line Manager Tile Pressed");
-        },
-        
-        // Link handlers for timesheet tile
-        onTimesheetEntryPress: function() {
-            this._tileActionsController.onTimesheetEntryPress();
-        },
-        
-        // Link handlers for reports tile
-        onActivityReportPress: function() {
-            this._tileActionsController.onActivityReportPress();
-        },
-        
-        onCustomerTimesheetPress: function() {
-            this._tileActionsController.onCustomerTimesheetPress();
-        },
-        
-        onHomeWorkingReportPress: function() {
-            this._tileActionsController.onHomeWorkingReportPress();
         },
         
         // Link handlers for PM tile - keep directly in time3 controller as they are specific to time3

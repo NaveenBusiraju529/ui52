@@ -173,6 +173,80 @@ sap.ui.define([
             
             return aAppointments;
         },
+        
+        /**
+         * Refresh calendar appointments with the given timesheet data
+         * @public
+         * @param {Array} aTimesheetApprovals - Timesheet approval data to convert to calendar appointments
+         */
+        refreshCalendarAppointments: function(aTimesheetApprovals) {
+            console.log("VALIDATION: Refreshing calendar appointments with " + aTimesheetApprovals.length + " timesheet entries");
+            
+            // Convert timesheet data to appointments
+            var aAppointments = this._convertTimesheetsToAppointments(aTimesheetApprovals);
+            
+            // Get the calendar model
+            var oModel = this._owner.getView().getModel();
+            
+            if (oModel) {
+                // Update the appointments property in the model
+                oModel.setProperty("/appointments", aAppointments);
+                console.log("VALIDATION: Updated calendar with " + aAppointments.length + " appointments");
+            } else {
+                console.log("ERROR: Calendar model not found");
+                
+                // Create a new model if one doesn't exist
+                var oDate = new Date();
+                var oStartDate = new Date(oDate.getFullYear(), oDate.getMonth(), 1);
+                
+                var oNewModel = new JSONModel();
+                
+                // Define appointment types for legend
+                var aAppointmentTypes = [{
+                    type: CalendarDayType.Type01,
+                    title: "Client Work",
+                    color: "#0070b1"  // Atos blue
+                }, {
+                    type: CalendarDayType.Type02,
+                    title: "Internal Meetings",
+                    color: "#1d2d3e"  // Atos dark blue
+                }, {
+                    type: CalendarDayType.Type03,
+                    title: "Training",
+                    color: "#00BB00"
+                }, {
+                    type: CalendarDayType.Type04,
+                    title: "Administration",
+                    color: "#FFA500"
+                }, {
+                    type: CalendarDayType.Type05,
+                    title: "Public Holiday",
+                    color: "#6B1C9E"
+                }, {
+                    type: CalendarDayType.Type06,
+                    title: "Approved Timesheet",
+                    color: "#2b7d2b"  // Green for approved
+                }, {
+                    type: CalendarDayType.Type07,
+                    title: "Rejected Timesheet",
+                    color: "#bb0000"  // Red for rejected
+                }, {
+                    type: CalendarDayType.Type08,
+                    title: "Pending Timesheet",
+                    color: "#e78c07"  // Orange for pending
+                }];
+                
+                oNewModel.setData({
+                    startDate: oStartDate,
+                    appointments: aAppointments,
+                    appointmentTypes: aAppointmentTypes,
+                    viewKey: "Month"  // Set Month as default view
+                });
+                
+                this._owner.getView().setModel(oNewModel);
+                console.log("VALIDATION: Created new calendar model with " + aAppointments.length + " appointments");
+            }
+        },
 
         /**
          * Handle appointment selection event

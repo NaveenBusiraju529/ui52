@@ -84,9 +84,9 @@
     margin: 0.5rem !important;
 }
 
-.sapUiSmallMarginBegin {
+/* .sapUiSmallMarginBegin {
     margin-left: 1rem !important;
-}
+} */
 
 /* Icon Styling */
 .sapUiIcon {
@@ -174,6 +174,34 @@
     height: 100% !important;
 }
 
+/* MicroChart Styling */
+.sapSuiteUiMicroColumnMicroChart {
+    height: 150px !important;
+}
+
+.sapSuiteUiMicroColumnMicroChart .sapSuiteUiMicroChartPointer {
+    border-radius: 0 !important;
+}
+
+/* StackedBarMicroChart Styling */
+.sapSuiteUiMicroStackedBarMicroChart {
+    height: 24px !important;
+    border-radius: 0 !important;
+}
+
+.sapSuiteUiMicroStackedBarMicroChartBar {
+    border-radius: 0 !important;
+}
+
+/* Booking Tile Specific */
+#bookingTileContainer .sapMListShowSeparatorsNone .sapMLIBShowSeparator {
+    border-bottom: none !important;
+}
+
+#bookingTileContainer .sapMListBGTransparent {
+    background-color: transparent !important;
+}
+
 /* Responsive Behavior */
 @media (max-width: 599px) {
     .sapFCard {
@@ -189,4 +217,238 @@
 /* Remove Rounded Corners from All Elements */
 * {
     border-radius: 0 !important;
+}
+
+/* Enter your custom styles here */
+
+/* Global styles */
+* {
+    border-radius: 0 !important;
+}
+
+/* Layout styles */
+.equalHeightTile {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Font styles */
+.sapUiTinyFont {
+    font-size: 0.75rem !important;
+    color: #333333;
+}
+
+/* MicroChart styles */
+.sapSuiteUiMicroColumnMicroChart {
+    height: 150px;
+}
+
+/* Card styles - no separators and transparent background */
+.sapFCard .sapMListShowSeparatorsNone .sapMLIBShowSeparator {
+    border-bottom: none;
+}
+
+.sapFCard .sapMListBGTransparent {
+    background-color: transparent;
+}
+
+/* Button styles */
+.sapMBtn {
+    margin-top: 0.5rem;
+}
+
+/* Icon Tab Bar styles */
+.sapMITBHead {
+    margin: 0;
+}
+
+/* Badge styles */
+.sapMBadge {
+    margin-left: 0.5rem;
+}
+
+/* Text styles */
+.sapMText {
+    margin-bottom: 0.25rem;
+}
+
+/* Focus outline style */
+.sapMBtn:focus {
+    outline: 1px dotted #000;
+    outline-offset: -3px;
+}
+
+/* Button states */
+.sapMBtnActive {
+    background-color: #0070F2;
+    border-color: #0070F2;
+}
+
+.sapMBtnHover {
+    background-color: #ebf5fe;
+}
+
+/* Custom button colors */
+.sapMBtnCustomColor {
+    color: #0070F2;
+}
+
+/* Layout spacing */
+.sapUiTinyMarginTop {
+    margin-top: 0.5rem;
+}
+
+.sapUiTinyMarginBottom {
+    margin-bottom: 0.5rem;
+}
+
+/* Icon styles */
+.sapUiIcon {
+    color: #0070F2;
+}
+
+/* Hover effects */
+.sapMBtn:hover {
+    background-color: #ebf5fe;
+}
+
+/* ProgressIndicator styling */
+.sapMPI {
+    border-radius: 0 !important;
+    height: 24px !important;
+}
+
+.sapMPIBar {
+    border-radius: 0 !important;
+}
+
+.sapMPIBarRemaining {
+    border-radius: 0 !important;
+}
+
+.sapMPIText {
+    font-size: 0.75rem !important;
+}
+
+/* Ensure progress indicators match the tile theme */
+.sapMPI.sapMPIDisplayOnly {
+    background-color: #f5f5f5 !important;
+}
+
+/* Remove any remaining rounded corners in the application */
+.sapMInputBaseInner,
+.sapMInputBase,
+.sapMComboBoxBaseArrow,
+.sapMComboBoxTextField,
+.sapUiCalItem,
+.sapUiCalHead,
+.sapUiCalHeadB,
+.sapUiCalMonthPicker,
+.sapUiCalYearPicker,
+.sapUiCalDayName {
+    border-radius: 0 !important;
+}
+
+/* Booking tile specific optimizations */
+.bookingSummary {
+    border-top: 1px solid #e5e5e5;
+    padding-top: 0.5rem;
+}
+
+.bookingSummary .sapMLabel {
+    font-size: 0.75rem;
+}
+
+.bookingSummary .sapMText {
+    font-size: 0.75rem;
+}
+
+/* More compact progress indicators */
+.sapMPI {
+    border-radius: 0 !important;
+    height: 16px !important;
+    margin: 0 !important;
+}
+
+/* Remove any outline from progress indicators */
+.sapMPI:focus {
+    outline: none !important;
+}
+
+/* Tighter spacing for project rows */
+.sapUiTinyMarginBottom {
+    margin-bottom: 4px !important;
+}
+
+/* Left aligned project names without wrapping */
+.sapUiTinyFont {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Project-specific colors for progress indicators */
+.coloredProgress0 .sapMPIBar {
+    background-color: #0070b1 !important;
+}
+
+.coloredProgress1 .sapMPIBar {
+    background-color: #5cbae6 !important;
+}
+
+.coloredProgress2 .sapMPIBar {
+    background-color: #1f78b4 !important;
+}
+
+.coloredProgress3 .sapMPIBar {
+    background-color: #33a02c !important;
+}
+
+.coloredProgress4 .sapMPIBar {
+    background-color: #b2df8a !important;
+}
+
+/* Summary row styling */
+.summaryLabel {
+    font-size: 0.75rem !important;
+    color: #666666 !important;
+}
+
+.summaryData {
+    font-size: 0.75rem !important;
+}
+
+/* ComparisonMicroChart styling */
+.projectComparisonChart {
+    height: auto !important;
+    margin: 0.5rem 0 !important;
+}
+
+.projectComparisonChart .sapSuiteCpMCChartItem {
+    margin-bottom: 8px !important;
+    height: 20px !important;
+}
+
+.projectComparisonChart .sapSuiteCpMCChartBar {
+    border-radius: 0 !important;
+    height: 16px !important;
+}
+
+.projectComparisonChart .sapSuiteCpMCChartTitle {
+    font-size: 0.75rem !important;
+    padding-right: 0.5rem !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.projectComparisonChart .sapSuiteCpMCChartValue {
+    font-size: 0.75rem !important;
+    font-weight: bold !important;
+    padding-left: 0.5rem !important;
+}
+
+.sapFCard .sapFCardContent {
+    display: inline-table !important;
 }

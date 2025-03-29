@@ -1,69 +1,96 @@
 sap.ui.define([
-    "timenew/controller/BaseController",
+    "sap/ui/core/mvc/Controller",
+    "timenew/controller/common/CalendarController",
+    "timenew/controller/common/TileActionsController",
     "sap/ui/model/json/JSONModel",
-    "sap/m/MessageToast",
-    "timenew/controller/common/CalendarController"
-], (BaseController, JSONModel, MessageToast, CalendarController) => {
+    "sap/m/MessageToast"
+], function (Controller, CalendarController, TileActionsController, JSONModel, MessageToast) {
     "use strict";
 
-    return BaseController.extend("timenew.controller.time2", {
-        onInit() {
+    return Controller.extend("timenew.controller.time2", {
+        onInit: function () {
             console.log("VALIDATION: time2 controller initializing");
-            
+             
             // Initialize the calendar controller
             this._calendarController = new CalendarController(this);
             console.log("VALIDATION: time2 - Calendar controller initialized");
+             
+            // Initialize the tile actions controller
+            this._tileActionsController = new TileActionsController(this);
+            console.log("VALIDATION: time2 - Tile actions controller initialized");
             
-            // Try to set content density, but handle if component is not available
-            try {
-                if (this.getOwnerComponent() && this.getOwnerComponent().getContentDensityClass) {
-                    this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
+            // Load timesheet approval model
+            this._loadTimeSheetApprovalModel();
+        },
+        
+        _loadTimeSheetApprovalModel: function() {
+            var oApprovalModel = new JSONModel();
+            jQuery.ajax({
+                url: sap.ui.require.toUrl("timenew/model/timesheetApprovals.json"),
+                dataType: "json",
+                success: function(oData) {
+                    oApprovalModel.setData(oData);
+                    this.getView().setModel(oApprovalModel, "approvalModel");
+                    console.log("VALIDATION: Timesheet approval model loaded");
+                }.bind(this),
+                error: function(error) {
+                    console.log("ERROR: Failed to load timesheet approval model", error);
                 }
-            } catch (e) {
-                console.log("Could not set content density class: " + e.message);
-            }
+            });
+        },
+
+        // Navigation methods
+        onNavToTime3: function() {
+            // Get the router
+            var oRouter = this.getOwnerComponent().getRouter();
+            // Navigate to time3 view
+            oRouter.navTo("Routetime3");
         },
         
-        // Timesheet Tile handlers
-        onTimesheetTilePress: function() {
-            MessageToast.show(this.getResourceBundle().getText("timesheetTilePressed"));
-            // Navigation to Entry page
-            this._navigateToTimeEntry();
+        // General tile press events - delegated to tile actions controller
+        onTimesheetTilePress: function (oEvent) {
+            this._tileActionsController.onTimesheetTilePress();
+        },
+
+        onMyReportsTilePress: function (oEvent) {
+            this._tileActionsController.onMyReportsTilePress();
         },
         
-        _navigateToTimeEntry: function() {
-            MessageToast.show("Navigating to Time Entry");
-            // Implement navigation logic here
+        onTeamManageTilePress: function (oEvent) {
+            this._tileActionsController.onManageTeamTilePress();
+        },
+
+        // Timesheet tile actions
+        onTimesheetEntryPress: function (oEvent) {
+            this._tileActionsController.onTimesheetEntryPress();
+        },
+
+        // My Reports tile actions
+        onActivityReportPress: function (oEvent) {
+            this._tileActionsController.onActivityReportPress();
+        },
+
+        onCustomerTimesheetPress: function (oEvent) {
+            this._tileActionsController.onCustomerTimesheetPress();
+        },
+
+        onHomeWorkingReportPress: function (oEvent) {
+            this._tileActionsController.onHomeWorkingReportPress();
         },
         
-        // My Reports Tile handlers
-        onMyReportsTilePress: function() {
-            MessageToast.show(this.getResourceBundle().getText("myReportsTilePressed"));
-            // Show options dialog or navigate to default report
-            this._showReportOptions();
+        // Team Management tile actions
+        onTeamOverviewPress: function (oEvent) {
+            this._tileActionsController.onTeamOverviewPress();
         },
         
-        _showReportOptions: function() {
-            MessageToast.show("Showing Report Options");
-            // Implement dialog or navigation logic here
+        onTeamCalendarPress: function (oEvent) {
+            this._tileActionsController.onTeamCalendarPress();
         },
         
-        // My Reports specific link handlers
-        onActivityReportPress: function() {
-            MessageToast.show("Navigating to Activity Report");
-            this._navigateToFeature("ActivityReport");
+        onApprovalsPress: function (oEvent) {
+            this._tileActionsController.onApprovalsPress();
         },
-        
-        onCustomerTimesheetPress: function() {
-            MessageToast.show("Navigating to Customer Timesheet");
-            this._navigateToFeature("CustomerTimesheet");
-        },
-        
-        onHomeWorkingReportPress: function() {
-            MessageToast.show("Navigating to Home Working Report");
-            this._navigateToFeature("HomeWorkingReport");
-        },
-        
+
         // Calendar event handlers - delegated to calendar controller
         onAppointmentSelect: function (oEvent) {
             this._calendarController.onAppointmentSelect(oEvent);
@@ -83,19 +110,6 @@ sap.ui.define([
         
         handleAppointmentDelete: function() {
             this._calendarController.handleAppointmentDelete();
-        },
-        
-        // Navigation
-        onNavToTime3: function () {
-            // Get router
-            const oRouter = this.getOwnerComponent().getRouter();
-            // Navigate to time3 view
-            oRouter.navTo("Routetime3");
-        },
-        
-        _navigateToFeature: function(sFeatureName) {
-            // To be implemented
-            console.log("Navigate to feature: " + sFeatureName);
         }
     });
 });

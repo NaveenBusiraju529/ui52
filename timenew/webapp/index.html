@@ -32,6 +32,7 @@
         id="sap-ui-bootstrap"
         src="https://ui5.sap.com/resources/sap-ui-core.js"
         data-sap-ui-theme="sap_horizon"
+        data-sap-ui-libs="sap.m, sap.ui.core, sap.ui.unified, sap.ui.layout, sap.suite.ui.microchart, sap.viz"
         data-sap-ui-resourceroots='{
             "timenew": "./"
         }'
@@ -41,6 +42,15 @@
     ></script>
     <script>
         sap.ui.onInit = function() {
+            // Ensure microchart library is loaded explicitly
+            sap.ui.getCore().loadLibrary("sap.suite.ui.microchart", {
+                async: true
+            }).then(function() {
+                console.log("sap.suite.ui.microchart library loaded successfully");
+            }).catch(function(error) {
+                console.error("Failed to load sap.suite.ui.microchart library:", error);
+            });
+            
             // Simple buttons to launch different views
             document.getElementById("loadTime2").addEventListener("click", function() {
                 window.location.href = "?view=time2";

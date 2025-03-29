@@ -78,7 +78,7 @@
                                 </f:Card>
                                 
                                 <!-- My Booking Tile -->
-                                <f:Card width="100%" class="sapUiTinyMarginBottom equalHeightTile">
+                                <f:Card id="bookingTileContainer" width="100%" class="sapUiTinyMarginBottom equalHeightTile">
                                     <f:content>
                                         <core:Fragment fragmentName="timenew.view.fragments.tiles.BookingTile" type="XML" />
                                     </f:content>
@@ -111,7 +111,7 @@
                 </VBox>
                 
                 <!-- Right side with calendar - 60% width -->
-                <f:Card id="calendarCard" width="100%" height="100%">
+                 <f:Card id="calendarCard" width="100%" height="100%">
                     <f:content>
                         <FlexBox fitContainer="true" direction="Column" alignContent="Center">
                             <core:Fragment fragmentName="timenew.view.fragments.calendar.TeamCalendar" type="XML" />

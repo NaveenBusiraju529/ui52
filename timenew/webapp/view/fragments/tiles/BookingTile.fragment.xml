@@ -4,28 +4,52 @@
     xmlns:f="sap.f"
     xmlns:core="sap.ui.core"
     xmlns:l="sap.ui.layout"
-    xmlns:viz="sap.viz.ui5.controls"
-    xmlns:viz.data="sap.viz.ui5.data"
-    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:mc="sap.suite.ui.microchart"
+    xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
     xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
     <f:Card width="100%" class="sapUiTinyMarginBottom equalHeightTile">
         <f:content>
             <FlexBox class="sapUiTinyMargin" direction="Column" width="100%">
-                <HBox>
+                <HBox alignItems="Center">
                     <core:Icon src="sap-icon://calendar" size="30px"/>
-                    <VBox class="sapUiSmallMarginBegin">
-                        <Text class="boldFont" text="{i18n>bookings}"/>
-                    </VBox>
+                    <Text class="sapUiSmallMarginBegin boldFont" text="{i18n>bookings}"/>
                 </HBox>
                 
                 <VBox class="sapUiTinyMarginTop" width="100%">
-                    <Text text="Chart displaying bookings with values:" class="sapUiTinyMarginBottom" />
-                    <List noDataText="No booking data available">
-                        <StandardListItem title="Choices Franchise 1" info="3.33M" infoState="Success" />
-                        <StandardListItem title="Donald's Market" info="3.31M" infoState="Success" />
-                        <StandardListItem title="Choices Franchise 3" info="2.09M" infoState="Information" />
-                        <StandardListItem title="Choices Franchise 6" info="1.93M" infoState="Information" />
-                    </List>
+                    <Text text="Project Bookings" class="sapUiTinyMarginBottom boldFont" />
+                    
+                    <!-- Dynamic ComparisonMicroChart with project binding -->
+                    <mc:ComparisonMicroChart 
+                        id="projectComparisonChart"
+                        size="Responsive"
+                        scale="Percentage"
+                        width="100%"
+                        height="auto"
+                        class="sapUiSmallMarginBottom projectComparisonChart">
+                        <mc:data>
+                            <!-- Dynamic binding to projects array -->
+                            <mc:ComparisonMicroChartData
+                                title="{projectName}"
+                                value="{= ${filledDays} / ${allocatedDays} * 100 }"
+                                color="{= ${filledDays} / ${allocatedDays} >= 0.8 ? 'Good' : ${filledDays} / ${allocatedDays} >= 0.5 ? 'Critical' : 'Error' }"
+                                displayValue="{filledDays}/{allocatedDays}">
+                                <mc:customData>
+                                    <core:CustomData key="projectColor" value="{color}" />
+                                </mc:customData>
+                            </mc:ComparisonMicroChartData>
+                        </mc:data>
+                    </mc:ComparisonMicroChart>
+                    
+                    <!-- Summary in a single line -->
+                    <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginTop bookingSummary">
+                        <HBox alignItems="Center">
+                            <Label text="Month:" class="sapUiTinyMarginEnd summaryLabel" />
+                            <Text text="{/month}" class="boldFont summaryData" />
+                        </HBox>
+                        <HBox alignItems="Center">
+                            <Text text="{/totalFilledDays}/{/totalWorkingDays} days filled" class="summaryData" />
+                        </HBox>
+                    </HBox>
                 </VBox>
                 
                 <Button
@@ -37,7 +61,7 @@
                     app:action="Manage"
                     class="sapUiTinyMarginTop">
                     <customData>
-                        <BadgeCustomData key="badge" value="" visible="true"/>
+                        <core:CustomData key="badge" value="" visible="true"/>
                     </customData>
                 </Button>
             </FlexBox>

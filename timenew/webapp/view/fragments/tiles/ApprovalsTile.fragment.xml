@@ -8,38 +8,34 @@
     xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
     <f:Card width="100%" class="sapUiTinyMarginBottom equalHeightTile">
         <f:content>
-            <FlexBox class="sapUiTinyMargin" width="100%">
-                <VBox>
-                    <HBox>
-                        <core:Icon src="sap-icon://approvals" size="30px"/>
-                        <VBox class="sapUiSmallMarginBegin">
-                            <Text class="boldFont" text="{i18n>approvals}"/>
-                        </VBox>
-                    </HBox>
-                    <VBox class="sapUiTinyMargin">
-                        <Button
-                            icon="sap-icon://slim-arrow-right"
-                            text="{i18n>pendingApprovals}"
-                            type="Transparent"
-                            press=".onPendingApprovalsPress"
-                            app:semObject="Leave"
-                            app:action="Approve">
-                            <customData>
-                                <BadgeCustomData key="badge" value="{myConfigSet>/pendingApprovalCount}" visible="true"/>
-                            </customData>
-                        </Button>
-                        <Button
-                            icon="sap-icon://slim-arrow-right"
-                            text="{i18n>approvalHistory}"
-                            type="Transparent"
-                            press=".onApprovalHistoryPress"
-                            app:semObject="Leave"
-                            app:action="History">
-                            <customData>
-                                <BadgeCustomData key="badge" value="" visible="true"/>
-                            </customData>
-                        </Button>
-                    </VBox>
+            <FlexBox class="sapUiTinyMargin" direction="Column" width="100%">
+                <HBox alignItems="Center">
+                    <core:Icon src="sap-icon://approvals" size="30px"/>
+                    <Text class="sapUiSmallMarginBegin boldFont" text="{i18n>approvals}"/>
+                </HBox>
+                <VBox class="sapUiTinyMargin">
+                    <Button
+                        icon="sap-icon://slim-arrow-right"
+                        text="{i18n>pendingApprovals}"
+                        type="Transparent"
+                        press=".onPendingApprovalsPress"
+                        app:semObject="Leave"
+                        app:action="Approve">
+                        <customData>
+                            <core:CustomData key="badge" value="{myConfigSet>/pendingApprovalCount}" visible="true"/>
+                        </customData>
+                    </Button>
+                    <Button
+                        icon="sap-icon://slim-arrow-right"
+                        text="{i18n>approvalHistory}"
+                        type="Transparent"
+                        press=".onApprovalHistoryPress"
+                        app:semObject="Leave"
+                        app:action="History">
+                        <customData>
+                            <core:CustomData key="badge" value="" visible="true"/>
+                        </customData>
+                    </Button>
                 </VBox>
             </FlexBox>
         </f:content>

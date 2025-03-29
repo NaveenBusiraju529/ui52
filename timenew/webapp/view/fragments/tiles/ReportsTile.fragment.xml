@@ -7,49 +7,45 @@
     xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
     <f:Card width="100%" class="sapUiTinyMarginBottom equalHeightTile">
         <f:content>
-            <FlexBox class="sapUiTinyMargin" width="100%">
-                <VBox>
-                    <HBox>
-                        <core:Icon src="sap-icon://business-objects-experience" size="30px"/>
-                        <VBox class="sapUiSmallMarginBegin">
-                            <Text class="boldFont" text="{i18n>reports}"/>
-                        </VBox>
-                    </HBox>
-                    <VBox class="sapUiTinyMargin">
-                        <Button
-                            icon="sap-icon://slim-arrow-right"
-                            text="Activity Report"
-                            type="Transparent"
-                            press=".onActivityReportPress"
-                            app:semObject="Reports"
-                            app:action="Activity">
-                            <customData>
-                                <BadgeCustomData key="badge" value="" visible="true"/>
-                            </customData>
-                        </Button>
-                        <Button
-                            icon="sap-icon://slim-arrow-right"
-                            text="Customer Timesheet"
-                            type="Transparent"
-                            press=".onCustomerTimesheetPress"
-                            app:semObject="Reports"
-                            app:action="Customer">
-                            <customData>
-                                <BadgeCustomData key="badge" value="" visible="true"/>
-                            </customData>
-                        </Button>
-                        <Button
-                            icon="sap-icon://slim-arrow-right"
-                            text="Home Working Report"
-                            type="Transparent"
-                            press=".onHomeWorkingReportPress"
-                            app:semObject="Reports"
-                            app:action="HomeWorking">
-                            <customData>
-                                <BadgeCustomData key="badge" value="" visible="true"/>
-                            </customData>
-                        </Button>
-                    </VBox>
+            <FlexBox class="sapUiTinyMargin" direction="Column" width="100%">
+                <HBox alignItems="Center">
+                    <core:Icon src="sap-icon://business-objects-experience" size="30px"/>
+                    <Text class="sapUiSmallMarginBegin boldFont" text="{i18n>reports}"/>
+                </HBox>
+                <VBox class="sapUiTinyMargin">
+                    <Button
+                        icon="sap-icon://slim-arrow-right"
+                        text="Activity Report"
+                        type="Transparent"
+                        press=".onActivityReportPress"
+                        app:semObject="Reports"
+                        app:action="Activity">
+                        <customData>
+                            <core:CustomData key="badge" value="" visible="true"/>
+                        </customData>
+                    </Button>
+                    <Button
+                        icon="sap-icon://slim-arrow-right"
+                        text="Customer Timesheet"
+                        type="Transparent"
+                        press=".onCustomerTimesheetPress"
+                        app:semObject="Reports"
+                        app:action="Customer">
+                        <customData>
+                            <core:CustomData key="badge" value="" visible="true"/>
+                        </customData>
+                    </Button>
+                    <Button
+                        icon="sap-icon://slim-arrow-right"
+                        text="Home Working Report"
+                        type="Transparent"
+                        press=".onHomeWorkingReportPress"
+                        app:semObject="Reports"
+                        app:action="HomeWorking">
+                        <customData>
+                            <core:CustomData key="badge" value="" visible="true"/>
+                        </customData>
+                    </Button>
                 </VBox>
             </FlexBox>
         </f:content>

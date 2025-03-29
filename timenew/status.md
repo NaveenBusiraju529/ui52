@@ -20,6 +20,8 @@ timenew/
 │   │   └── style.css                # Custom styling
 │   ├── i18n/
 │   │   └── i18n.properties          # Internationalization texts
+│   ├── model/
+│   │   └── bookingData.json         # Project booking data for bar chart 
 │   ├── view/
 │   │   ├── fragments/              # Reusable UI fragments
 │   │   │   ├── calendar/
@@ -30,7 +32,7 @@ timenew/
 │   │   │       ├── TeamManageTile.fragment.xml   # Combined PM/LM tabs for approvals and reports
 │   │   │       ├── TeamTile.fragment.xml         # Time approvals and various reports
 │   │   │       ├── LMTile.fragment.xml           # Duplicate of Team tile for time3 view
-│   │   │       ├── BookingTile.fragment.xml      # Chart with franchise booking data
+│   │   │       ├── BookingTile.fragment.xml      # ColumnMicroChart with project booking data
 │   │   │       ├── ProjectTile.fragment.xml      # Project management with approvals and reports
 │   │   │       └── ApprovalsTile.fragment.xml    # Simplified approval actions
 │   │   ├── time2.view.xml          # Time2 view - 40/60 layout with grid
@@ -62,12 +64,13 @@ timenew/
     - Reports: Three action buttons for "Activity Report", "Customer Timesheet", and "Home Working Report"
     - Team Management: Tabbed interface (PM/LM) with six actions each for approvals and reports
     - Team & LM: Six action buttons for approvals and various reports
-    - Booking: Chart display showing franchise booking values with visualization
+    - Booking: ColumnMicroChart visualization showing project data from bookingData.json
     - Project: Six action buttons for approvals and various reports
 
 #### Controller Modularization
 - **Base Controllers**: `time2.controller.js`, `time3.controller.js`, `time4.controller.js`.
 - **Reusable Modules**: `common/CalendarController.js`, `common/TileActionsController.js`. (No changes in this update).
+- **Data Models**: JSON model loading for booking data in time4.controller.js.
 
 #### How Components Interact (No changes in this update)
 1. View Loading -> Fragments Included
@@ -104,7 +107,7 @@ timenew/
 - Left Column Tiles:
   - Timesheet (Entry button)
   - My Reports (Activity, Customer, Home Working)
-  - Booking (Chart with franchise data visualization)
+  - Booking (ColumnMicroChart visualization with project data)
 - Right Column Tiles:
   - Team Management (Various approval and reporting options)
   - Project Management (Various approval and reporting options)
@@ -123,7 +126,7 @@ timenew/
   - Content: `VBox` with action `Button`s (transparent, slim-arrow-right icon).
 - **Content Specificity**:
   - Custom action buttons relevant to each tile's purpose
-  - BookingTile with chart visualization showing franchise data
+  - BookingTile with ColumnMicroChart visualization using real project data
   - Team and Project tiles with comprehensive management options
 - **Styling**:
     - Sharp rectangular corners enforced via CSS (`border-radius: 0`).
@@ -140,6 +143,7 @@ timenew/
 
 ### 4. Controller Modules
 - `CalendarController.js` and `TileActionsController.js` remain.
+- Added enhanced model loading for booking data visualization in time4.controller.js.
 
 ## Modular Architecture
 
@@ -185,25 +189,43 @@ timenew/
 - **Equal Height Rows**: Grid layout ensures equal heights for elements in the same row.
 - **Improved Responsive Behavior**: Added media queries for smaller screens to adjust the grid layout appropriately.
 
-## Recent Updates (June 4, 2024)
+### 5. Data Visualization Components
+- **ColumnMicroChart**: Implemented in BookingTile to visualize project booking data.
+- **MicroChart Styling**: Added specific CSS for chart height and consistent appearance.
+- **Data Binding**: Connected chart to bookingData.json through model binding.
+- **Project Information**: Added summary with month, working days, and filled days information.
 
-### 1. Tile Content Customization
+## Recent Updates (June 5, 2024)
+
+### 1. XML Namespace Fix
+- **Fixed ComparisonMicroChart customData**: Resolved namespace issue with customData in BookingTile.fragment.xml by adding the correct 'mc:' prefix.
+- **Button CustomData Fix**: Updated the Button's customData element to properly use core:CustomData.
+- **Error Resolution**: Fixed "Cannot add direct child without default aggregation defined for control" error that was preventing the application from loading.
+
+### 2. Booking Tile Enhancement
+- **ColumnMicroChart Implementation**: Replaced static list with an interactive bar chart.
+- **Real Data Visualization**: Connected to bookingData.json for project-specific information.
+- **Project Display**: Shows filled vs. allocated days for each project with color coding.
+- **Summary Information**: Added month and day statistics below the chart.
+- **Custom Styling**: Enhanced CSS for proper chart rendering and consistency.
+
+### 3. Model Binding Improvements
+- **Data Model Integration**: Updated time4.controller.js to properly load and bind booking data.
+- **Default Model Approach**: Uses both named and default model binding for flexibility.
+- **Direct Tile Binding**: Targets the specific bookingTileContainer by ID.
+
+### 4. Previous Updates (June 4, 2024)
 - **Detailed Action Buttons**: Updated all tile fragments with specific action buttons relevant to their purpose.
 - **TeamManageTile Enhancement**: Expanded PM/LM tabs with six management actions each.
-- **BookingTile Visualization**: Added franchise data visualization with list display.
 - **Consistent Management Options**: Aligned Team, LM, and Project tiles with similar management options.
 - **Specific Navigation Actions**: Each button has custom press handlers and semantic object mappings.
 
-### 2. Previous Updates (June 3, 2024)
+### 5. Earlier Updates
 - **Replaced FlexBox with CSSGrid**: Updated all three views to use sap.ui.layout.cssgrid.CSSGrid instead of FlexBox.
 - **Added Responsive Grid Layout**: Implemented GridResponsiveLayout with specific settings for different screen sizes.
 - **Maintained 40/60 Split**: Preserved the 40/60 split between tiles and calendar sections across all views.
 - **Card-Based Content**: Wrapped all fragments in sap.f.Card for consistent styling and behavior.
-
-### 3. Earlier Updates
 - **Legend Panel Removal**: Removed all legend panels from all views for a cleaner interface.
-- **Consistent Tile Widths**: Updated time3.view.xml layout to ensure all tiles have the same width with proper spacing.
-- **Standardized Layout**: Updated all views to use the same 40/60 split layout.
 - **Switched to `sap.f.Card`**: Replaced `sap.m.GenericTile` with `sap.f.Card` across all tile fragments.
 - **Standardized Structure**: Implemented a consistent internal structure for all cards.
 - **Sharp Rectangular Design**: Applied global CSS for consistent styling.
@@ -212,10 +234,11 @@ timenew/
 
 ### Planned Enhancements
 1. **Data Integration**: Connect to backend services for real appointment data and booking information
-2. **User Settings**: Add personalization options for calendar views and preferences
-3. **Offline Support**: Implement local storage for offline functionality
-4. **Role-Based Personalization**: Adjust UI based on user role (PM/LM/Regular)
-5. **Event Handling Implementation**: Complete the controller methods for the new action buttons
+2. **Chart Interactivity**: Add selection and drill-down capabilities to the booking chart
+3. **User Settings**: Add personalization options for calendar views and preferences
+4. **Offline Support**: Implement local storage for offline functionality
+5. **Role-Based Personalization**: Adjust UI based on user role (PM/LM/Regular)
+6. **Event Handling Implementation**: Complete the controller methods for the new action buttons
 
 ### Known Issues
 - None currently identified.
@@ -228,15 +251,22 @@ timenew/
 - **Equal Tile Heights**: Combination of Grid `align-items: stretch` and `.equalHeightTile` class.
 - **Card Layout**: Uses `sap.f.Card` with internal `FlexBox`, `HBox`, `VBox`. Standard margin classes used.
 - **Grid-Specific Styling**: Added targeted selectors for grid layout elements to ensure proper sizing and alignment.
+- **MicroChart Styling**: Custom height and appearance for chart components.
 
 ### Component Structure
 - Modular architecture with reusable fragments (`f:Card` for tiles, `SinglePlanningCalendar` for calendar) and controller modules.
 - Grid-based layout structure using sap.ui.layout.cssgrid components.
 - Specific content customization for each tile type while maintaining consistent styling.
+- Data visualization using SAP Suite UI MicroChart library.
+
+### Data Binding
+- JSON model binding for booking data chart visualization.
+- Model initialization in controller and binding to specific components.
+- Dynamic chart generation based on project data.
 
 ### Routing and Navigation
 - Routing for time2, time3, time4 views remains.
 
 ---
 
-*Last Updated: June 4, 2024*
+*Last Updated: June 5, 2024*

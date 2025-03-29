@@ -10,8 +10,7 @@
             startDate="{path: '/startDate'}"
             appointments="{path: '/appointments'}"
             appointmentSelect=".onAppointmentSelect"
-            fullDay="false"
-            viewKey="Month">
+            fullDay="false">
             <!-- Removed action buttons as requested -->
             <appointments>
                 <unified:CalendarAppointment
